@@ -112,15 +112,17 @@ This workshop uses <TODO: enter main technologies used to solve the sceanrio>, w
 This is a modular workshop, and in each section, you'll learn concepts, technologies and processes to help you complete the solution.
 
 <table style="tr:nth-child(even) {background-color: #f2f2f2;}; text-align: left; display: table; border-collapse: collapse; border-spacing: 5px; border-color: gray;">
-
   <tr><td style="background-color: AliceBlue; color: black;"><b>Module</b></td><td style="background-color: AliceBlue; color: black;"><b>Topics</b></td></tr>
 
-  <tr><td><a href="url" target="_blank">TODO: 01 - Module Name </a></td><td> TODO: Module Description</td></tr>
-  <tr><td style="background-color: AliceBlue; color: black;"><a href="url" target="_blank">TODO: 02 - Module 2</a> </td><td td style="background-color: AliceBlue; color: black;"> TODO: Module Description</td></tr>
-  <tr><td><a href="url" target="_blank">TODO: 03 - Module Name </a></td><td> TODO: Module Description</td></tr>
-  <tr><td style="background-color: AliceBlue; color: black;"><a href="url" target="_blank">TODO: 04 - Module 2</a> </td><td td style="background-color: AliceBlue; color: black;"> TODO: Module Description</td></tr>  <tr><td><a href="url" target="_blank">TODO: 05 - Module Name </a></td><td> TODO: Module Description</td></tr>
-  <tr><td style="background-color: AliceBlue; color: black;"><a href="url" target="_blank">TODO: 06 - Module 2</a> </td><td td style="background-color: AliceBlue; color: black;"> TODO: Module Description</td></tr>
-
+  <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">00 - Pre Requisites </a></td><td> Covers the materials and tools you need, as well as the knowledge you need prior to taking this course.</td></tr>
+  <tr><td style="background-color: AliceBlue; color: black;">  <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank">01 - Security Landscape</a> </td>
+      <td td style="background-color: AliceBlue; color: black;"> Explains the general Information Technology areas, and also frameworks for IT security. Covers the Database portion of those security areas. </td></tr>
+  <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank">02 - SQL Server Security Basics </a></td>
+      <td> Details the primary components and tools for SQL Server security, from Principals and Securables to Data Control Language (DDL) statements.</td></tr>
+  <tr><td style="background-color: AliceBlue; color: black;"><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank">03 - Microsoft Azure SQL Security </a> </td>
+      <td td style="background-color: AliceBlue; color: black;"> Explains the similarities and differences between the data structures, statements, tools and processes to sure your Azure SQL databases in the Microsoft Azure Platform. </td></tr>  <tr>
+  <td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/04%20-%20MonitoringAndIncidentResponse.md" target="_blank">04 - Monitoring and Incident Response</a></td>
+      <td> Covers the tools and processes you can use both on-premises and in-cloud to detect and secure your data estate. Also explains some of the common threats and mitigations for those threats to databases. </td></tr>
 </table>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
