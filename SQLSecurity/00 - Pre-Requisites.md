@@ -8,11 +8,9 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/textbubble.png"> <h2>00 Pre-Requisites</h2>
 
-The "<TODO: Enter workshop name>" workshop is taught using the following components, which you will install and configure in the sections that follow. 
+The "SQL Server Security Ground to Cloud" workshop is taught using the following components, which you will install and configure in the sections that follow.
 
-*(Note: TODO: Any notes you want.)*
-
-For this workshop, you will use Microsoft Windows as the base workstation, altough Apple and Linux operating systems can be used in production. You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>. 
+For this workshop, you will use Microsoft Windows as the base workstation, altough Apple and Linux operating systems can be used in production. You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>.
 
 The other requirements are:
 
@@ -52,15 +50,31 @@ Your workshop invitation may have instructed you that they will provide a Micros
 
 **Unless you received explicit instructions in your workshop invitations, you much create either a free, MSDN or Personal account. You must have an account prior to the workshop.**
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: TODO: Any other things they need to do</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: Install SQL Server Developer Edition on your workstation/b></p>
 <br>
 
 <TODO: Explain whatever esle they need to do.>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: TODO: Step within Activity.</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
 <br>
 
 The instructions that follow are <TODO: any data you want here>
+
+<br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender Setup</b></p>
+<br>
+
+The instructions that follow are <TODO: any data you want here>
+
+https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
+
+<br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 5: Install the Sample Application for Security Exploration</b></p>
+<br>
+
+https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
 
 <br>
 
