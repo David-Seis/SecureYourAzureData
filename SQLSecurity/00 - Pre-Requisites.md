@@ -8,7 +8,7 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/textbubble.png"> <h2>00 Pre-Requisites</h2>
 
-The "SQL Server Security Ground to Cloud" workshop is taught using the following components, which you will install and configure in the sections that follow.
+The "SQL Server Security Ground to Cloud" workshop is taught using the following components, which you will install and configure in the sections that follow in this module.
 
 For this workshop, you will use Microsoft Windows as the base workstation, altough Apple and Linux operating systems can be used in production. You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>.
 
