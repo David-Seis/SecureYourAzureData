@@ -8,16 +8,17 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/textbubble.png"> <h2>00 Pre-Requisites</h2>
 
-The "<TODO: Enter workshop name>" workshop is taught using the following components, which you will install and configure in the sections that follow. 
+The "SQL Server Security Ground to Cloud" workshop is taught using the following components, which you will install and configure in the sections that follow in this module.
 
-*(Note: TODO: Any notes you want.)*
-
-For this workshop, you will use Microsoft Windows as the base workstation, altough Apple and Linux operating systems can be used in production. You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>. 
+For this workshop, you will use Microsoft Windows as the base workstation, altough Apple and Linux operating systems can be used in production. You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>.
 
 The other requirements are:
 
-- **Microsoft Azure**: This workshop uses the Microsoft Azure platform to host the Kubernetes cluster (using the Azure Kubernetes Service), and optionally you can deploy a system there to act as a workstation. You can use a free Azure account, an MSDN Account, your own account, or potentially one provided for you, as long as you can create about $100.00 (U.S.) worth of assets.
-- **TODO: Other Requirements** - <TODO: Whatever else they need>.
+- **Microsoft Azure**: This workshop uses the Microsoft Azure platform to host Virtual Machines for the servers and workstations. You can use a free Azure account, an MSDN Account, your own account, or potentially one provided for you, as long as you can create about $100.00 (U.S.) worth of assets.
+- **SQL Server Developer Edition**: Installation of SQL Server Developer Edition is free and this system can also host the application code and other utilities if desired. 
+- **Microsoft Azure SQL DB**: A Microsoft Azure SQL Database (smallest edition) allows for testing and exploration of SQL Server security on that platform.
+- **Microsoft Azure Defender Account**: This is the primary tool from Microsoft for securing and reporting on security for your on-premises and in-cloud environments. 
+- **NodeJS Application**: A simple Create, Read, Update and Delete (CRUD) application to show traffic to and from the on-premises and in-cloud environments. 
 
 
 *Note that all following activities must be completed prior to class - there will not be time to perform these operations during the workshop.*
@@ -26,7 +27,7 @@ The other requirements are:
 
 You have multiple options for setting up Microsoft Azure account to complete this workshop. You can use a free account, a Microsoft Developer Network (MSDN) account, a personal or corporate account, or in some cases a pass may be provided by the instructor. (Note: for most classes, the MSDN account is best)
 
-**Unless you are explicitly told you will be provided an account by the instructor in the invitation to this workshop, you must have your Microsoft Azure account and Data Science Virutal Machine set up before you arrive at class.**
+> *Unless you are explicitly told you will be provided an account by the instructor in the invitation to this workshop, you must have your Microsoft Azure account and Virutal Machine Workstation set up before you arrive at class. Instructions are below.*
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Option 1 - Free Account</b></p>
 
@@ -34,7 +35,7 @@ The free account gives you twelve months of time, and a limited amount of resour
 
 - [Open this resource, and click the "Start Free" button you see there](https://azure.microsoft.com/en-us/free/)
 
-**NOTE: You can only use the Free subscription once, and it expires in 12 months. Set up your account and create the DSVM per the instructions below, but ensure that you turn off the VM in the Portal to ensure that you do no exceed the cost limits on this account. You will turn it off and on in the classroom per the instructor's directions.**
+> *NOTE: You can only use the Free subscription once, and it expires in 12 months. Set up your account and create the Workstation per the instructions below, but **ensure that you turn off the VM in the Portal to ensure that you do no exceed the cost limits on this account**. You will turn it off and on in the classroom per the instructor's directions.*
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Option 2 - Microsoft Developer Network Account (MSDN) Account</b></p>
 
@@ -44,25 +45,18 @@ The best way to take this workshop is to use your [Microsoft Developer Network (
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Option 3 - Use Your Own Account</b></p>
 
-You can also use your own account or one provided to you by your organization, but you must be able to create a resource group and create, start, and manage a Data Science Virtual Machine (DSVM) and an Azure AKS cluster. 
+You can also use your own account or one provided to you by your organization, but you must be able to create a resource group and create, start, and manage a Workstation. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Option 4 - Use an account provided by your instructor</b></p>
 
 Your workshop invitation may have instructed you that they will provide a Microsoft Azure account for you to use. If so, you will receive instructions that it will be provided.
 
-**Unless you received explicit instructions in your workshop invitations, you much create either a free, MSDN or Personal account. You must have an account prior to the workshop.**
+> *Unless you received explicit instructions in your workshop invitations, you much create either a free, MSDN or Personal account. You must have an account **prior** to the workshop.*
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: TODO: Any other things they need to do</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: Create a Workstation and Install SQL Server Developer Edition withh all features and defaults</b></p>
 <br>
 
 <TODO: Explain whatever esle they need to do.>
-
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: TODO: Step within Activity.</b></p>
-<br>
-
-The instructions that follow are <TODO: any data you want here>
-
-<br>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">TODO: Sub-step<p>
 
@@ -73,6 +67,31 @@ First, ensure all of your updates are current. You can use the following command
 TODO: Enter any code typing here
 
 </pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
+<br>
+
+The instructions that follow are <TODO: any data you want here>
+
+<br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender Setup</b></p>
+<br>
+
+The instructions that follow are <TODO: any data you want here>
+
+https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
+
+<br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 5: Install the Sample Application for Security Exploration</b></p>
+<br>
+
+https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
+
+<br>
+
+
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
