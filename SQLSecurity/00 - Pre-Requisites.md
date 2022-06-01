@@ -56,48 +56,48 @@ Your workshop invitation may have instructed you that they will provide a Micros
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: Create a Workstation and Install SQL Server Developer Edition withh all features and defaults</b></p>
 <br>
 
-<TODO: Explain whatever esle they need to do.>
+In this activity you will install SQL Server Developer Edition either on a Microsoft Azure Virtual Machine, or on a system you own that you can make changes to. Your system should have at least 8GB RAM and 150GB space available. 
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">TODO: Sub-step<p>
+> NOTE: All installations should be done on a system you have complete control over. These systems should not be part of your production or testing environments.
 
-First, ensure all of your updates are current. You can use the following commands to do that in an Administrator-level PowerShell session:
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">(Optional) Create a Microsoft Azure Virtual Machine<p>
 
-<pre>
+- Open this reference, and follow the instructions you see there. Select a Virtual Machine that has at least 8GB of RAM and 150GB drive space. You can select Windows 10 or higher, or any version of Windows Server desired: [https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal)
+    
+- Log in to that system and use Windows Update to bring it up to date. [https://support.microsoft.com/en-us/windows/update-windows-3c5ae7fc-9fb6-9af1-1984-b5e0412c556a#WindowsVersion=Windows_10](https://support.microsoft.com/en-us/windows/update-windows-3c5ae7fc-9fb6-9af1-1984-b5e0412c556a#WindowsVersion=Windows_10)
+    
+- After you update the system, download SQL Server 2022 Evaluation from here, and install the Developer Edition with all options: [https://www.microsoft.com/en-us/evalcenter/download-sql-server-2022](https://www.microsoft.com/en-us/evalcenter/download-sql-server-2022) You will also need to install SQL Server Management Studio by following the process shown on this reference: [https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16) 
+    
+ *You may install SQL Server 2019 Developer Edition if desired, but the exercises for SQL Server 2022 will not work on that version*
+    
+- Next, you'll install the Sample Application we will use for the this course. Open this reference and follow the instructions you see there. You do not need to run the applicaiton at this time. [https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/](https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/)
 
-TODO: Enter any code typing here
-
-</pre>
-
+<br>
+ 
+> NOTE: When you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. [https://build5nines.com/properly-shutdown-azure-vm-to-save-money/](https://build5nines.com/properly-shutdown-azure-vm-to-save-money/) 
+    
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
 <br>
 
-The instructions that follow are <TODO: any data you want here>
+In this Activity you will create a Serverless Microsoft Azure SQL DB for use in this course. 
+- Open this reference, and follow all the steps you see there: [https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal)
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender Setup</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender for SQL Setup</b></p>
 <br>
 
-The instructions that follow are <TODO: any data you want here>
+The instructions that follow explain how to create and enable a Microsoft Defender for Azure SQL and SQL Server installations. 
 
-https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
-
-<br>
-
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 5: Install the Sample Application for Security Exploration</b></p>
-<br>
-
-https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
+- Open this reference, and follow the instructions you see there for your Windows and Microsoft Azure SQL Server Databases: [https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-sql-usage](https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-sql-usage)
 
 <br>
-
-
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="url" target="_blank">Official Documentation for this section</a></li>
+    <li><a href="[url](https://docs.microsoft.com/en-us/azure/defender-for-cloud/)" target="_blank">Official Documentation for Microsoft Defender for Cloud</a></li>
 </ul>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="url" target="_blank"><i> 01 - Module</i></a>.
+Next, Continue to <a href="[url](https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/01%20-%20SecurityLandscape.md)" target="_blank"><i> 01 - The Database Security Landscape</i></a>.
