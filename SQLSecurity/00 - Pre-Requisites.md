@@ -80,7 +80,7 @@ The instructions that follow are <TODO: any data you want here>
 
 The instructions that follow are <TODO: any data you want here>
 
-https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>
+[https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/>](https://docs.microsoft.com/en-us/azure/defender-for-cloud/)
 
 <br>
 
