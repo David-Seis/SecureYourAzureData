@@ -85,6 +85,10 @@ You do not need to be a developer to take this course, but having an application
 
 - <a href="https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/" target="_blank">Navigate to this page and install the Sample Application we will use for this course.</a>
 
+<br>
+ 
+> NOTE: When you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. [https://build5nines.com/properly-shutdown-azure-vm-to-save-money/](https://build5nines.com/properly-shutdown-azure-vm-to-save-money/) 
+    
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
 <br>
 
@@ -94,7 +98,7 @@ The instructions that follow use the Microsoft Azure Account you created earlier
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender Setup</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 4: Create a Microsoft Azure Defender for SQL Setup</b></p>
 <br>
 
 The instructions that follow use the Microsoft Azure Account you created earlier. If you created a Windows Virtual Machine in Microsoft Azure, use the same Resource Group for these steps.
