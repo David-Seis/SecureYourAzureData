@@ -1,4 +1,4 @@
-a<img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/Lock-2.png">
+<img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/Lock-2.png">
 
 # Workshop: SQL Server Security Ground to Cloud
 
@@ -39,7 +39,7 @@ Computing Security paradigms are a kind of framework or action paths you can use
 One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects.
 
 <br>
-<img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
+<img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
 **Physical security**: Restricting and controlling access to your datacenteror computing assets to only allow authorized personnel.
 **Identity and access security controls**: Using multifactor authentication and conditional  access for infrastructure, code, and change tracking systems.
@@ -63,28 +63,26 @@ The "Zero Trust" paradigm is a modern framework for distributed applications whe
 <br>
 <img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-2.png">
 
-
 **Verify Explicitly**: Authenticate and authorize based on the available data points, including user identity, location, device, service or workload, data classification, and anomalies.
 **Least Privilege**: Limit user access with just-in-time and just-enough access (JIT/JEA), risk-based adaptive policies, and data protection to protect both data and productivity.
 **Assume Breach**: Segment access by network, user, devices, and application. Use encryption to protect data, and use analytics to get visibility, detect threats, and improve your security.
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Defense in Depth and Zero Trust Paradigms</b></p>
 
-TODO: Activity Description and tasks
+In this exercise you will review two videos on Defense in Depth and Zero Trust concepts. 
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
+> If you are taking this workshop in-person, your instructor may direct you to watch these videos later if there are time constraints.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+- [Open this reference and watch the video you see there on "Defense in depth".](https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure)
+- [Open this reference and watch the video you see there on "Zero Trust".](https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks)
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Database Components of Computing Security</h2>
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png"> 2.0 Database Components of Computing Security</h2>
 
 <br>
 
@@ -107,7 +105,10 @@ TODO: Enter activity description with checkbox
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+- Check Networks in Configuration Manager
+- Check Account Types in Properties
+- Check File Locations in Properties
+- Run Security Standard Reports
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
