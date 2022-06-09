@@ -25,29 +25,28 @@ You'll cover these topics in this Module:
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Computing Security</h2>
 The Data Professional is not entirely responsible for the security of the entire organization, but they do need to be aware of the various components within computing security, and how the database figures into those components.
 
-This section covers the basics of Computing Security - defined as "allowing the right people to access the right objects in the right way and in the right situations". That also means preventing unauthorized persons from accessing objects they do not have permissions for.
+This section covers the basics of Computing Security - defined as "allowing the right people to access the right objects in the right way and in the right situations". That also means preventing unauthorized persons from accessing objects they do not have permissions for. In the sections that follow, you will learn more about the entire Computing Security landscape, and how and where Database Security fits into that landscape. 
 
 > The "References" section that follows has much more detail on this topic.
 
 <h5>Identity, Access and Authentication</h5>
 
-
 <h3>1.1 Computing Security Paradigms</h3>
 Computing Security paradigms are a kind of framework or action paths you can use to form the basis of good security policies and practices in your organization. These paradigms and frameworks allow each part of the organization to understand their responsibilities for security.
 
 <h4>1.1.1 Defense in Depth</h4>
-One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects.
+One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
 
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
-**Physical security**: Restricting and controlling access to your datacenteror computing assets to only allow authorized personnel.
-**Identity and access security controls**: Using multifactor authentication and conditional  access for infrastructure, code, and change tracking systems.
-**Perimeter security**:  Creating defenses at the network level for distributed denial of service (DDoS) attacks.
-**Network security** Using network access controls and segmentation to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
-**Compute layer security**: Creating a strong system for controlloing access to physical and virtual machines, and implementing string Cloud Controls.
-**Application layer security**: Implementing Secure Code practices and policies to prevent security vulnerabilities. An ogoing process.
-**Data layer security**: Ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course. 
+**Physical security**: This ring involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized personnel.
+**Identity and access security controls**: At this level you will use [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
+**Perimeter security**:  This level entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks.
+**Network security** At this level you will use [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+**Compute layer security**: This level requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlloing access to physical and virtual machines, and implementing strong Cloud Controls.
+**Application layer security**: For this level, you will implement [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities. This is an ogoing process.
+**Data layer security**: This level ensures that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
 
 <h4>1.1.2 Zero Trust</h4> 
 
@@ -83,12 +82,14 @@ In this exercise you will review two videos on Defense in Depth and Zero Trust c
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png"> 2.0 Database Components of Computing Security</h2>
-Your role for security as the Data Professional involves being a part of the complete security landscape in your organization. This requires coordination and standardization of all teams involved in Information Technology. At the end of this course, you'll find a basic Data Security Checklist template, that you can use as a starting point for developing your own standards.
+Your role for security as the Data Professional involves being a part of the complete security landscape in your organization. This requires coordination and standardization of all teams involved in Information Technology. 
+
+At the end of this course, you'll find a basic Data Security Checklist template, that you can use as a starting point for developing your own standards.
 
 > In the Modules that follow, you'll learn more about the details of each of these concepts, and have specific Activities to experiment with them. 
 
 <h3>Database Security Process</h3>
-<br>
+There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. 
 
 **Compliance with Defense in Depth Standards**
 
@@ -113,17 +114,17 @@ After you secure the SQL Server Instance platform and configuration, and you've 
 
 <br>
 
-> Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here. 
+> Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
 
 **SQL Server Authentication, Certificates and Keys, Active Directory, Azure Active Directory**
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
-SQL Server can also use Certificates to allow access 
+SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow. 
 
+Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly. 
 
 **Database Security or Application Security**
 
 **Role-Based Acccess Control**
-
 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
@@ -147,7 +148,8 @@ TODO: Activity Description and tasks
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- Thing
+- [Right-click this reference and open in a new tab to see the recommendations for Azure SQL DB Security](https://docs.microsoft.com/en-us/security/benchmark/azure/baselines/sql-database-security-baseline?toc=%2Fazure%2Fazure-sql%2Ftoc.json&view=azuresql)
+- Open the Azure Portal for your account, navigate to the Resource Group for your Azure SQL DB created for this course, and click the "Security" item on the left-side of the database blade. Review each setting in light of the guide you opened in the previous step.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -168,7 +170,8 @@ TODO: Activity Description and tasks
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">Official Documentation for this section</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=sql-server-ver16" target="_blank">Official Documentation for SQL Server Security</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=azuresqldb-current" target="_blank">Official Documentation for Azure SQL DBr Security</a></li>
 </ul>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
