@@ -77,31 +77,58 @@ In this exercise you will review two videos on Defense in Depth and Zero Trust c
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- [Open this reference and watch the video you see there on "Defense in depth".](https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure)
-- [Open this reference and watch the video you see there on "Zero Trust".](https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks)
+- [Right-click and open this reference in a separate browser tab and watch the video you see there on "Defense in depth".](https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure)
+- [Right-click and open this reference in a separate browser tab and watch the video you see there on "Zero Trust".](https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks)
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png"> 2.0 Database Components of Computing Security</h2>
+Your role for security as the Data Professional involves being a part of the complete security landscape in your organization. This requires coordination and standardization of all teams involved in Information Technology. At the end of this course, you'll find a basic Data Security Checklist template, that you can use as a starting point for developing your own standards.
+
+
+
+<h3>Database Security Process</h3>
+<br>
+
+**Compliance with Defense in Depth Standards**
+
+**Data Catalog**
+
+**Application Discovery**
+
+**Authentication Review**
+
+**Access Review**
+
+**Auditing and Reporting Standardization**
+
+
+The primary tool for your security footprint of your on-premises or in-cloud database servers and databases is Microsoft Defender for SQL. 
+
+<h3>Determine Access Strategy</h3>
+
+After you secure the SQL Server Instance platform and configuration, and you've set in place your security at-rest strategy, it's time to evaluate the application access for each data set. In general, there are five primary methods of access: 
+
+<img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-3.png">
 
 <br>
 
+> Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here. 
+
+**SQL Server Authentication, Certificates and Keys, Active Directory, Azure Active Directory**
+SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
+SQL Server can also use Certificates to allow access 
 
 
-<h3>Database Security or Application Security</h3>
-<br>
+**Database Security or Application Security**
 
-<h3>Role-Based Access Control (RBAC)</h3>
-<br>
+**Role-Based Acccess Control**
 
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
 
 TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
@@ -113,6 +140,31 @@ TODO: Enter activity description with checkbox
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Azure SQL DB Security Settings Review</b></p>
+
+TODO: Activity Description and tasks
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+- Thing
+
+<p style="border-bottom: 1px solid lightgrey;"></p>
+
+<br>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Microsoft Defender for SQL Security Score</b></p>
+
+TODO: Activity Description and tasks
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+- Thing
+
+<p style="border-bottom: 1px solid lightgrey;"></p>
+
+<br>
+
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
