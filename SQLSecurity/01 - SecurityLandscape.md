@@ -70,17 +70,16 @@ The "Zero Trust" paradigm is a modern framework for distributed applications whe
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Defense in Depth and Zero Trust Paradigms</b></p>
 
-TODO: Activity Description and tasks
+In this exercise you will review two videos on Defense in Depth and Zero Trust concepts. 
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
+> If you are taking this workshop in-person, your instructor may direct you to watch these videos later if there are time constraints.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+- [Open this reference and watch the video you see there on "Defense in depth".](https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure)
+- [Open this reference and watch the video you see there on "Zero Trust".](https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks)
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
