@@ -71,7 +71,7 @@ The "Zero Trust" paradigm is a modern framework for distributed applications whe
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Defense in Depth and Zero Trust Paradigms</b></p>
 
-In this exercise you will review two videos on Defense in Depth and Zero Trust concepts. 
+In this exercise you will review two videos on Defense in Depth and Zero Trust concepts.
 
 > If you are taking this workshop in-person, your instructor may direct you to watch these videos later if there are time constraints.
 
@@ -85,7 +85,7 @@ In this exercise you will review two videos on Defense in Depth and Zero Trust c
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png"> 2.0 Database Components of Computing Security</h2>
 Your role for security as the Data Professional involves being a part of the complete security landscape in your organization. This requires coordination and standardization of all teams involved in Information Technology. At the end of this course, you'll find a basic Data Security Checklist template, that you can use as a starting point for developing your own standards.
 
-
+> In the Modules that follow, you'll learn more about the details of each of these concepts, and have specific Activities to experiment with them. 
 
 <h3>Database Security Process</h3>
 <br>
