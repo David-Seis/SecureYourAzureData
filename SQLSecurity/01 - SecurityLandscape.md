@@ -29,32 +29,44 @@ This section covers the basics of Computing Security - defined as "allowing the 
 
 > The "References" section that follows has much more detail on this topic.
 
+<h5>Identity, Access and Authentication</h5>
+
+
 <h3>1.1 Computing Security Paradigms</h3>
 Computing Security paradigms are a kind of framework or action paths you can use to form the basis of good security policies and practices in your organization. These paradigms and frameworks allow each part of the organization to understand their responsibilities for security.
 
 <h4>1.1.1 Defense in Depth</h4>
-One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. 
+One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects.
 
 <br>
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
+<img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
-<h5>Physical Plant</h5>
-
-
-<h5>Computing Hardware</h5>
-
-<h5>Firmware</h5>
-
-<h5>OS and Drivers</h5>
-
-<h5>Platform</h5>
-
-<h5>Identity, Access and Authentication</h5>
+**Physical security**: Restricting and controlling access to your datacenteror computing assets to only allow authorized personnel.
+**Identity and access security controls**: Using multifactor authentication and conditional  access for infrastructure, code, and change tracking systems.
+**Perimeter security**:  Creating defenses at the network level for distributed denial of service (DDoS) attacks.
+**Network security** Using network access controls and segmentation to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+**Compute layer security**: Creating a strong system for controlloing access to physical and virtual machines, and implementing string Cloud Controls.
+**Application layer security**: Implementing Secure Code practices and policies to prevent security vulnerabilities. An ogoing process.
+**Data layer security**: Ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course. 
 
 <h4>1.1.2 Zero Trust</h4> 
 
-<h5>Least Privilege</h5>
+The "Zero Trust" paradigm is a modern framework for distributed applications where you cannot control the various networks and access points applications may use. It layers three basic concepts, Verify Explicitly, Least Privilege, and Assume Breach, over multiple objects in your system:
 
+- Identities
+- Devices
+- Applications
+- Data
+- Infrastructure
+- Networks
+
+<br>
+<img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-2.png">
+
+
+**Verify Explicitly**: Authenticate and authorize based on the available data points, including user identity, location, device, service or workload, data classification, and anomalies.
+**Least Privilege**: Limit user access with just-in-time and just-enough access (JIT/JEA), risk-based adaptive policies, and data protection to protect both data and productivity.
+**Assume Breach**: Segment access by network, user, devices, and application. Use encryption to protect data, and use analytics to get visibility, detect threats, and improve your security.
 
 <br>
 
@@ -76,8 +88,7 @@ TODO: Enter activity steps description with checkbox
 
 <br>
 
-<h3>Physical, Computing Hardware and Firmware Components</h3>
-<br>
+
 
 <h3>Database Security or Application Security</h3>
 <br>
