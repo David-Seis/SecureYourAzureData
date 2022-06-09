@@ -39,7 +39,7 @@ Computing Security paradigms are a kind of framework or action paths you can use
 One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects.
 
 <br>
-<img style="height: 200; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
+<img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
 **Physical security**: Restricting and controlling access to your datacenteror computing assets to only allow authorized personnel.
 **Identity and access security controls**: Using multifactor authentication and conditional  access for infrastructure, code, and change tracking systems.
