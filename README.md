@@ -8,9 +8,9 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/textbubble.png"> <h2>About this Workshop</h2>
 
-Welcome to this workshop on *SQL Server Security Ground to Cloud*. In this workshop, you'll learn <TODO: Describe what the students will learn>
+Welcome to this workshop on *SQL Server Security Ground to Cloud*. In this workshop, you'll learnthe Computing Security Landscape, and the Data Professional's responsibilities within it. You'll also learn the latest security frameworks and paradigms, SQL Server security operations both on-premises and in-cloud, and the steps you should secure your organization's data.  
 
-The focus of this workshop is to understand <TODO: Describe the workshop's primay focus in one sentence>
+The focus of this workshop is to enable the Data Professional to secure and protect their data estate.
 
 You'll start by <TODO: Describe what the flow of the workshop will be>, with a focus on how to extrapolate what you have learned to create other solutions for your organization.
 

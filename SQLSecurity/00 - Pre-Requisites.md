@@ -83,7 +83,58 @@ In this activity, you will install SQL Server, selecting at least the "Database 
 
 You do not need to be a developer to take this course, but having an application to use for SQL Server makes it more "real world" and what you will face in production. The steps below are comprehensive and simple to implement. This course uses a <a href="https://nodejs.org/en/" target="_blank">NodeJS sample application</a>.
 
-- <a href="https://www.microsoft.com/en-us/sql-server/developer-get-started/node/windows/" target="_blank">Navigate to this page and install the Sample Application we will use for this course.</a>
+- <a href="https://docs.chocolatey.org/en-us/choco/setup#install-with-powershell.exe" target="_blank">Navigate to this page and install the "Chocolatey " application using PowerShell that you will use for other installations on your test system.</a>
+
+- Open an elevated permissions PowerShell command-line and create a directory for the course:
+
+<pre>
+cd \
+mkdir c:\SampleDBApp
+cd \SampleDBApp
+</pre>
+- In that same window, install NodeJS using Chocolatey:
+<pre>
+choco install -y nodejs
+</pre>
+- In that same window, install the mssql NodeJS package to allow access to SQL Server:
+<pre>
+npm install mssql
+</pre>
+- In that same window, install the mssql NodeJS package to allow API access to your application:
+<pre>
+npm install express
+</pre>
+- In that same window, Start the Notepad program to create the first iteration of the sample application:
+<pre>
+notepad SampleDBApp.js
+</pre>
+Answer "Y" to create a new file, and paste the following text in the file, then save and close it. You will alter this file later. 
+
+<pre>
+var express = require('express');
+var app = express();
+app.get('/', function (req, res) {
+    var sql = require("mssql");
+    var config = {
+        user: 'sa',
+        password: 'ReplaceWithYourSAPassWord',
+        server: '(local)', 
+        database: 'master' 
+    };
+    sql.connect(config, function (err) {
+        if (err) console.log(err);
+        var request = new sql.Request();
+        request.query('SELECT @@VERSION', function (err, recordset) {
+            if (err) console.log(err)
+            res.send(recordset);
+        });
+    });
+});
+
+var server = app.listen(5001, function () {
+    console.log('Server is running at http://localhost:5001');
+});
+</pre>
 
 <br>
  
