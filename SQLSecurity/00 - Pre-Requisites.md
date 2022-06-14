@@ -17,11 +17,11 @@ The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">
 - **Microsoft Azure Defender Account**: This is the primary tool from Microsoft for securing and reporting on security for your on-premises and in-cloud environments.
 - **NodeJS Application**: A simple Create, Read, Update and Delete (CRUD) application to show traffic to and from the on-premises and in-cloud environments.
 
-> Note that all following activities must be completed **prior** to class - there will not be time to perform these operations during the workshop. The complete pre-requisites steps will take from 2-6 hours.
+> All of the following activities must be completed **prior** to class - there will not be time to perform these operations during the workshop. The complete pre-requisites steps will take from 2-6 hours.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 1: Set up a Microsoft Azure Account</b></p>
 
-You have multiple options for setting up Microsoft Azure account to complete this workshop. You can use a free account, a Microsoft Developer Network (MSDN) account, a personal or corporate account, or in some cases a pass may be provided by the instructor. (Note: for most classes, the MSDN account is best)
+You have multiple options for setting up Microsoft Azure account to complete this workshop. You can use a free account, a Microsoft Developer Network (MSDN) account, a personal or corporate account, or in some cases a pass may be provided by the instructor. (For most classes, the MSDN account is best)
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Option 1 - Free Account</b></p>
 
@@ -58,8 +58,8 @@ You can create your workstation for this course using **one** of the following m
 
 - Local Workstation - You can use a physical workstation for this course, assuming you can install software on that system and you have complete control of the administration account. **This needs to be a system you could format and start over multiple times, so do not use your work or production workstation for this course.** This system should have a minimum of 8GB of RAM and 150GB drive space free.
 - Local Virtual Machine - You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>, or you can use your own installation media.</a> This system should have a minimum of 8GB of RAM and 150GB drive space free. 
-- <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal" target="_blank">Microsoft Azure Virtual Machine.</a> Select a system that has at least 2 processors, a minimum of 8GB of RAM and 150GB drive space free. Ensure you create all assets for this course in a single Resource Group, so that you can delete all these assets when you complete the workshop. NOTE: **Do not use your organization's production subscription for this workshop.**
-- Another Cloud Provider's Virtual Machine Environment. See the provider's documentation for this process. This system should have a minimum of 8GB of RAM and 150GB drive space free. NOTE: **Do not use your organization's production subscription for this workshop.**
+- <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal" target="_blank">Microsoft Azure Virtual Machine.</a> Select a system that has at least 2 processors, a minimum of 8GB of RAM and 150GB drive space free. Ensure you create all assets for this course in a single Resource Group, so that you can delete all these assets when you complete the workshop. **Do not use your organization's production subscription for this workshop.**
+- Another Cloud Provider's Virtual Machine Environment. See the provider's documentation for this process. This system should have a minimum of 8GB of RAM and 150GB drive space free. **Do not use your organization's production subscription for this workshop.**
 
 > If you use a Microsoft Azure Virtual Machine,  **ensure that you "Stop" the VM in the Portal to ensure that you do no exceed the cost limits on this account. Simply shutting down the Virtual Machine will continue to cost you.** <a href="https://build5nines.com/properly-shutdown-azure-vm-to-save-money/" target="_blank">You can read more about properly stopping a Microsoft Azure Virtual Machine here.</a>
 
@@ -69,7 +69,7 @@ Next, ensure all of your updates are current. You can use <a href="https://suppo
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Install SQL Server Database Engine</b></p>
 
-In this activity, you will install SQL Server, selecting at least the "Database Engine" Feature. Note that if you select more than the Database Engine components, <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">you will have more configuration options you will need to consider</a>. For this course, we will focus on the Database Engine feature, so that is all you need to install. You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup?view=sql-server-ver16" target="_blank">add more features later by using the Setup Center</a> on your system.
+In this activity, you will install SQL Server, selecting at least the "Database Engine" Feature. If you select more than the Database Engine components, <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">you will have more configuration options you will need to consider</a>. For this course, we will focus on the Database Engine feature, so that is all you need to install. You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup?view=sql-server-ver16" target="_blank">add more features later by using the Setup Center</a> on your system.
 
 > For the next two steps, <a href="https://www.youtube.com/watch?v=KZtHbq_Ar_Y" target="_blank">you can see a walkthrough video of this process here.</a>
 
@@ -98,47 +98,49 @@ choco install -y nodejs
 </pre>
 - In that same window, install the mssql NodeJS package to allow access to SQL Server:
 <pre>
-npm install mssql
-</pre>
-- In that same window, install the mssql NodeJS package to allow API access to your application:
-<pre>
-npm install express
+npm install tedious
 </pre>
 - In that same window, Start the Notepad program to create the first iteration of the sample application:
 <pre>
 notepad SampleDBApp.js
 </pre>
-Answer "Y" to create a new file, and paste the following text in the file, then save and close it. You will alter this file later. 
+Answer "Y" to create a new file, and paste the following text in the file, then save and close it. You will alter this file later.
 
 <pre>
-var express = require('express');
-var app = express();
-app.get('/', function (req, res) {
-    var sql = require("mssql");
-    var config = {
-        user: 'sa',
-        password: 'ReplaceWithYourSAPassWord',
-        server: '(local)', 
-        database: 'master' 
-    };
-    sql.connect(config, function (err) {
-        if (err) console.log(err);
-        var request = new sql.Request();
-        request.query('SELECT @@VERSION', function (err, recordset) {
-            if (err) console.log(err)
-            res.send(recordset);
-        });
+    var Connection = require('tedious').Connection;  
+    var config = {  
+        server: '(local)',  
+        authentication: {
+            type: 'default',
+            options: {
+                userName: 'sa',
+                password: 'your_sa_password'  //update me
+            }
+        },
+        options: {
+            // If you are on Microsoft Azure, you need encryption:
+            encrypt: true,
+            database: 'master',
+            trustServerCertificate: true
+        }
+    };  
+    var connection = new Connection(config);  
+    connection.on('connect', function(err) {  
+        // If no error, then good to proceed.
+        console.log("Connected");  
     });
-});
+    
+    connection.connect();
+</pre>
 
-var server = app.listen(5001, function () {
-    console.log('Server is running at http://localhost:5001');
-});
+*You can test this application with the following command if desired:*
+<pre>
+node .\SampleDBApp.js
 </pre>
 
 <br>
  
-> NOTE: When you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. [https://build5nines.com/properly-shutdown-azure-vm-to-save-money/](https://build5nines.com/properly-shutdown-azure-vm-to-save-money/) 
+> If you are using an Azure Virtual Machine, when you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. [https://build5nines.com/properly-shutdown-azure-vm-to-save-money/](https://build5nines.com/properly-shutdown-azure-vm-to-save-money/) 
     
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
 <br>
@@ -162,6 +164,8 @@ The instructions that follow use the Microsoft Azure Account you created earlier
 <ul>
     <li><a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">Official Documentation for this section</a></li>
 </ul>
+
+You now have a testing and classroom environment for this course. You will add more to this environment as you progress through the modules. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
