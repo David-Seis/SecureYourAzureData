@@ -14,6 +14,8 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
+In this module you will learn the general Information Technology Security Landscape, and the role of the data professional in that area. While you may not be responsible for the entire organization's security posture, you should be familiar with where the data fits and your responsibilities.
+
 You'll cover these topics in this Module:
 <dl>
   <dt><a href="#01" target="_blank"><dt>01 - Computing Security</dt></a>
@@ -93,7 +95,11 @@ There are various steps you can take for starting the process to secure your dat
 
 **Compliance with Defense in Depth Standards**
 
-**Data Catalog**
+Physical Access
+
+Data at Rest Protection
+
+**Data Catalog and Classification**
 
 **Application Discovery**
 
@@ -118,9 +124,9 @@ After you secure the SQL Server Instance platform and configuration, and you've 
 
 **SQL Server Authentication, Certificates and Keys, Active Directory, Azure Active Directory**
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
-SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow. 
+SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
 
-Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly. 
+Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly.
 
 **Database Security or Application Security**
 
@@ -176,4 +182,4 @@ TODO: Activity Description and tasks
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="[url](https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md)" target="_blank"><i> 01 - The Database Security Landscape</i></a>.
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank"><i> 01 - The Database Security Landscape</i></a>.
