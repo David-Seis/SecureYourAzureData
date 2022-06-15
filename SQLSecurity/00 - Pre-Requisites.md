@@ -15,7 +15,7 @@ The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">
 - **SQL Server Developer Edition**: An installation of the SQL Server Developer Edition, the Database Engine feature.
 - **Microsoft Azure SQL DB**: A Microsoft Azure SQL Database (smallest edition) allows for testing and exploration of SQL Server security on that platform.
 - **Microsoft Azure Defender Account**: This is the primary tool from Microsoft for securing and reporting on security for your on-premises and in-cloud environments.
-- **NodeJS Application**: A simple Create, Read, Update and Delete (CRUD) application to show traffic to and from the on-premises and in-cloud environments.
+- **Python**: A simple set of Create, Read, Update and Delete (CRUD) applications to show traffic to and from the on-premises and in-cloud environments.
 
 > All of the following activities must be completed **prior** to class - there will not be time to perform these operations during the workshop. The complete pre-requisites steps will take from 2-6 hours.
 
@@ -115,7 +115,7 @@ import pyodbc
 cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};Server=(local);Database=master;Trusted_Connection=yes;Application Name=DBConnectionAppFromPython;')
 cursor = cnxn.cursor()
 
-#Sample select query
+# Connect and return version information
 cursor.execute("SELECT @@version;") 
 row = cursor.fetchone() 
 while row: 
