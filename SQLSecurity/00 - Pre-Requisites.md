@@ -15,7 +15,7 @@ The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">
 - **SQL Server Developer Edition**: An installation of the SQL Server Developer Edition, the Database Engine feature.
 - **Microsoft Azure SQL DB**: A Microsoft Azure SQL Database (smallest edition) allows for testing and exploration of SQL Server security on that platform.
 - **Microsoft Azure Defender Account**: This is the primary tool from Microsoft for securing and reporting on security for your on-premises and in-cloud environments.
-- **NodeJS Application**: A simple Create, Read, Update and Delete (CRUD) application to show traffic to and from the on-premises and in-cloud environments.
+- **Python**: A simple set of Create, Read, Update and Delete (CRUD) applications to show traffic to and from the on-premises and in-cloud environments.
 
 > All of the following activities must be completed **prior** to class - there will not be time to perform these operations during the workshop. The complete pre-requisites steps will take from 2-6 hours.
 
@@ -85,57 +85,47 @@ You do not need to be a developer to take this course, but having an application
 
 - <a href="https://docs.chocolatey.org/en-us/choco/setup#install-with-powershell.exe" target="_blank">Navigate to this page and install the "Chocolatey " application using PowerShell that you will use for other installations on your test system.</a>
 
-- Open an elevated permissions PowerShell command-line and create a directory for the course:
+- Now open an elevated permissions (run as Administrator) PowerShell command-line and create a directory for the course:
 
 <pre>
 cd \
 mkdir c:\SampleDBApp
 cd \SampleDBApp
 </pre>
-- In that same window, install NodeJS using Chocolatey:
+
+- In that same window, install Python using Chocolatey:
 <pre>
-choco install -y nodejs
+choco install -y python
 </pre>
-- In that same window, install the mssql NodeJS package to allow access to SQL Server:
+
+- In that same window, install the package manager for Python, and use that to install the connection code for SQL Server:
 <pre>
-npm install tedious
+python -m pip install -U pip
+python -m pip install pyodbc
 </pre>
+
 - In that same window, Start the Notepad program to create the first iteration of the sample application:
 <pre>
-notepad SampleDBApp.js
+notepad SimpleConnection.py
 </pre>
 Answer "Y" to create a new file, and paste the following text in the file, then save and close it. You will alter this file later.
 
 <pre>
-    var Connection = require('tedious').Connection;  
-    var config = {  
-        server: '(local)',  
-        authentication: {
-            type: 'default',
-            options: {
-                userName: 'sa',
-                password: 'your_sa_password'  //update me
-            }
-        },
-        options: {
-            // If you are on Microsoft Azure, you need encryption:
-            encrypt: true,
-            database: 'master',
-            trustServerCertificate: true
-        }
-    };  
-    var connection = new Connection(config);  
-    connection.on('connect', function(err) {  
-        // If no error, then good to proceed.
-        console.log("Connected");  
-    });
-    
-    connection.connect();
+import pyodbc 
+cnxn = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};Server=(local);Database=master;Trusted_Connection=yes;Application Name=DBConnectionAppFromPython;')
+cursor = cnxn.cursor()
+
+# Connect and return version information
+cursor.execute("SELECT @@version;") 
+row = cursor.fetchone() 
+while row: 
+    print(row[0])
+    row = cursor.fetchone()
 </pre>
 
 *You can test this application with the following command if desired:*
 <pre>
-node .\SampleDBApp.js
+python SimpleConnection.py
 </pre>
 
 <br>

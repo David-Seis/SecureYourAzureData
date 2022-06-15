@@ -14,7 +14,7 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
-In this module you will learn the general Information Technology Security Landscape, and the role of the data professional in that area. While you may not be responsible for the entire organization's security posture, you should be familiar with where the data fits and your responsibilities.
+In this module you will learn the general Information Technology security landscape, and the role of the data professional in that area. While you may not be responsible for the entire organization's security posture, you should be familiar with where the data storage and processing security part of that larger security footprint.
 
 You'll cover these topics in this Module:
 <dl>
@@ -27,14 +27,20 @@ You'll cover these topics in this Module:
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Computing Security</h2>
 The Data Professional is not entirely responsible for the security of the entire organization, but they do need to be aware of the various components within computing security, and how the database figures into those components.
 
-This section covers the basics of Computing Security - defined as "allowing the right people to access the right objects in the right way and in the right situations". That also means preventing unauthorized persons from accessing objects they do not have permissions for. In the sections that follow, you will learn more about the entire Computing Security landscape, and how and where Database Security fits into that landscape. 
+This section covers the basics of computing security - defined as "allowing the right people to access the right objects in the right way and in the right situations". That also means preventing unauthorized persons from accessing objects they do not have permissions for. In the sections that follow, you will learn more about the entire Computing Security landscape, and how and where database security fits into that landscape.
 
 > The "References" section that follows has much more detail on this topic.
 
-<h5>Identity, Access and Authentication</h5>
+<h5>Identity, Authentication and Authorization</h5>
+
+Computing Security paradigms are a kind of framework or action paths you can use to form the basis of good security policies and practices in your organization. These paradigms and frameworks allow each part of the organization to understand their responsibilities for security. It involves three main areas:
+- Identity: The user or process that is requesting access to an asset
+- Athentication: A system or systems that prove the Indentity
+- Authorization: The permissions granted or denied on an asset to the identity
+
 
 <h3>1.1 Computing Security Paradigms</h3>
-Computing Security paradigms are a kind of framework or action paths you can use to form the basis of good security policies and practices in your organization. These paradigms and frameworks allow each part of the organization to understand their responsibilities for security.
+To adequately secure a resource, security processes and programs within operating systems and applications control each area. You can implement those areas using various methods and processes, and over time various frameworks for tracking Identity, Authentication and Authorization have been created. Two of these are *Defense in Depth*, and *Zero Trust*.
 
 <h4>1.1.1 Defense in Depth</h4>
 One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
