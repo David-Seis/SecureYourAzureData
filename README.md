@@ -8,9 +8,9 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/textbubble.png"> <h2>About this Workshop</h2>
 
-Welcome to this workshop on *SQL Server Security Ground to Cloud*. In this workshop, you'll learn <TODO: Describe what the students will learn>
+Welcome to this workshop on *SQL Server Security Ground to Cloud*. In this workshop, you'll learnthe Computing Security Landscape, and the Data Professional's responsibilities within it. You'll also learn the latest security frameworks and paradigms, SQL Server security operations both on-premises and in-cloud, and the steps you should secure your organization's data.  
 
-The focus of this workshop is to understand <TODO: Describe the workshop's primay focus in one sentence>
+The focus of this workshop is to enable the Data Professional to secure and protect their data estate.
 
 You'll start by <TODO: Describe what the flow of the workshop will be>, with a focus on how to extrapolate what you have learned to create other solutions for your organization.
 
@@ -81,7 +81,7 @@ If you are new to these, here are a few references you can complete prior to cla
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/bulletlist.png"> <h3>Setup</h3>
 
-<a href="url" target="_blank">A full pre-requisites document is located here</a>. These instructions should be completed before the workshop starts, since you will not have time to cover these in class. <i>Remember to turn off any Virtual Machines from the Azure Portal when not taking the class so that you do incur charges (shutting down the machine in the VM itself is not sufficient)</i>.
+<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">A full pre-requisites document is located here</a>. These instructions should be completed before the workshop starts, since you will not have time to cover these in class. <i>Remember to turn off any Virtual Machines from the Azure Portal when not taking the class so that you do incur charges (shutting down the machine in the VM itself is not sufficient)</i>.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -115,7 +115,7 @@ This is a modular workshop, and in each section, you'll learn concepts, technolo
   <tr><td style="background-color: AliceBlue; color: black;"><b>Module</b></td><td style="background-color: AliceBlue; color: black;"><b>Topics</b></td></tr>
 
   <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">00 - Pre Requisites </a></td><td> Covers the materials and tools you need, as well as the knowledge you need prior to taking this course.</td></tr>
-  <tr><td style="background-color: AliceBlue; color: black;">  <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank">01 - Security Landscape</a> </td>
+  <tr><td style="background-color: AliceBlue; color: black;">  <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank">01 - The Database Security Landscape</a> </td>
       <td td style="background-color: AliceBlue; color: black;"> Explains the general Information Technology areas, and also frameworks for IT security. Covers the Database portion of those security areas. </td></tr>
   <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank">02 - SQL Server Security Basics </a></td>
       <td> Details the primary components and tools for SQL Server security, from Principals and Securables to Data Control Language (DDL) statements.</td></tr>
@@ -129,7 +129,7 @@ This is a modular workshop, and in each section, you'll learn concepts, technolo
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/geopin.png"><b>Next Steps</b></p>
 
-Next, Continue to <a href="url" target="_blank"><i> Pre-Requisites</i></a>
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank"><i> Pre-Requisites</i></a>
 
 # Contributing
 
