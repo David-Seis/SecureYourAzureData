@@ -97,26 +97,15 @@ At the end of this course, you'll find a basic Data Security Checklist template,
 > In the Modules that follow, you'll learn more about the details of each of these concepts, and have specific Activities to experiment with them. 
 
 <h3>Database Security Process</h3>
-There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. 
+There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
 
-**Compliance with Defense in Depth Standards**
+<h4>SQL Server Instance</h4>
+Thing
 
-Physical Access
+System access and file protections
 
-Data at Rest Protection
+Data at rest protections
 
-**Data Catalog and Classification**
-
-**Application Discovery**
-
-**Authentication Review**
-
-**Access Review**
-
-**Auditing and Reporting Standardization**
-
-
-The primary tool for your security footprint of your on-premises or in-cloud database servers and databases is Microsoft Defender for SQL. 
 
 <h3>Determine Access Strategy</h3>
 
@@ -126,17 +115,22 @@ After you secure the SQL Server Instance platform and configuration, and you've 
 
 <br>
 
-> Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
+Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
 
-**SQL Server Authentication, Certificates and Keys, Active Directory, Azure Active Directory**
+- SQL Server Authentication
+
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
+
+- Integrated Authentication
 SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
 
 Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly.
 
-**Database Security or Application Security**
+- Certificate and other non-user methods of Authentication
 
-**Role-Based Acccess Control**
+- Application Proxy
+
+- Application Roles
 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
@@ -149,12 +143,13 @@ TODO: Activity Description and tasks
 - Check Account Types in Properties
 - Check File Locations in Properties
 - Run Security Standard Reports
+- Determine Access to your environment
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Azure SQL DB Security Settings Review</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: SQL Server Security Settings Review</b></p>
 
 TODO: Activity Description and tasks
 
@@ -188,4 +183,4 @@ TODO: Activity Description and tasks
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank"><i> 01 - The Database Security Landscape</i></a>.
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank"><i> 02 - SQL Server Security</i></a>.
