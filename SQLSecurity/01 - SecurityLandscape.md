@@ -48,12 +48,12 @@ One of the oldest security paradigms is *Defense in Depth*. You check and secure
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
-- **Physical**: This ring involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized personnel.
-- **Perimeter**:  This level entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and you will use [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
-- **Compute**: This level requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlloing access to physical and virtual machines, and implementing strong Cloud Controls.
-- **Identity and Authorization**: At this level you will use [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
-- **Application**: For this level, you will implement [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
-- **Data**: This level ensures that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
+- **Physical**: Involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
+- **Perimeter**:  Entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+- **Compute**: Requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlling access to physical and virtual machines, and implementing strong Cloud controls.
+- **Identity and Authorization**: Defining Principals and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
+- **Application**: Implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
+- **Data**: Ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
 
 <h4>1.1.2 Zero Trust</h4> 
 
@@ -99,9 +99,7 @@ At the end of this course, you'll find a basic Data Security Checklist template,
 There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
 
 <h4>SQL Server Instance</h4>
-Thing
-
-System access and file protections
+Beyond the phsysical facilities and access to the environment where your SQL Server hardware is located, you must also set up system access and file protections. Understanding the file locations.
 
 Data at rest protections
 
