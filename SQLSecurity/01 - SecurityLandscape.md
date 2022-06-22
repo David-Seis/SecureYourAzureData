@@ -115,20 +115,20 @@ After you secure the SQL Server Instance platform and configuration, and you've 
 Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
 
 - SQL Server Authentication
-
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
 
 - Integrated Authentication
 SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
-
 Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly.
 
 - Certificate and other non-user methods of Authentication
+Certificates are not used to log in to a SQL Server Instance or Database, but are used to help secure connections, for database mirroring connections, to sign packages and other objects, or to encrypt data and connections.
 
 - Application Proxy
+In this pattern the database stores user and permission information in it's own storage, and the application accesses the database on behalf of all users, performing operations on their behalf. The application has access to all data and objects, and the users have none. 
 
 - Application Roles
-
+An application role is a SQL Server Database principal with user-like permissions. You  use application roles to enable access to specific data to only those users who connect through a an  application. Application Roles do not have members. A user logs in to the application, the application logs into SQL Server, and then assigns permissions to objects using the application role. The user has no permissions other than that which the application provides through the role.  
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
 
@@ -180,4 +180,4 @@ TODO: Activity Description and tasks
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank"><i> 02 - SQL Server Security</i></a>.
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank"><i> 02 - SQL Server Security</i></a>.
