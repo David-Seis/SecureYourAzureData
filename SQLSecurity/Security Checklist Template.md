@@ -28,52 +28,65 @@ The following sections should be answered as "*Complete*", "*Checked*", or "*Imp
 Physical security involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> The physical server hosting SQL Server is kept in a secure location, with alarm and monitoring systems, which are periodically tested.
-<img src="../graphics/checkbox.png"> Only authorized personnel have access to the physical server that hosts SQL Server.
-<img src="../graphics/checkbox.png"> All access to the physical system hosting SQL Server is audited and periodically reviewed.
+<br><img src="../graphics/checkbox.png"> The physical server hosting SQL Server is kept in a secure location, with alarm and monitoring systems, which are periodically tested.
+<br><img src="../graphics/checkbox.png"> Only authorized personnel have access to the physical server that hosts SQL Server.
+<br><img src="../graphics/checkbox.png"> All access to the physical system hosting SQL Server is audited and periodically reviewed.
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security](https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security)
+<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security](https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security)
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Perimeter</b></p>
 
 Perimeter security entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> Thing 
+<br><img src="../graphics/checkbox.png"> Only required network protocols are enabled using the SQL Server Configuration Manager utility. 
+<br><img src="../graphics/checkbox.png"> Default SQL Server ports changed to non-standard value.
+<br><img src="../graphics/checkbox.png"> Disable the SQL Server Browser Service using the SQL Server Configuration Manager utility.
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
+<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Compute</b></p>
 
 The Compute security area requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlling access to physical and virtual machines, and implementing strong Cloud controls.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> All Operating System Service Packs and Linux updates evaluated and applied after testing to the system(s) hosting SQL Server binaries and files. 
+<br><img src="../graphics/checkbox.png"> All Windows Operating System Service Packs and Linux updates evaluated and applied after testing to the system(s) hosting SQL Server binaries and files. 
+<br><img src="../graphics/checkbox.png"> Firewalls configured to allow only specific access from authorized systems. 
+<br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for administrative or elevated access.
+<br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for unusual access to resources.
+<br><img src="../graphics/checkbox.png"> Binary and file locations for the SQL Server are secured against unauthorized access.
+<br><img src="../graphics/checkbox.png"> Only required Operating System components, utilities, and features are installed required for operating the SQL Server installation.
+<br><img src="../graphics/checkbox.png"> Only required SQL Server components, utilities and features are installed required for securely servicing authorized data and programmatic requests.
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Thing
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Identitiy and Authorization</b></p>
 
 Identity and Authorization security defines the appropriate *Principals* and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> Thing 
+<br><img src="../graphics/checkbox.png"> Rename or disable the *sa* SQL Server account after testing.
+<br><img src="../graphics/checkbox.png"> Use *Integrated Authentication* wherever possible. Active Directory or Azure Active Directory used wherever possible.
+<br><img src="../graphics/checkbox.png"> The *SQL Server Configuration Manager* utility is used for all Service Account changes.
+<br><img src="../graphics/checkbox.png"> All SQL Server Services evaluated and disabled where not required for servicing authorised data requests.
+<br><img src="../graphics/checkbox.png"> All SQL Server Services use specific, low-privilege accounts for each service operation, and are periodically reivewed for activity.
+<br><img src="../graphics/checkbox.png"> A strong audit and review process is in place for evaluating user access to data and programmatic objects, such as using SQL Server Audit and other utilities. 
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Thing
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Application</b></p>
 
 The Application security area involves implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> Thing 
+<br><img src="../graphics/checkbox.png"> Thing 
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Thing
  
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Data</b></p>
@@ -81,11 +94,15 @@ The Application security area involves implementing [Secure Code](https://docs.m
 The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
 
 *SQL Server Installations*
-<img src="../graphics/checkbox.png"> Thing 
+<br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured.
+<br><img src="../graphics/checkbox.png"> The *public* group has no execute access to unnecessary stored procedures, such as extended stored procedures. 
+<br><img src="../graphics/checkbox.png"> The *xp_cmdshell* is disabled.
+<br><img src="../graphics/checkbox.png"> Encryption at rest (such as Transparent Data Encryption) evaluated and implemented wherever possible.
+
+
 
 *Microsoft Azure SQL DB environments*
-<img src="../graphics/checkbox.png"> Thing
- 
+<br><img src="../graphics/checkbox.png"> Thing
 
 <a href="url" target="_blank">url</a>
 
