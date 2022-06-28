@@ -10,7 +10,7 @@
 
 The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">SQL Server Security Ground to Cloud workshop</a> ues the following components. Read through this list, and in the Activities that follow you will see specific steps for each installation. You can also simply read through each of these steps, and observe the activities in the workshop if you cannot install the hands-on poritions.
 
-- **A Microsoft Windows 10 or Higher Workstation**: For this workshop, you will use a Microsoft Windows system as the base workstation, although Apple and Linux operating systems can be used in production.
+- **A Microsoft Windows 10 or Higher Workstation**: For this workshop, you will use a Microsoft Windows system as the base workstation, although Apple and Linux operating systems can be used in production. You'll see instructions for multiple options, from a physical system you have administrative access on, to Virtual Machines you can use for free on Windows, Linux and Apple systems. You can also use a VM in the cloud provider of your choice.
 - **Microsoft Azure**: This workshop uses the Microsoft Azure platform for the cloud database and the Microsoft Defender products. You can also host your workstation there if desired. You can use a free Azure account, an MSDN Account, your own account, or potentially one provided for you, as long as you can create about $100.00 (U.S.) worth of assets.
 - **SQL Server Developer Edition**: An installation of the SQL Server Developer Edition, the Database Engine feature.
 - **Microsoft Azure SQL DB**: A Microsoft Azure SQL Database (smallest edition) allows for testing and exploration of SQL Server security on that platform.
@@ -48,7 +48,9 @@ Your workshop invitation may have instructed you that they will provide a Micros
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 2: Create a Workstation and Install SQL Server Developer Edition and the Sample Application</b></p>
 <br>
 
-You will use a Windows 10 or higher workstation for this course. After you complete that installation, you will install SQL Server 2019 on this workstation, along with the SQL Server Management Studio tool, and a sample application.  You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted when necessary.
+You will use a Windows 10 or higher workstation for this course. After you complete that installation, you will install SQL Server 2019 on this workstation, along with the SQL Server Management Studio tool, and a sample application.  
+
+You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted when necessary. Choose one of the following options if you are planning to do the hands-on steps either in class or on your own. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Create your own Workstation</b></p> 
 
@@ -56,7 +58,7 @@ You will use a Windows 10 or higher workstation for this course. After you compl
 
 You can create your workstation for this course using **one** of the following methods:
 
-- Local Workstation - You can use a physical workstation for this course, assuming you can install software on that system and you have complete control of the administration account. **This needs to be a system you could format and start over multiple times, so do not use your work or production workstation for this course.** This system should have a minimum of 8GB of RAM and 150GB drive space free.
+- Local Workstation - You can use a physical workstation for this course, assuming you can install software on that system and you have complete control of the administration account. **This needs to be a system you could format and start over multiple times, so do not use your work or production workstation for this course.** This system should have a minimum of 8GB of RAM, 2 processors, and 150GB drive space free.
 - Local Virtual Machine - You can <a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines" target="_blank">download a Windows 10 Workstation Image for VirtualBox, Hyper-V, VMWare, or Parallels for free here</a>, or you can use your own installation media.</a> This system should have a minimum of 8GB of RAM and 150GB drive space free. 
 - <a href="https://docs.microsoft.com/en-us/azure/virtual-machines/windows/quick-create-portal" target="_blank">Microsoft Azure Virtual Machine.</a> Select a system that has at least 2 processors, a minimum of 8GB of RAM and 150GB drive space free. Ensure you create all assets for this course in a single Resource Group, so that you can delete all these assets when you complete the workshop. **Do not use your organization's production subscription for this workshop.**
 - Another Cloud Provider's Virtual Machine Environment. See the provider's documentation for this process. This system should have a minimum of 8GB of RAM and 150GB drive space free. **Do not use your organization's production subscription for this workshop.**
@@ -65,7 +67,9 @@ You can create your workstation for this course using **one** of the following m
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Apply Operating System Updates</b></p>
 
-Next, ensure all of your updates are current. You can use <a href="https://support.microsoft.com/en-us/windows/update-windows-3c5ae7fc-9fb6-9af1-1984-b5e0412c556a#WindowsVersion=Windows_10" target="_blank">the Windows Update</a> graphical tool <a href="https://www.parallels.com/blogs/ras/powershell-windows-update/" target="_blank">or PowerShell.</a>
+*For the rest of the workshop, you will use the Development Environment you just set up to run all steps.*
+
+Next, ensure all of your updates are current on your development system. You can use <a href="https://support.microsoft.com/en-us/windows/update-windows-3c5ae7fc-9fb6-9af1-1984-b5e0412c556a#WindowsVersion=Windows_10" target="_blank">the Windows Update</a> graphical tool <a href="https://www.parallels.com/blogs/ras/powershell-windows-update/" target="_blank">or PowerShell.</a>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Install SQL Server Database Engine</b></p>
 
@@ -79,13 +83,13 @@ In this activity, you will install SQL Server, selecting at least the "Database 
 
 - <a href="https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16" target="_blank">Navigate to this page, and install SQL Server Management Studio.</a>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Install the NodeJS Sample Application</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Install the Python Sample Application</b></p>
 
-You do not need to be a developer to take this course, but having an application to use for SQL Server makes it more "real world" and what you will face in production. The steps below are comprehensive and simple to implement. This course uses a <a href="https://nodejs.org/en/" target="_blank">NodeJS sample application</a>.
+You do not need to be a developer to take this course, but having an application to use for SQL Server makes it more "real world" and what you will face in production. The steps below are comprehensive and simple to implement. This course uses a <a href="https://nodejs.org/en/" target="_blank">Python sample application</a>.
 
-- <a href="https://docs.chocolatey.org/en-us/choco/setup#install-with-powershell.exe" target="_blank">Navigate to this page and install the "Chocolatey " application using PowerShell that you will use for other installations on your test system.</a>
+- <a href="https://docs.chocolatey.org/en-us/choco/setup#install-with-powershell.exe" target="_blank">Navigate to this page and install the "Chocolatey" application using PowerShell that you will use for other installations on your test system.</a>
 
-- Now open an elevated permissions (run as Administrator) PowerShell command-line and create a directory for the course:
+- Now open an elevated permissions (run as **Administrator**) PowerShell command-line and create a directory for the course:
 
 <pre>
 cd \

@@ -116,12 +116,12 @@ This is a modular workshop, and in each section, you'll learn concepts, technolo
 
   <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">00 - Pre Requisites </a></td><td> Covers the materials and tools you need, as well as the knowledge you need prior to taking this course.</td></tr>
   <tr><td style="background-color: AliceBlue; color: black;">  <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank">01 - The Database Security Landscape</a> </td>
-      <td td style="background-color: AliceBlue; color: black;"> Explains the general Information Technology areas, and also frameworks for IT security. Covers the Database portion of those security areas. </td></tr>
-  <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank">02 - SQL Server Security Basics </a></td>
-      <td> Details the primary components and tools for SQL Server security, from Principals and Securables to Data Control Language (DDL) statements.</td></tr>
+      <td td style="background-color: AliceBlue; color: black;"> Explains the general Information Technology areas, and also frameworks for IT security. Covers the Database portion of those security areas.</td></tr>
+  <tr><td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank">02 - SQL Server Security</a></td>
+      <td> Details the primary components and tools for on-premises/Virtual Machine SQL Server security environments, from Principals and Securables to Data Control Language (DDL) statements.</td></tr>
   <tr><td style="background-color: AliceBlue; color: black;"><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank">03 - Microsoft Azure SQL Security </a> </td>
       <td td style="background-color: AliceBlue; color: black;"> Explains the similarities and differences between the data structures, statements, tools and processes to sure your Azure SQL databases in the Microsoft Azure Platform. </td></tr>  <tr>
-  <td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/04%20-%20MonitoringAndIncidentResponse.md" target="_blank">04 - Monitoring and Incident Response</a></td>
+  <td><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/04%20-%20MonitoringAndIncidentResponse.md" target="_blank">04 - Monitoring and Mitigations</a></td>
       <td> Covers the tools and processes you can use both on-premises and in-cloud to detect and secure your data estate. Also explains some of the common threats and mitigations for those threats to databases. </td></tr>
 </table>
 

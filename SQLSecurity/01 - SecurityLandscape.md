@@ -48,13 +48,12 @@ One of the oldest security paradigms is *Defense in Depth*. You check and secure
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
-**Physical security**: This ring involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized personnel.
-**Identity and access security controls**: At this level you will use [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
-**Perimeter security**:  This level entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks.
-**Network security** At this level you will use [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
-**Compute layer security**: This level requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlloing access to physical and virtual machines, and implementing strong Cloud Controls.
-**Application layer security**: For this level, you will implement [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities. This is an ogoing process.
-**Data layer security**: This level ensures that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
+- **Physical**: Involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
+- **Perimeter**:  Entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+- **Compute**: Requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlling access to physical and virtual machines, and implementing strong Cloud controls.
+- **Identity and Authorization**: Defining Principals and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
+- **Application**: Implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
+- **Data**: Ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
 
 <h4>1.1.2 Zero Trust</h4> 
 
@@ -97,26 +96,13 @@ At the end of this course, you'll find a basic Data Security Checklist template,
 > In the Modules that follow, you'll learn more about the details of each of these concepts, and have specific Activities to experiment with them. 
 
 <h3>Database Security Process</h3>
-There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. 
+There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
 
-**Compliance with Defense in Depth Standards**
+<h4>SQL Server Instance</h4>
+Beyond the phsysical facilities and access to the environment where your SQL Server hardware is located, you must also set up system access and file protections. Understanding the file locations.
 
-Physical Access
+Data at rest protections
 
-Data at Rest Protection
-
-**Data Catalog and Classification**
-
-**Application Discovery**
-
-**Authentication Review**
-
-**Access Review**
-
-**Auditing and Reporting Standardization**
-
-
-The primary tool for your security footprint of your on-premises or in-cloud database servers and databases is Microsoft Defender for SQL. 
 
 <h3>Determine Access Strategy</h3>
 
@@ -126,18 +112,23 @@ After you secure the SQL Server Instance platform and configuration, and you've 
 
 <br>
 
-> Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
+Other combinations of access are possible, and you can derive the proper security posture those applications use from the basic patterns described here.
 
-**SQL Server Authentication, Certificates and Keys, Active Directory, Azure Active Directory**
+- SQL Server Authentication
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
-SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
 
+- Integrated Authentication
+SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
 Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly.
 
-**Database Security or Application Security**
+- Certificate and other non-user methods of Authentication
+Certificates are not used to log in to a SQL Server Instance or Database, but are used to help secure connections, for database mirroring connections, to sign packages and other objects, or to encrypt data and connections.
 
-**Role-Based Acccess Control**
+- Application Proxy
+In this pattern the database stores user and permission information in it's own storage, and the application accesses the database on behalf of all users, performing operations on their behalf. The application has access to all data and objects, and the users have none. 
 
+- Application Roles
+An application role is a SQL Server Database principal with user-like permissions. You  use application roles to enable access to specific data to only those users who connect through a an  application. Application Roles do not have members. A user logs in to the application, the application logs into SQL Server, and then assigns permissions to objects using the application role. The user has no permissions other than that which the application provides through the role.  
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
 
@@ -149,12 +140,13 @@ TODO: Activity Description and tasks
 - Check Account Types in Properties
 - Check File Locations in Properties
 - Run Security Standard Reports
+- Determine Access to your environment
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Azure SQL DB Security Settings Review</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: SQL Server Security Settings Review</b></p>
 
 TODO: Activity Description and tasks
 
@@ -188,4 +180,4 @@ TODO: Activity Description and tasks
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/Buck/SQLSecurity/01%20-%20SecurityLandscape.md" target="_blank"><i> 01 - The Database Security Landscape</i></a>.
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md" target="_blank"><i> 02 - SQL Server Security</i></a>.
