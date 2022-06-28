@@ -30,6 +30,8 @@ You'll cover these topics in this module:
 
 Logins and Users
   Relationship
+  
+However, there is one exception to this rule: Contained Databases. <TODO: Research and fill out>
 
 SQL Server controlled security accounts
 
@@ -44,7 +46,35 @@ Roles and Role-Based Access Control
 
 Schemas 
 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: List Principals in an Instance</b></p>
 
+TODO: Activity Description and tasks - Something about listing Instance, DB and Contained Principals, along with Certificates. 
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+
+The following code will list all Principals on an Instance, in each Database, and show any Certificates in use on your test system. You will run this code multiple times throughout this course to show the effect of adding, removing, and altering a Principal.
+  
+  > It is a common practice to run these scripts and save the output to another database or secure artifact. This way you can provide an audit trail for users on the system. 
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+Run the following code on your test system: 
+  
+<pre>
+/* Code Goes here with Comment */
+
+SELECT @@VERSION;
+GO 
+
+</pre>
+
+<p style="border-bottom: 1px solid lightgrey;"></p>  
+
+  
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
+
+Object Hierachy
+  
 TODO: Topic Description
 
 <br>
