@@ -45,9 +45,12 @@ Physical security involves restricting and [controlling access to your datacente
 Perimeter security entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
 
 *SQL Server Installations*
+<br><img src="../graphics/checkbox.png"> Where applicable, Extended Protection for Authentication is configured using channel binding and service binding. 
 <br><img src="../graphics/checkbox.png"> Only required network protocols are enabled using the SQL Server Configuration Manager utility. 
 <br><img src="../graphics/checkbox.png"> Default SQL Server ports changed to non-standard value.
 <br><img src="../graphics/checkbox.png"> Disable the SQL Server Browser Service using the SQL Server Configuration Manager utility.
+<br><img src="../graphics/checkbox.png"> Where possible, Always Encrypted is enabled to ensure encryption of data on the wire and at-rest.
+<br><img src="../graphics/checkbox.png"> Strict connection encryption enabled for SQL Server 2022 and higher applications.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
@@ -71,6 +74,8 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> SQL Server CLR feature evaluated for necessary and proper use, disabled if not.
 <br><img src="../graphics/checkbox.png"> SQL Server Application Roles documented with applicable applications that use them.
 <br><img src="../graphics/checkbox.png"> SQL Server Guest user disabled.
+<br><img src="../graphics/checkbox.png"> The SQL Vulnerability Assessment Tool has been run and a baseline report has been created, and a schedule is in place for it to be run periodcially.
+<br><img src="../graphics/checkbox.png"> A Server Audit and Server Audit Specification has been evaluated and implemented to the level required by the organization.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -90,7 +95,7 @@ Identity and Authorization security defines the appropriate *Principals* and che
 <br><img src="../graphics/checkbox.png"> A specific audit and review rule is in place for evaluating Failed Login attempts.
 <br><img src="../graphics/checkbox.png"> The *public* group has no execute access to unnecessary stored procedures, such as extended stored procedures. 
 <br><img src="../graphics/checkbox.png"> The *xp_cmdshell* is disabled.
-
+<br><img src="../graphics/checkbox.png"> DBA accounts have been removed from the *sysadmin* role, and **CONTROL SERVER** has been granted to DBA accounts.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -112,6 +117,10 @@ The Data Security Area involves ensuring that business and customer data is encr
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured.
+<br><img src="../graphics/checkbox.png"> If Always Encrypted is not enabled, Dynamic Data Masking is configured for applicable columns.
+<br><img src="../graphics/checkbox.png"> Row Level Encryption has been evaluated and implemeneted for all sensitive data.
+<br><img src="../graphics/checkbox.png"> Least-privilege role-based security has been implemented for all data access.
+<br><img src="../graphics/checkbox.png"> The SQL Data Discovery and Classification feature has been evaluated and used to identify and classify sensitive data.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
