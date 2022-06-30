@@ -20,13 +20,31 @@ You'll cover these topics in this module:
 <dl>
   <dt><a href="#01" target="_blank"><dt>01 - Principals</dt></a>
   <dt><a href="#02" target="_blank"><dt>02 - Securables</dt></a>
-  <dt><a href="#03" target="_blank"><dt>03 - Rights and Permissions</dt></a>
-  <dt><a href="#04" target="_blank"><dt>04 - Programmatic Security</dt></a>
+  <dt><a href="#03" target="_blank"><dt>03 - Applications</dt></a>
+  <dt><a href="#04" target="_blank"><dt>04 - Encryption, Certificates, and Keys</dt></a>
+  <dt><a href="#04" target="_blank"><dt>05 - Auditing</dt></a>
+  
 </dl>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
+
+This topic is broad, and we will hit the high points of each sub-point but there will always be more to invetsigate on your own time. Here is the 50,000 foot view:
+
+Access to SQL is managed through principals, or accounts. Accounts can be for a user, a computer, an application, a service, a group, <TODO: and more?>. Each account will have a way for the user to 'log in' (considering passwordless), which then enables the user of the account to be Authenticated, and then we get to the authorization side Authorization is What you can do once you are connected.
+
+
+Now to break it down:
+When it comes to SQL, there are two modes of authentication: 1) SQL Authentication where the account is managed and stored inside of SQL, or 2) managed externally through windows, Active directory (including azure), or linux account management. 
+
+Considerations: not typically managed by the DBA role:
+Password and account policies.
+
+
+
+
+
 
 Logins and Users
   Relationship
