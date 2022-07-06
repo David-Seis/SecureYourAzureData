@@ -63,6 +63,7 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> Firewalls configured to allow only specific access from authorized systems. 
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for administrative or elevated access.
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for unusual access to resources.
+<br><img src="../graphics/checkbox.png"> SQL Server is not installed on a Domain Controller.
 <br><img src="../graphics/checkbox.png"> Binary and file locations for the SQL Server are secured against unauthorized access.
 <br><img src="../graphics/checkbox.png"> Only required Operating System components, utilities, and features are installed required for operating the SQL Server installation.
 <br><img src="../graphics/checkbox.png"> System lock after timeout enabled.
@@ -74,8 +75,13 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> SQL Server Application Roles documented with applicable applications that use them.
 <br><img src="../graphics/checkbox.png"> SQL Server Guest user disabled.
 <br><img src="../graphics/checkbox.png"> The SQL Vulnerability Assessment Tool has been run and a baseline report has been created, and a schedule is in place for it to be run periodcially.
+<br><img src="../graphics/checkbox.png"> the *Default Trace Enabled* Instance option is enabled.
+
 <br><img src="../graphics/checkbox.png"> A Server Audit and Server Audit Specification has been evaluated and implemented to the level required by the organization.
 <br><img src="../graphics/checkbox.png"> A full monitoring and alerting systems has been implemented on the server, and has a review process and team appointed. 
+<br><img src="../graphics/checkbox.png"> Unless required, and after testing, the *SQLWriter* and *SQLBrowser* services are disabled.
+<br><img src="../graphics/checkbox.png"> If the CLR feature is required, the *clr strict security* Instance option is enabled.
+<br><img src="../graphics/checkbox.png"> The *Maximum number of error log files* Instance option is set to 10 or higher.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -87,6 +93,7 @@ Identity and Authorization security defines the appropriate *Principals* and che
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> The *sa* SQL Server account has been disabled or renamed, after testing.
 <br><img src="../graphics/checkbox.png"> *Integrated Authentication* is implemented wherever possible. Active Directory or Azure Active Directory is used wherever possible for that integration.
+<br><img src="../graphics/checkbox.png"> If SQL Server Authentication is used, the Password and Account settings have been strengthened with Password History, length, complexity, age, and lockout settings to the most restrictive possible.
 <br><img src="../graphics/checkbox.png"> The *SQL Server Configuration Manager* utility is used for all Service Account changes.
 <br><img src="../graphics/checkbox.png"> All SQL Server Services evaluated and disabled where not required for servicing authorised data requests.
 <br><img src="../graphics/checkbox.png"> All SQL Server Services use specific, low-privilege accounts for each service operation, and are periodically reivewed for activity.
@@ -97,6 +104,13 @@ Identity and Authorization security defines the appropriate *Principals* and che
 <br><img src="../graphics/checkbox.png"> The *xp_cmdshell* is disabled.
 <br><img src="../graphics/checkbox.png"> DBA accounts have been removed from the *sysadmin* role, and **CONTROL SERVER** has been granted to DBA accounts.
 <br><img src="../graphics/checkbox.png"> There is a strict, documented and reviewed process for accounts that are no longer active, and access to data-bearing assets are revoked as soon as the user leaves the position or organization. 
+<br><img src="../graphics/checkbox.png"> Unless required by auditing or Replication, the *Scan For Startup Procs* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Database Mail XPs* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Cross DB Ownership Chaining* Instance option is disabled. 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Remote Access* Instance option is disabled. 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Remote Admin Connections* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Trustworthy* Database Property is disabled. Note: The *msdb* System Database requires this configuration be enabled.
+<br><img src="../graphics/checkbox.png"> The SQL Agent Proxies have been audited to establish least privilege.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -109,6 +123,10 @@ The Application security area involves implementing [Secure Code](https://docs.m
 <br><img src="../graphics/checkbox.png"> Applications do not use a hard-coded password in the application for database access.
 <br><img src="../graphics/checkbox.png"> Applications are developed on a Development Instance, tested on a Testing Instance, and Developers do not have general rights to access Production Instances.
 <br><img src="../graphics/checkbox.png"> Development databases do not contain sensitive production data.
+<br><img src="../graphics/checkbox.png"> Unless required, the *CLR Enabled* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *OlE Automation Procedures* Instance option is disabled 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Ad Hoc Distributed Queries* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Each application's input for database access is sanitized to prevent SQL Injection and other attacks.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
