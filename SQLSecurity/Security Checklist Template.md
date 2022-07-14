@@ -8,18 +8,17 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/textbubble.png"> <h2>SQL Server Security Checklist Template</h2>
 
-In <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">the SQL Server Security Gtround to Cloud workshop</a> you'll cover the basics of securing SQL Server installations and databases, from on-premises systems to Microsoft Azure deployments. After completing that workshop, you will know the basics of securing your system along with the other teams in your organization. This checklist should be used as a guide to form the basis of your own security posture, after you have completed this workshop and fully understand each section's implementation.
+In <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">the SQL Server Security Ground to Cloud workshop</a> you'll cover the basics of securing SQL Server installations and databases, from on-premises systems to Microsoft Azure deployments. After completing that workshop, you will know the basics of securing your system along with the other teams in your organization. This checklist should be used as a *guide* to form the basis of your own security posture, after you have completed the workshop and fully understand each section's implementation.
 
-This checklist covers both the Microsoft Azure SQL DB platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL DB security is a shared responsibility between Microsoft and your organization. A more [complete description of these responsibilities are here](https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility).
+This checklist covers both the Microsoft Azure SQL DB platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL DB security is a shared responsibility between Microsoft and your organization. A more [complete description of these responsibilities is here](https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility).
+
+Some of these items are checked on installation or initial configuration, others are periodic tasks based on your organization's requirements and the general use of your installation. You should augment the steps in this guide to fit your organization and installations. You should review this checklist periodically to ensure compliance and to update the teams in your organization for changes or additions. 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-https://docs.microsoft.com/en-us/azure/security/fundamentals/zero-trust 
-Security review scheduled
-
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Security Checklist by "Defense in Depth" Area</b></p>
 
-The following sections should be answered as "*Complete*", "*Checked*", or "*Implemented*". If any area is not marked with one of these designations, you should complete the tasks to secure the area using the knowledge gained in the SQL Server Security course.
+The following sections should be answered as "*Complete*", "*Checked*", or "*Implemented*". If any area is not marked with one of these designations, you should complete the tasks to secure the area using the knowledge gained in the SQL Server Security course. You should also use the ["Zero-Trust"](https://docs.microsoft.com/en-us/azure/security/fundamentals/zero-trust) model for your deployments. 
 
 <br>
 
@@ -28,13 +27,12 @@ The following sections should be answered as "*Complete*", "*Checked*", or "*Imp
 Physical security involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
 
 *SQL Server Installations*
-<br><img src="../graphics/checkbox.png"> The physical server hosting SQL Server is kept in a secure location, with alarm and monitoring systems, which are periodically tested.
+<br><img src="../graphics/checkbox.png"> The physical server hosting SQL Server is kept in a secure location, with alarm and monitoring systems implemented, which are documented and periodically tested.
 <br><img src="../graphics/checkbox.png"> Only authorized personnel have access to the physical server that hosts SQL Server.
 <br><img src="../graphics/checkbox.png"> All access to the physical system hosting SQL Server is audited and periodically reviewed.
-<br><img src="../graphics/checkbox.png"> Encryption at rest (such as Transparent Data Encryption) evaluated and implemented wherever possible.
+<br><img src="../graphics/checkbox.png"> Encryption at rest (such as Transparent Data Encryption) has been evaluated and implemented wherever possible.
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media.
 <br><img src="../graphics/checkbox.png"> Server Master Keys and Database Master Keys, along with other Certificate mechanisms, are backed up and secured.
-
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security](https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security)
@@ -45,12 +43,12 @@ Physical security involves restricting and [controlling access to your datacente
 Perimeter security entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
 
 *SQL Server Installations*
-<br><img src="../graphics/checkbox.png"> Where applicable, Extended Protection for Authentication is configured using channel binding and service binding. 
 <br><img src="../graphics/checkbox.png"> Only required network protocols are enabled using the SQL Server Configuration Manager utility. 
-<br><img src="../graphics/checkbox.png"> Default SQL Server ports changed to non-standard value.
-<br><img src="../graphics/checkbox.png"> Disable the SQL Server Browser Service using the SQL Server Configuration Manager utility.
+<br><img src="../graphics/checkbox.png"> Default SQL Server ports have been changed to non-standard values.
+<br><img src="../graphics/checkbox.png"> The SQL Server Browser Service has been disabled using the SQL Server Configuration Manager utility.
 <br><img src="../graphics/checkbox.png"> Where possible, Always Encrypted is enabled to ensure encryption of data on the wire and at-rest.
 <br><img src="../graphics/checkbox.png"> Strict connection encryption enabled for SQL Server 2022 and higher applications.
+<br><img src="../graphics/checkbox.png"> Where applicable, the *Extended Protection for Authentication* feature is configured using channel binding and service binding. 
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
@@ -61,21 +59,29 @@ The Compute security area requires creating a [strong system](https://techcommun
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> All Windows Operating System Service Packs and Linux updates evaluated and applied after testing to the system(s) hosting SQL Server binaries and files. 
-<br><img src="../graphics/checkbox.png"> Firewalls configured to allow only specific access from authorized systems. 
+<br><img src="../graphics/checkbox.png"> Firewalls are configured to allow only specific access from authorized systems. 
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for administrative or elevated access.
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for unusual access to resources.
+<br><img src="../graphics/checkbox.png"> The Server that hosts SQL Server Instances does not also provide file shares, print spools, or other functions. 
+<br><img src="../graphics/checkbox.png"> SQL Server is not installed on a Domain Controller.
 <br><img src="../graphics/checkbox.png"> Binary and file locations for the SQL Server are secured against unauthorized access.
 <br><img src="../graphics/checkbox.png"> Only required Operating System components, utilities, and features are installed required for operating the SQL Server installation.
-<br><img src="../graphics/checkbox.png"> System lock after timeout enabled.
-<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools enabled, run, and periodically evaluated.
+<br><img src="../graphics/checkbox.png"> System lock after timeout is enabled.
+<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools are enabled, run, and results are periodically evaluated.
 <br><img src="../graphics/checkbox.png"> Only required SQL Server components, utilities and features are installed required for securely servicing authorized data and programmatic requests.
-<br><img src="../graphics/checkbox.png"> SQL Server is at currently supported version.
-<br><img src="../graphics/checkbox.png"> SQL Server latest Service Packs and/or Cumulative Updates tested, installed and configuration documents updated.
-<br><img src="../graphics/checkbox.png"> SQL Server CLR feature evaluated for necessary and proper use, disabled if not.
+<br><img src="../graphics/checkbox.png"> SQL Server is at a currently supported version.
+<br><img src="../graphics/checkbox.png"> SQL Server latest Service Packs and/or Cumulative Updates are tested, installed and configuration documents updated.
+<br><img src="../graphics/checkbox.png"> SQL Server CLR feature evaluated for necessary and proper use, and disabled if not.
 <br><img src="../graphics/checkbox.png"> SQL Server Application Roles documented with applicable applications that use them.
 <br><img src="../graphics/checkbox.png"> SQL Server Guest user disabled.
 <br><img src="../graphics/checkbox.png"> The SQL Vulnerability Assessment Tool has been run and a baseline report has been created, and a schedule is in place for it to be run periodcially.
-<br><img src="../graphics/checkbox.png"> A Server Audit and Server Audit Specification has been evaluated and implemented to the level required by the organization.
+<br><img src="../graphics/checkbox.png"> The *Default Trace Enabled* Instance option is enabled.
+<br><img src="../graphics/checkbox.png"> A Server Audit, Server Audit Specification and Database Audit Specifications have been evaluated and implemented to the level required by the organization. 
+<br><img src="../graphics/checkbox.png"> A full monitoring and alerting systems has been implemented on the server, and has a review process and team appointed. 
+<br><img src="../graphics/checkbox.png"> Unless required, and after testing, the *SQLWriter* and *SQLBrowser* services are disabled.
+<br><img src="../graphics/checkbox.png"> If the CLR feature is required, the *clr strict security* Instance option is enabled.
+<br><img src="../graphics/checkbox.png"> The *Maximum number of error log files* Instance option is set to 10 or higher.
+<br><img src="../graphics/checkbox.png"> A full configuration audit of the Operating System and SQL Server Instances has been created, and is updated with Delta reports on a periodic basis. These documents are reviewed by both the Security and Data teams.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -85,8 +91,9 @@ The Compute security area requires creating a [strong system](https://techcommun
 Identity and Authorization security defines the appropriate *Principals* and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
 
 *SQL Server Installations*
-<br><img src="../graphics/checkbox.png"> Rename or disable the *sa* SQL Server account after testing.
-<br><img src="../graphics/checkbox.png"> Use *Integrated Authentication* wherever possible. Active Directory or Azure Active Directory used wherever possible.
+<br><img src="../graphics/checkbox.png"> The *sa* SQL Server account has been disabled or renamed, after testing.
+<br><img src="../graphics/checkbox.png"> *Integrated Authentication* is implemented wherever possible. Active Directory or Azure Active Directory is used wherever possible for that integration.
+<br><img src="../graphics/checkbox.png"> If SQL Server Authentication is used, the Password and Account settings have been strengthened with Password History, length, complexity, age, and lockout settings to the most restrictive possible.
 <br><img src="../graphics/checkbox.png"> The *SQL Server Configuration Manager* utility is used for all Service Account changes.
 <br><img src="../graphics/checkbox.png"> All SQL Server Services evaluated and disabled where not required for servicing authorised data requests.
 <br><img src="../graphics/checkbox.png"> All SQL Server Services use specific, low-privilege accounts for each service operation, and are periodically reivewed for activity.
@@ -96,6 +103,14 @@ Identity and Authorization security defines the appropriate *Principals* and che
 <br><img src="../graphics/checkbox.png"> The *public* group has no execute access to unnecessary stored procedures, such as extended stored procedures. 
 <br><img src="../graphics/checkbox.png"> The *xp_cmdshell* is disabled.
 <br><img src="../graphics/checkbox.png"> DBA accounts have been removed from the *sysadmin* role, and **CONTROL SERVER** has been granted to DBA accounts.
+<br><img src="../graphics/checkbox.png"> There is a strict, documented and reviewed process for Operating System, Instance, and Database accounts that are no longer active, and access to data-bearing assets are revoked as soon as the user leaves the position or organization. 
+<br><img src="../graphics/checkbox.png"> Unless required by auditing or Replication, the *Scan For Startup Procs* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Database Mail XPs* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Cross DB Ownership Chaining* Instance option is disabled. 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Remote Access* Instance option is disabled. 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Remote Admin Connections* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *Trustworthy* Database Property is disabled. Note: The *msdb* System Database requires this configuration be enabled.
+<br><img src="../graphics/checkbox.png"> The SQL Agent Proxies have been audited to establish least privilege.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
@@ -105,22 +120,30 @@ Identity and Authorization security defines the appropriate *Principals* and che
 The Application security area involves implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
 
 *SQL Server Installations*
-<br><img src="../graphics/checkbox.png"> Thing 
+<br><img src="../graphics/checkbox.png"> Applications do not use a hard-coded password in the application for database access.
+<br><img src="../graphics/checkbox.png"> Applications are developed on a Development Instance, tested on a Testing Instance, and Developers do not have general rights to access Production Instances.
+<br><img src="../graphics/checkbox.png"> Development databases do not contain sensitive production data.
+<br><img src="../graphics/checkbox.png"> Unless required, the *CLR Enabled* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Unless required, the *OlE Automation Procedures* Instance option is disabled 
+<br><img src="../graphics/checkbox.png"> Unless required, the *Ad Hoc Distributed Queries* Instance option is disabled.
+<br><img src="../graphics/checkbox.png"> Each application's input for database access is sanitized to prevent SQL Injection and other attacks.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
  
-
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Data</b></p>
 
-The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
+The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. 
 
 *SQL Server Installations*
-<br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured.
+<br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured. All demonstration or sample databases have been removed.
+<br><img src="../graphics/checkbox.png"> All databases have been evaluated for encryption requirements, and mechanisms such as Transparent Database Encryption, Always Encrypted, and other technologies are implemented where appropriate.
+<br><img src="../graphics/checkbox.png"> The SQL Data Discovery and Classification feature has been evaluated and used to identify and classify sensitive data.
 <br><img src="../graphics/checkbox.png"> If Always Encrypted is not enabled, Dynamic Data Masking is configured for applicable columns.
 <br><img src="../graphics/checkbox.png"> Row Level Encryption has been evaluated and implemeneted for all sensitive data.
+<br><img src="../graphics/checkbox.png"> Any specifically sensitive databases are identified, documented in the configuration documents, and reviewed with the Security and Data teams. If any database is subject to higher restrictions, such as government or organization regulations, the applicable teams are also included in this review.
 <br><img src="../graphics/checkbox.png"> Least-privilege role-based security has been implemented for all data access.
-<br><img src="../graphics/checkbox.png"> The SQL Data Discovery and Classification feature has been evaluated and used to identify and classify sensitive data.
+<br><img src="../graphics/checkbox.png"> SQL Server Audit features such as Change Tracking, Change Data Capture, and SQL Server Audit have been evaluated and implemented per-database as required.
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Thing
