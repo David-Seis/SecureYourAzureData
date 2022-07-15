@@ -35,7 +35,13 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
-TODO: Firewalls and Access rules 
+In SQL Server installations, you are able to control access to the network addresses and ports using any configuration you like - or none at all. In Microsoft Azure SQL DB, two other mechanisms are enforced at all times: Encrypted Connections, and Firewalls. 
+
+<h3> Azure SQL DB Encrypted Connections </h3>
+SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using [Transport Layer Security](https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe) (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set. It's also a best practice to *not* trust the Server Certificate, so that the client verifies the Certificate for TLS at all times. 
+
+<h3> Microsoft Azure Firewalls<h3>
+Before a client or application can connect to Azure SQL DB to begin the Authentication process, the Azure Firewall must have a rule allowing that address to connect, either to the Server or each Azure SQL DB Database. This can be done in the Microsoft Azure Portal or using AZ commands, or for Azure SQL DB database scopes, in Transact-SQL. [More details on that process is here](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-configure?view=azuresql).
 
 
 [//]: <> (================================= ========= =========================================================)
@@ -46,6 +52,12 @@ TODO: Firewalls and Access rules
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
 You have two primary mechanisms for Principals in Azure SQL DB: SQL Server logins, and Azure Active Directory logins. 
+  
+Activity
+  
+[Open this resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql), and complete the sections from [Prerequisites](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites) to [Setup Database Firewall Rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules).
+  
+  
 
 <h3>Authentication</h3>
 <br>
@@ -62,7 +74,7 @@ As described in the last module, Microsoft Active Directory (AD) is a suite of s
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach.  
 
-[You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource.](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell) .
+[You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource.](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell).
 
 <br>
 
