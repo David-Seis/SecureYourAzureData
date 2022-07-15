@@ -35,7 +35,7 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
-In SQL Server installations, you are able to control access to the network addresses and ports using any configuration you like - or none at all. In Microsoft Azure SQL DB, two other mechanisms are enforced at all times: Encrypted Connections, and Firewalls. 
+In SQL Server installations, you are able to control access to the network addresses and ports using any configuration you like - or you can leave the default settings and your system is available on the entire network. In Microsoft Azure SQL DB however, two mechanisms are enforced at all times: *Encrypted Connections*, and *Firewalls*. 
 
 <h3> Azure SQL DB Encrypted Connections </h3>
 SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">Transport Layer Security</a> (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set. It's also a best practice to *not* trust the Server Certificate, so that the client verifies the Certificate for TLS at all times. 
@@ -77,8 +77,6 @@ Using SQL Authentication means that Azure SQL DB stores the password for the Pri
 As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. <a href="https://docs.microsoft.com/en-us/azure/active-directory/?culture=en-us&country=US">Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud</a>. This is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql">as described in this reference.</a>
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
-
-<br>
 
 <h3>Roles in Microsoft Azure SQL DB</h3>
 
