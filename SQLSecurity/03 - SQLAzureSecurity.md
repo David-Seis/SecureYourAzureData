@@ -78,17 +78,35 @@ As described in the last module, Microsoft Active Directory (AD) is a suite of s
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
 
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and List Users</b></h4>
+<br>
+Thing
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+Run the following code on your test SQL Azure DB: 
+<pre>
+      Thing
+</pre>
+
+
 <h3>Roles in Microsoft Azure SQL DB</h3>
 Similar to SQL Server installations, you can group Principals into <i>Roles</i> in Azure SQL DB. In the case of Azure SQL DB, you do not have direct access to an <i>Instance</i> of SQL Server, but instead rely on a logical construct called a <i>Server</i>. There are several built-in Server Roles, which allow the most common set of permissions. It is a best practice to always put Principals (users) into Roles, and apply permissions at the Role level. This prevents "orphaned" users, and allows easier tracking for the permissions spread. 
 
 You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Server Roles and their permissions at this reference</a>. 
 
-Azure SQL DB also has Database-level Roles, and you can add more if you want to create custom permissions. You can see the included <a href= "[https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver16)">Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>. 
+Similar to SQL Server Installations, Azure SQL DB also has Database-level Roles, and you can add more if you want to create custom permissions. You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>. 
 
+Also similar to SQL Server Installations, Azure SQL DB has Application Roles. Application Roles remove the need for user permissions. Using Application Roles, the user runs a client application, which connects to the database as that user. The application switches contexts to the Application Role, runs the commands on behalf of the user, and returns the result. 
 
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Thing</b></h4>
+You can learn more about <a href= "https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver16"> Application Roles and how to use them at this reference</a>. 
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Working with Server and Database Roles</b></h4>
 <br>
-Thing
+Add users to builtin Server
+Add users to builtin Database
+Create Database Role
+Add User to DB Role
+List Roles and Members
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 Run the following code on your test SQL Azure DB: 
