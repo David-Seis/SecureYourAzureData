@@ -40,8 +40,23 @@ In SQL Server installations, you are able to control access to the network addre
 <h3> Azure SQL DB Encrypted Connections </h3>
 SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using [Transport Layer Security](https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe) (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set. It's also a best practice to *not* trust the Server Certificate, so that the client verifies the Certificate for TLS at all times. 
 
-<h3> Microsoft Azure Firewalls<h3>
+<h3> Microsoft Azure Firewalls</h3>
 Before a client or application can connect to Azure SQL DB to begin the Authentication process, the Azure Firewall must have a rule allowing that address to connect, either to the Server or each Azure SQL DB Database. This can be done in the Microsoft Azure Portal or using AZ commands, or for Azure SQL DB database scopes, in Transact-SQL. [More details on that process is here](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-configure?view=azuresql).
+
+
+<br>
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create Firewall Rules to allow connections to Azure SQL DB</b></h4>
+<br>
+
+In this Activity you will set the firewall rules to allow connections from your test system to an Azure SQL DB Database. 
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+- Determine the IP Address on your test system, and record it.
+- [Open this resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql), and complete the sections from [Prerequisites](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites) to [Setup Database Firewall Rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules).
+- Connect to that database with SQL Server Management Studio using an encrypted connection.
+
+<p style="border-bottom: 1px solid lightgrey;"></p>
 
 
 [//]: <> (================================= ========= =========================================================)
@@ -53,12 +68,6 @@ Before a client or application can connect to Azure SQL DB to begin the Authenti
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
 You have two primary mechanisms for Principals in Azure SQL DB: SQL Server logins, and Azure Active Directory logins. 
   
-Activity
-  
-[Open this resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql), and complete the sections from [Prerequisites](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites) to [Setup Database Firewall Rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules).
-  
-  
-
 <h3>Authentication</h3>
 <br>
 Similar to the mechanism in SQL Server, *authentication* only pertains to whether or not you can log in to the server. *Authorization*, which is covered later, defines the rights and privileges once the authentication of a Principal is determined. 
