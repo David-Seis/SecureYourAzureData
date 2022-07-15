@@ -123,62 +123,83 @@ Run the following code on your test SQL Azure DB:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
-Just as in a SQL Server Instance, a <b>Securables</b> in Azure SQL DB are the objects the database contains. Securables fall into three categories, or <i>scopes</i>, for ease of use:
+Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a *Schema* allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals.
 
-<h3>Server Scope</h3>
+Securables fall into three categories, or <i>scopes</i>, for ease of use, the same as a SQL Server installation:
+
+<h4>Server Scopes</h4>
 <ul>
-  <li>Availability Group</li> 
-  <li>Endpoint</li>
+  <li>Availability Groups</li> 
+  <li>Endpoints</li>
   <li>Logins</li>
   <li>Server Roles</li>
-  <li>Database</li>
+  <li>Databases</li>
 </ul>
 
-<h3>Database Scope</h3>
+<h4>Database Scopes</h4>
 <ul>
   <li>Application Roles</li> 
-  <li>Assembly</li>
+  <li>Assemblyies</li>
   <li>Asymmetric Keys</li>
   <li>Certificates</li>
-  <li>Contract</li>
+  <li>Contracts</li>
   <li>Fulltext Catalogs</li> 
-  <li>Fulltext stoplist</li>
-  <li>Message type</li>
-  <li>Remote Service Binding</li>
+  <li>Fulltext stoplists</li>
+  <li>Message types</li>
+  <li>Remote Service Bindings</li>
   <li>Database Roles</li>
-  <li>Route</li> 
-  <li>Search Property List</li>
-  <li>Service</li>
-  <li>Symmetric Key</li>
-  <li>User</li>
+  <li>Routes</li> 
+  <li>Search Property Lists</li>
+  <li>Services</li>
+  <li>Symmetric Keys</li>
+  <li>Users</li>
 </ul>
 
-<h3> Schema Scope</h3>
+<h4> Schema Scopes</h4>
 <ul>
-  <li>Type</li> 
-  <li>XML schema Collection</li>
+  <li>Types</li> 
+  <li>XML schema Collections</li>
   <li>Objects</li>
     <ul>
-      <li>Aggregate</li>
-      <li>Function</li> 
-      <li>Procedure</li>
-      <li>Queue</li>
-      <li>Synonym</li>
-      <li>Table</li>
-      <li>View</li> 
-      <li>External Table</li>
+      <li>Aggregates</li>
+      <li>Functions</li> 
+      <li>Procedures</li>
+      <li>Queues</li>
+      <li>Synonyms</li>
+      <li>Tables</li>
+      <li>Views</li> 
+      <li>External Tables</li>
     </ul>
-
 </ul>
   
-Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">permissions hierarchy</a> as well as reviewing the built in <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Server roles</a> and <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Database roles</a> is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a>.
+Each securable includes a set of <i>permissions</i> relevant to its scope and function. Some of these permissions include <i>rights</i>, such as the ability for one Principal to allow access to an object the first owns. Permissions are "most permissive" - meaning that if a user has three permissions in one Role they are a member of and two other permissions from another Role they are a member of, they will have a total of five permissions. 
 
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
+The primary commands for object access (Data Control Language, or DCL), just as in a SQL Server installation, are:
+
+<ul>
+  <li>GRANT - Allows a Principal to perform an action on the object, such as SELECT or DELETE.</li>  
+  <li>REVOKE - Removes the permission on an object for a Principal, but if the Principal is a member of another Role with access, does not remove that access.</li>  
+  <li>DENY - Removes the permission on an object for a Principal. Overrides all other permissions, including those inhereted from a Role assignment.</li> 
+</ul>
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Permissions to Azure SQL DB Objects</b></h4>
 <br>
 
 Thing
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+Thing
+
+<pre>
+  Thing
+</pre> 
+
+
+Always use the principle of "least privilege" each time you assign permissions, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a>.
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
+<br>
 
 Thing
 
@@ -203,17 +224,24 @@ Thing
 
 TODO: Topic Description
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Row-Level Security to an Object</b></p>
 
 TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
 TODO: Enter activity steps description with checkbox
+
+TODO: Topic Description
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></p>
+
+TODO: Activity Description and tasks
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+TODO: Enter activity steps description with checkbox
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -228,7 +256,7 @@ TODO: Enter activity steps description with checkbox
 
 TODO: Topic Description
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Review Always Encrypted</b></p>
 
 TODO: Activity Description and tasks
 
@@ -253,11 +281,7 @@ TODO: Enter activity steps description with checkbox
 
 TODO: Topic Description
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
-
-TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Implement and Review Microsoft Defender</b></p>
 
 TODO: Enter activity description with checkbox
 
