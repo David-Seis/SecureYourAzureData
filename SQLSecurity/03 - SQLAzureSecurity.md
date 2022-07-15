@@ -14,15 +14,16 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
-This module builds on the previous module where you learned about the basics of SQL Server Security. This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
+This module builds on the [previous module where you learned about the basics of SQL Server Security](https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md). This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
 
 You'll cover these topics in this module:
 <ul>
-  <li><a href="#01" target="_blank">01 - Principals</li></a>
-  <li><a href="#02" target="_blank">02 - Securables</li></a>
-  <li><a href="#03" target="_blank">03 - Applications</li></a>
-  <li><a href="#04" target="_blank">04 - Encryption, Certificates, and Keys</li></a>
-  <Li><a href="#04" target="_blank">05 - Auditing</li></a>
+  <li><a href="#01" target="_blank">01 - Accessing Azure SQL DB</li></a>
+  <li><a href="#01" target="_blank">02 - Principals</li></a>
+  <li><a href="#02" target="_blank">03 - Securables</li></a>
+  <li><a href="#03" target="_blank">04 - Applications</li></a>
+  <li><a href="#04" target="_blank">05 - Encryption, Certificates, and Keys</li></a>
+  <Li><a href="#04" target="_blank">06 - Auditing</li></a>
 </ul>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -33,53 +34,27 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
-You have two primary mechanisms for Principals in Azure SQL DB: SQL Server logins, and Azure Active Directory logins. 
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
+In SQL Server installations, you are able to control access to the network addresses and ports using any configuration you like - or you can leave the default settings and your system is available on the entire network. In Microsoft Azure SQL DB however, two mechanisms are enforced at all times: <i>Encrypted Connections</i>, and <i>Firewalls</i>. 
 
-<h3>Authentication</h3>
-<br>
-Similar to the mechanism in SQL Server, *authentication* only pertains to whether or not you can log in to the server. *Authorization*, which is covered later, defines the rights and privileges once the authentication of a Principal is determined. 
+<h3> Azure SQL DB Encrypted Connections </h3>
+SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">Transport Layer Security</a> (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set. It's also a best practice to *not* trust the Server Certificate, so that the client verifies the Certificate for TLS at all times. 
 
-
-<h4>1) SQL Authentication</h4>
-In the case of SQL Authentication, the **master** system database stores information for database security Principals where the username and permissions are tracked and managed. 
-
-Using SQL Authentication means that Azure SQL DB stores the password for the Principals. Because passwords are stored in the master database, it is up to the database owner to ensure that a password and account policy is applied to each user.
-
-<h4>2) Microsoft Azure Active Directory</h4>
-As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud. This is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), [as described in this reference.](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql)
-
-You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach.  
-
-[You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource.](https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell) .
+<h3> Microsoft Azure Firewalls</h3>
+Before a client or application can connect to Azure SQL DB to begin the Authentication process, the Azure Firewall must have a rule allowing that address to connect, either to the Server or each Azure SQL DB Database. This can be done in the Microsoft Azure Portal or using AZ commands, or for Azure SQL DB database scopes, in Transact-SQL. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-configure?view=azuresql">More details on that process is here</a>.
 
 <br>
-
-<h3>Roles in Microsoft Azure SQL DB</h3>
-
-Thing
-
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create Firewall Rules to allow connections to Azure SQL DB</b></h4>
 <br>
-
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Thing</b></h4>
-<br>
-
-Thing
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-Thing
-
+In this Activity you will set the firewall rules to allow connections from your test system to an Azure SQL DB Database. 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+<ol type="1">
+  <li> Determine the IP Address on your test system, and record it.
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql">Open this resource</a>, and complete the sections from <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites">Prerequisites</a> to <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules">Setup Database Firewall Rules</a>.</li>
+  <li> Connect to that database with SQL Server Management Studio using an encrypted connection.</li>
+</ol>
 
-Run the following code on your test SQL Azure DB: 
-<pre>
-      Thing
-</pre>
-
-
-<p style="border-bottom: 1px solid lightgrey;"></p>  
-
+<p style="border-bottom: 1px solid lightgrey;"></p>
 
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
@@ -87,9 +62,68 @@ Run the following code on your test SQL Azure DB:
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
+You have two primary mechanisms for Principals in Azure SQL DB: <i>SQL Server logins</i>, and <i>Azure Active Directory</i> logins. 
+ 
+<h3>Authentication</h3>
+Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
+
+<h4>SQL Authentication</h4>
+In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation.
+
+Using SQL Authentication means that Azure SQL DB stores the password for the Principals. Because passwords are stored in the master database, it is up to the database owner to ensure that a password and account policy is applied to each user.
+
+<h4>Microsoft Azure Active Directory</h4>
+As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. <a href="https://docs.microsoft.com/en-us/azure/active-directory/?culture=en-us&country=US">Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud</a>. This is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql">as described in this reference.</a>
+
+You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and List Users</b></h4>
 <br>
-Just as in a SQL Server Instance, a **Securables** in Azure SQL DB are the objects the database contains. Securables fall into three categories, or scopes, for ease of use:
+Thing
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+Run the following code on your test SQL Azure DB: 
+<pre>
+      Thing
+</pre>
+
+
+<h3>Roles in Microsoft Azure SQL DB</h3>
+Similar to SQL Server installations, you can group Principals into <i>Roles</i> in Azure SQL DB. In the case of Azure SQL DB, you do not have direct access to an <i>Instance</i> of SQL Server, but instead rely on a logical construct called a <i>Server</i>. There are several built-in Server Roles, which allow the most common set of permissions. It is a best practice to always put Principals (users) into Roles, and apply permissions at the Role level. This prevents "orphaned" users, and allows easier tracking for the permissions spread. 
+
+You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Server Roles and their permissions at this reference</a>. 
+
+Similar to SQL Server Installations, Azure SQL DB also has Database-level Roles, and you can add more if you want to create custom permissions. You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>. 
+
+Also similar to SQL Server Installations, Azure SQL DB has Application Roles. Application Roles remove the need for user permissions. Using Application Roles, the user runs a client application, which connects to the database as that user. The application switches contexts to the Application Role, runs the commands on behalf of the user, and returns the result. 
+
+You can learn more about <a href= "https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver16"> Application Roles and how to use them at this reference</a>. 
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Working with Server and Database Roles</b></h4>
+<br>
+Add users to builtin Server
+Add users to builtin Database
+Create Database Role
+Add User to DB Role
+List Roles and Members
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+Run the following code on your test SQL Azure DB: 
+<pre>
+      Thing
+</pre>
+
+<p style="border-bottom: 1px solid lightgrey;"></p>  
+
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= Section 3 =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+
+<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
+Just as in a SQL Server Instance, a <b>Securables</b> in Azure SQL DB are the objects the database contains. Securables fall into three categories, or <i>scopes</i>, for ease of use:
 
 <h3>Server Scope</h3>
 <ul>
@@ -137,19 +171,7 @@ Just as in a SQL Server Instance, a **Securables** in Azure SQL DB are the objec
 
 </ul>
   
-Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general [permissions hierarchy](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) as well as reviewing the built in [Server roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) and [Database roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the [Permissions Poster produced by Microsoft](https://aka.ms/sql-permissions-poster). 
-<br>
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-server-roles.png?view=sql-server-ver16">
-
-> Most environments use these out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-database-roles.png?view=sql-server-ver16">
-
-
-
-
-<br>
+Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">permissions hierarchy</a> as well as reviewing the built in <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Server roles</a> and <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Database roles</a> is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a>.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
 <br>
@@ -172,36 +194,11 @@ Thing
 
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 3 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-
-<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
-<br>
-
-TODO: Topic Description
-
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
-
-TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-
-TODO: Enter activity steps description with checkbox
-
-<p style="border-bottom: 1px solid lightgrey;"></p>
-
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= Section 4 =========================================================)
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
+<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
 <br>
 
 TODO: Topic Description
@@ -226,7 +223,32 @@ TODO: Enter activity steps description with checkbox
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
+<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
+<br>
+
+TODO: Topic Description
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+
+TODO: Activity Description and tasks
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+
+TODO: Enter activity description with checkbox
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+TODO: Enter activity steps description with checkbox
+
+<p style="border-bottom: 1px solid lightgrey;"></p>
+
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= Section 6 =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+
+<h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
 
 TODO: Topic Description
