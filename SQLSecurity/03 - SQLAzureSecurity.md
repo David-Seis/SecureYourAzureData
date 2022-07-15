@@ -14,15 +14,16 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
-This module builds on the previous module where you learned about the basics of SQL Server Security. This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
+This module builds on the [previous module where you learned about the basics of SQL Server Security](https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md). This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
 
 You'll cover these topics in this module:
 <ul>
-  <li><a href="#01" target="_blank">01 - Principals</li></a>
-  <li><a href="#02" target="_blank">02 - Securables</li></a>
-  <li><a href="#03" target="_blank">03 - Applications</li></a>
-  <li><a href="#04" target="_blank">04 - Encryption, Certificates, and Keys</li></a>
-  <Li><a href="#04" target="_blank">05 - Auditing</li></a>
+  <li><a href="#01" target="_blank">01 - Accessing Azure SQL DB</li></a>
+  <li><a href="#01" target="_blank">02 - Principals</li></a>
+  <li><a href="#02" target="_blank">03 - Securables</li></a>
+  <li><a href="#03" target="_blank">04 - Applications</li></a>
+  <li><a href="#04" target="_blank">05 - Encryption, Certificates, and Keys</li></a>
+  <Li><a href="#04" target="_blank">06 - Auditing</li></a>
 </ul>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -33,7 +34,17 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
+TODO: Firewalls and Access rules 
+
+
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= Section 2 =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
 You have two primary mechanisms for Principals in Azure SQL DB: SQL Server logins, and Azure Active Directory logins. 
 
 <h3>Authentication</h3>
@@ -83,11 +94,11 @@ Run the following code on your test SQL Azure DB:
 
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 2 =========================================================)
+[//]: <> (================================= Section 3 =========================================================)
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
+<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
 <br>
 Just as in a SQL Server Instance, a **Securables** in Azure SQL DB are the objects the database contains. Securables fall into three categories, or scopes, for ease of use:
 
@@ -172,36 +183,11 @@ Thing
 
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 3 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-
-<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
-<br>
-
-TODO: Topic Description
-
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
-
-TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-
-TODO: Enter activity steps description with checkbox
-
-<p style="border-bottom: 1px solid lightgrey;"></p>
-
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= Section 4 =========================================================)
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
+<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
 <br>
 
 TODO: Topic Description
@@ -226,7 +212,32 @@ TODO: Enter activity steps description with checkbox
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
+<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
+<br>
+
+TODO: Topic Description
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+
+TODO: Activity Description and tasks
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+
+TODO: Enter activity description with checkbox
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+TODO: Enter activity steps description with checkbox
+
+<p style="border-bottom: 1px solid lightgrey;"></p>
+
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= Section 6 =========================================================)
+[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= ========= =========================================================)
+
+<h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
 
 TODO: Topic Description
