@@ -63,26 +63,23 @@ In this Activity you will set the firewall rules to allow connections from your 
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
-You have two primary mechanisms for Principals in Azure SQL DB: *SQL Server logins*, and *Azure Active Directory* logins. 
+You have two primary mechanisms for Principals in Azure SQL DB: <i>SQL Server logins</i>, and <i>Azure Active Directory</i> logins. 
  
 <h3>Authentication</h3>
-Similar to the mechanism in SQL Server, *authentication* only pertains to whether or not you can log in to the server. *Authorization*, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
+Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
 
-<h4>1) SQL Authentication</h4>
-In the case of SQL Authentication, the **master** system database (accessed by querying *sys.syslogins*) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database *sysusers* system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation.
+<h4>SQL Authentication</h4>
+In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation.
 
 Using SQL Authentication means that Azure SQL DB stores the password for the Principals. Because passwords are stored in the master database, it is up to the database owner to ensure that a password and account policy is applied to each user.
 
-<h4>2) Microsoft Azure Active Directory</h4>
+<h4>Microsoft Azure Active Directory</h4>
 As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. <a href="https://docs.microsoft.com/en-us/azure/active-directory/?culture=en-us&country=US">Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud</a>. This is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql">as described in this reference.</a>
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
 
 <h3>Roles in Microsoft Azure SQL DB</h3>
-
 Thing
-
-<br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Thing</b></h4>
 <br>
@@ -103,8 +100,7 @@ Run the following code on your test SQL Azure DB:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
-<br>
-Just as in a SQL Server Instance, a **Securables** in Azure SQL DB are the objects the database contains. Securables fall into three categories, or *scopes*, for ease of use:
+Just as in a SQL Server Instance, a <b>Securables</b> in Azure SQL DB are the objects the database contains. Securables fall into three categories, or <i>scopes</i>, for ease of use:
 
 <h3>Server Scope</h3>
 <ul>
@@ -152,19 +148,7 @@ Just as in a SQL Server Instance, a **Securables** in Azure SQL DB are the objec
 
 </ul>
   
-Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general [permissions hierarchy](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) as well as reviewing the built in [Server roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) and [Database roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the [Permissions Poster produced by Microsoft](https://aka.ms/sql-permissions-poster). 
-<br>
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-server-roles.png?view=sql-server-ver16">
-
-> Most environments use these out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-database-roles.png?view=sql-server-ver16">
-
-
-
-
-<br>
+Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">permissions hierarchy</a> as well as reviewing the built in <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Server roles</a> and <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">Database roles</a> is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a>.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
 <br>
