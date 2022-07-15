@@ -27,30 +27,25 @@ You'll cover these topics in this module:
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 1 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+
+[//]: <> (================================= Section 1 )
+
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
+<br>
 
-
-This topic is broad, and we will hit the high points of each sub-point but there will always be more to invetsigate on your own time. Here is the 50,000 foot view:
-
-Access to SQL is managed through principals, or logins. Logins can be for a user, a computer, an application, a service, a group, <TODO: and more?>. Each principal will have a way for the user to 'log in' (considering passwordless), which then enables the user of the account to Access SQL Server at the most basic level, and then we get to the authorization side. Authorization is What you can do once you are connected.
+Access to SQL is managed through principals, or logins.  Each principal will have a way for the user to 'log in' (considering passwordless), which then enables the user of the account to Access SQL Server at the most basic level, and then we get to the authorization side. Authorization is What you can do once you are connected.
 
 <h3>Authentication</h3>
 <br>
 
-Now to break it down:
-When it comes to SQL, there are two modes of authentication: 1) SQL Authentication where the account is managed and stored inside of SQL, or 2) managed externally through Windows (including Active directory, Azure AD and Linux AD Integration). Remember Authentication only pertains to whether or not you can log in to the server. Authorization will come later.
+SQL has two modes of authentication: 1) SQL Authentication where the account is managed and stored inside of SQL, or 2) managed externally through Windows which includes Active Directory, Azure AD and Linux AD Integration. 
 
 
 <h4>1) SQL Authentication</h4>
 The Master database stores all security principals except in the case of a contained database. For all principals stored in the master database, the username and permissions are tracked and managed. 
 
-Contained Databases are those where the authentication and authroization are stored inside, without ever using the master database.  <TODO: Research and fill out conenciton and use cases.>
+Contained Databases are those where the authentication and authroization are stored inside, without ever using the master database.  <TODO: Research and fill out connection and use cases.>
 
 One key difference between these two kinds of authentication is that SQL stores the password for any non-Windows managed principals. Because passwords are stored in SQL, it is up to the DBA to ensure that a password and account policy is created and applied to each user.
 
@@ -112,7 +107,7 @@ Combining roles with Windows Authentication groups helps efficiently and quickly
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: List Principals in an Instance</b></h4>
 <br>
 
-This activity will take you to your test instance where you will query the principals that are present. You will be able to classify principals based on type, which will be useful in getting a clearer security picture for your environment. 
+This activity will take you to your test instance where you will create and query the principals that are present. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
 
@@ -121,6 +116,42 @@ The following code will list all Principals on an Instance, in each Database, an
   > It is a common practice to run these scripts and save the output to another database or secure artifact. This way you can provide an audit trail for users on the system. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+- Step 1:
+Use the script below to create a series of logins on your Windows computer in an elevated command prompt:
+    <pre>
+    net user Allen "Test20. User1!" /add
+    net user Brandy "Test20. User2!" /add
+    net user Carlos "Test20. User3!" /add
+    net user Dmitri "Test20. User4!" /add
+    net user Elliot "Test20. User5!" /add
+    net localgroup DBAs /add
+    net localgroup Accounting /add
+    net localgroup Sales /add
+    net localgroup DBAs Allen /add
+    net localgroup Accounting Brandy /add
+    net localgroup Sales Carlos /add
+    </pre>
+
+  Cleanup script for after:
+    <pre>
+    net user Allen /DELETE
+    net user Brandy /DELETE
+    net user Carlos /DELETE
+    net user Dmitri /DELETE
+    net user Elliot /DELETE
+    net localgroup DBAs /DELETE
+    net localgroup Accounting /DELETE
+    net localgroup Sales /DELETE
+    </pre>
+- Step 2:
+Add the windows users and Groups to SQL Server
+
+<pre> TODO : complete the adding of users and groups
+CREATE LOGIN [<loginName>] FROM WINDOWS;  
+GO  
+</pre>
+
 
 Run the following code on your test system: 
   <pre>
@@ -167,62 +198,14 @@ After taking inventory of each principal on your server, do more research into a
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 2 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+[//]: <> (================================= Section 2 )
+
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
 <br>
 
-Securing your SQL Server is the goal of this course. Principals can be managed to limit who can access the server, Adding permissions to each user to determine WHAT they can do while they are logged in is key to a secure system. A **Securable** in SQL server is virtually everything. Knowing how to limit access to sensitive data and leveraging least privilege when assigning permissions is of the utmost importance when securing a SQL instance. The topic of securables is usually broken down into three categories, or scopes, for ease of use:
+Securing your SQL Server is the goal of this course. Principals can be managed to limit who can access the server, Adding permissions to each user to determine WHAT they can do while they are logged in is key to a secure system. A **Securable** in SQL server is virtually everything. Knowing how to limit access to sensitive data and leveraging least privilege when assigning permissions is of the utmost importance when securing a SQL instance. The topic of securables is usually broken down into three categories, or scopes, for ease of use.
 
-<h3>Server Scope</h3>
-<ul>
-  <li>Availability Group</li> 
-  <li>Endpoint</li>
-  <li>Logins</li>
-  <li>Server Roles</li>
-  <li>Database</li>
-</ul>
-
-<h3>Database Scope</h3>
-<ul>
-  <li>Application Roles</li> 
-  <li>Assembly</li>
-  <li>Asymmetric Keys</li>
-  <li>Certificates</li>
-  <li>Contract</li>
-  <li>Fulltext Catalogs</li> 
-  <li>Fulltext stoplist</li>
-  <li>Message type</li>
-  <li>Remote Service Binding</li>
-  <li>Database Roles</li>
-  <li>Route</li> 
-  <li>Search Property List</li>
-  <li>Service</li>
-  <li>Symmetric Key</li>
-  <li>User</li>
-</ul>
-
-<h3> Schema Scope</h3>
-<ul>
-  <li>Type</li> 
-  <li>XML schema Collection</li>
-  <li>Objects</li>
-    <ul>
-      <li>Aggregate</li>
-      <li>Function</li> 
-      <li>Procedure</li>
-      <li>Queue</li>
-      <li>Synonym</li>
-      <li>Table</li>
-      <li>View</li> 
-      <li>External Table</li>
-    </ul>
-
-</ul>
   
 Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general [permissions hierarchy](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) as well as reviewing the built in [Server roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) and [Database roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the [Permissions Poster produced by Microsoft](https://aka.ms/sql-permissions-poster). 
 <br>
@@ -282,61 +265,143 @@ Remembering least privilege. Reducing permissions will make management more tedi
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 3 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+
+[//]: <> (================================= Section 3 )
+
 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
 <br>
 
-TODO: Topic Description
+Application security is as important as SQL security. Most applications are set up to have direct access to SQL, and in some cases with sysadmin rights. Secure coding practices as well as managing access and permisisons to the application account are the focus of this section.
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
-
-TODO: Activity Description and tasks
-
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Parameterized Queries and Error Handling</b></p>
+<br>
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
+See the effect of a SQL injection string on a non-parameterized query, and then see the effect once it is parameterized. Also see how error handling helps prevent an attacker from learning too much about your environment.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+- Step 1: 
+Create this table of Clients:
+<pre>
+CREATE DATABASE SQLSecurityTest
+
+<with information that can be gathered using an injection for a non-parameterized query>
+</pre>
+
+- Step 2
+Run this Query for a client to see their account information as a general user
+<pre>
+<query>
+</pre>
+- Step 3
+Run the same query with an injection string
+<pre>
+<query>
+</pre>
+- Step 4
+Parameterize the query and run it again
+<pre>
+<query>
+</pre>
+- Step 5
+Notice the error information, add handling
+<pre>
+<query>
+</pre>
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 4 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+
+
+
+[//]: <> (================================= Section 4 )
+
+
 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
 <br>
 
-TODO: Topic Description
+Encryption, certificates, and keys are encryption based tools for securing SQL server. 
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling TDE on a database</b></p>
 
-TODO: Activity Description and tasks
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
 
-TODO: Enter activity description with checkbox
-
+Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+Step 1:
+Create & Backup master key
+<pre>
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+GO
+
+OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+GO
+BACKUP MASTER KEY TO FILE = 'C:\EncryptedDrive\masterkey.mk' 
+    ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+GO
+
+</pre>
+- Step 2
+Create, Verify, and Backup a certificate
+<pre>
+CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
+GO
+
+SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
+GO
+
+BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\rev.cer'
+   WITH PRIVATE KEY (
+         FILE = 'C:\EncryptedDrive\TDE.pvk',
+         ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!');
+GO
+</pre>
+
+- Step 3
+Encrypt a test Database
+<pre>
+USE SQLSecurityTest
+GO
+
+--Create Encryption key
+CREATE DATABASE ENCRYPTION KEY
+   WITH ALGORITHM = AES_256
+   ENCRYPTION BY SERVER CERTIFICATE TDE_Cert;
+GO
+
+/* Encrypt database */
+ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
+GO
+
+/* Verify Encryption */
+SELECT 
+  DB_NAME(database_id) AS DatabaseName
+, Encryption_State AS EncryptionState
+, key_algorithm AS Algorithm
+, key_length AS KeyLength
+FROM sys.dm_database_encryption_keys
+GO
+
+SELECT 
+NAME AS DatabaseName
+, IS_ENCRYPTED AS IsEncrypted 
+FROM sys.databases where name ='SQLSecurityTest'
+GO
+</pre>
+
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Section 5 =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+
+[//]: <> (================================= Section 5 )
+
+
 
 <h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
@@ -357,11 +422,9 @@ TODO: Enter activity steps description with checkbox
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= Closing   =========================================================)
-[//]: <> (================================= ========= =========================================================)
-[//]: <> (================================= ========= =========================================================)
+
+[//]: <> (================================= Closing )
+)
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
     <TODO: add sql permission poster and builtin roles links>
