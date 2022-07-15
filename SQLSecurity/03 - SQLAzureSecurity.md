@@ -55,7 +55,7 @@ In this Activity you will set the firewall rules to allow connections from your 
 
 <ol type="1">
   <li> Determine the IP Address on your test system, and record it.
-  <li> [Open this resource](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql), and complete the sections from [Prerequisites](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites) to [Setup Database Firewall Rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules).</li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql">Open this resource</a>, and complete the sections from <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites">Prerequisites</a> to a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules">Setup Database Firewall Rules</a>.</li>
   <li> Connect to that database with SQL Server Management Studio using an encrypted connection.</li>
 </ol>
 
