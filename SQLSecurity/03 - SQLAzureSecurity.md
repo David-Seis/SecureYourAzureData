@@ -261,6 +261,19 @@ In this Activity you will review an example set of scripts that implement Dynami
   <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
 </ol>
 
+<h4>SQL Ledger</h4>
+
+TODO: https://docs.microsoft.com/en-us/azure/azure-sql/database/ledger-landing?view=azuresql
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review SQL Ledger</b></p>
+In this Activity you will review an example of setting up and working with SQL Ledger. 
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+<ol>
+  <li><a href="[https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask](https://docs.microsoft.com/en-us/sql/relational-databases/security/ledger/ledger-database-verification?view=sql-server-ver16&preserve-view=true)">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
+
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 [//]: <> (================================= ========= =========================================================)
@@ -297,7 +310,7 @@ TODO: Enter activity steps description with checkbox
 <h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
 
-TODO: Topic Description
+TODO: [Topic Description](https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql)
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Implement and Review Microsoft Defender</b></p>
 
