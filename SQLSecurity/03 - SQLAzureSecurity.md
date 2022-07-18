@@ -220,28 +220,46 @@ Thing
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
-<br>
+Apart from the Secure Coding principles your client applications should follow, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections. 
 
-TODO: Topic Description
+<h3>Client Libraries and TLS</h3>
+Azure SQL DB requires SSL/TLS at all times. There are, however, various version of TLS, and you want to <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">implement the highest version possible</a> when you connect to an Azure SQL DB. You can find the <a href="https://docs.microsoft.com/en-us/sql/connect/sql-connection-libraries?view=sql-server-ver16">latest drivers and connection methods for Azure SQL DB at this reference</a>. Each of these connection libraries has differing security impacts, so it is important to review the latest releases and use the most secure methods of access possible. 
+
+<h3>Protection of Sensitive Data</h3>
+You should follow the best practices for <a href="https://social.technet.microsoft.com/wiki/contents/articles/930.sql-server-how-to-design-create-and-maintain-a-database.aspx">data design for your application</a>, so that you store sensitive data in a separate, protected space. You can then move to to protecting the data within the application. You have various options for creating a secure database program. 
+
+<h4>Permissions and Rights, Views and Stored Procedures</h4>
+The first step is to implement a least-privilege approach within your permission structure, as described in the previous sections. By granting permissions only to the higher-level objects (such as Views, Functions and Store Procedures) you are able to protect the underlying base Tables from unecessary access by the end user. 
+
+Views allow you to show only the collumns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows. 
+
+<h4>Row Level Security</h4>
+Azure SQL DB <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security">provides Row-Level Security</a> so that you can restrict access to objects based on the security context of the user - whether that is based on Role membership or even the execution context of the query. 
+
+By creating a Function and a Security Policy, you can set up protections for SELECT, UPDATE and DELETE operations. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Row-Level Security to an Object</b></p>
-
-TODO: Activity Description and tasks
+In this Activity you will explore setting up Row-Level Security on your Azure SQL DB environment. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16#CodeExamples">Navigate to this reference, and follow all the steps you see there for Scenario "A"</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
 
-TODO: Topic Description
+<h4>Dynamic Data Masking</h4>
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql">Dynamic Data Masking</a> allows you to substitute a standard return from a Qeury with obfuscated characters. You can replace all or part of a result string with another character (X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></p>
+In this Activity you will review an example set of scripts that implement Dynamic Data Masking, and shows the data returned. 
 
-TODO: Activity Description and tasks
+>You can implement these scripts if you would like a hands-on experience in your sample workshop database. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
-
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
