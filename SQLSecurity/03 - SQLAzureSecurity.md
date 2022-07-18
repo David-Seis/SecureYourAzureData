@@ -222,7 +222,7 @@ Thing
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
 Apart from the Secure Coding principles your client applications should follow, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections. 
 
-<h3>Client Libraries and TSL</h3>
+<h3>Client Libraries and TLS</h3>
 Azure SQL DB requires SSL/TLS at all times. There are, however, various version of TLS, and you want to <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">implement the highest version possible</a> when you connect to an Azure SQL DB. You can find the <a href="https://docs.microsoft.com/en-us/sql/connect/sql-connection-libraries?view=sql-server-ver16">latest drivers and connection methods for Azure SQL DB at this reference</a>. Each of these connection libraries has differing security impacts, so it is important to review the latest releases and use the most secure methods of access possible. 
 
 <h3>Protection of Sensitive Data</h3>
