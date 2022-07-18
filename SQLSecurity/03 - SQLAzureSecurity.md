@@ -258,7 +258,7 @@ In this Activity you will review an example set of scripts that implement Dynami
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
 <ol>
-  <li><a href="[https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16#CodeExamples](https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask)">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+  <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
