@@ -107,93 +107,87 @@ Combining roles with Windows Authentication groups helps efficiently and quickly
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: List Principals in an Instance</b></h4>
 <br>
 
-This activity will take you to your test instance where you will create and query the principals that are present. 
-
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-The following code will list all Principals on an Instance, in each Database, and show any Certificates in use on your test system. You will run this code multiple times throughout this course to show the effect of adding, removing, and altering a Principal.
-
-  > It is a common practice to run these scripts and save the output to another database or secure artifact. This way you can provide an audit trail for users on the system. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- Step 1:
-Use the script below to create a series of logins on your Windows computer in an elevated command prompt:
-    <pre>
-    net user Allen "Test20. User1!" /add
-    net user Brandy "Test20. User2!" /add
-    net user Carlos "Test20. User3!" /add
-    net user Dmitri "Test20. User4!" /add
-    net user Elliot "Test20. User5!" /add
-    net localgroup DBAs /add
-    net localgroup Accounting /add
-    net localgroup Sales /add
-    net localgroup DBAs Allen /add
-    net localgroup Accounting Brandy /add
-    net localgroup Sales Carlos /add
-    </pre>
-
-  Cleanup script for after:
-    <pre>
-    net user Allen /DELETE
-    net user Brandy /DELETE
-    net user Carlos /DELETE
-    net user Dmitri /DELETE
-    net user Elliot /DELETE
-    net localgroup DBAs /DELETE
-    net localgroup Accounting /DELETE
-    net localgroup Sales /DELETE
-    </pre>
-- Step 2:
-Add the windows users and Groups to SQL Server
-
-<pre> TODO : complete the adding of users and groups
-CREATE LOGIN [<loginName>] FROM WINDOWS;  
-GO  
+1. Create the Test Database we will use for this module:
+<pre>
+    CREATE DATABASE SQLSecurityTest;
+    GO
 </pre>
 
-
-Run the following code on your test system: 
+2. Create a set of users on your Windows test environment in an elevated command prompt (linux will be different):
   <pre>
-      SELECT * FROM sys.server_principals 
+    net user User1 "Test20. User1!22" /add
+    net user User2 "Test20. User2!22" /add
   </pre>
 
-If you would like to further classify the output run these: 
+3. Create a set of users in your SQL environment in a new query window, you will need to replace -Placeholder- with your device name.
+  <pre>
+    USE [master]
+    GO
+    CREATE LOGIN [-Placeholder-\User1] FROM WINDOWS WITH DEFAULT_DATABASE=[SQLSecurityTest]
+    GO
+    use [master];
+    GO
+    USE [SQLSecurityTest]
+    GO
+    CREATE USER [-Placeholder-\User1] FOR LOGIN [-Placeholder-\User1]
+    GO
+    USE [master]
+    GO
+    CREATE LOGIN [-Placeholder-\User2] FROM WINDOWS WITH DEFAULT_DATABASE=[SQLSecurityTest]
+    GO
+    use [master];
+    GO
+    USE [SQLSecurityTest]
+    GO
+    CREATE USER [-Placeholder-\User2] FOR LOGIN [-Placeholder-\User2]
+    GO
+    USE [master]
+    GO
+    CREATE LOGIN [User3] WITH PASSWORD=N'Test20. User3!22', DEFAULT_DATABASE=[SQLSecurityTest], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+    GO
+    use [master];
+    GO
+    USE [SQLSecurityTest]
+    GO
+    CREATE USER [User3] FOR LOGIN [User3]
+    GO
+    USE [master]
+    GO
+    CREATE LOGIN [User4] WITH PASSWORD=N'Test20. User4!22', DEFAULT_DATABASE=[SQLSecurityTest], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+    GO
+    use [master];
+    GO
+    USE [SQLSecurityTest]
+    GO
+    CREATE USER [User4] FOR LOGIN [User4]
+    GO
+  </pre>
 
-Classify Server principals by type:
+TODO: add section 1.1 for roles:
+
+
+1.1 activity:
+1. TODO: Create 1 Server roel and 2 DB roles
+2. TODO: assign users to roles:
+3. Run this script to identify all user created roles on the system:
 <pre>
-    -- Windows Groups
-      SELECT * FROM sys.server_principals where type = 'G'
-
+		SELECT * FROM sys.server_principals WHERE type = 'R' AND is_fixed_role = 0 AND name NOT IN ('public')
+		SELECT * FROM sys.database_principals WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
+</pre>
+4. run this script to list all users by whetehr they are SQL or Windows users, excluding any build-in users.
+<pre>
     -- Windows Logins
-      SELECT * FROM sys.server_principals where type = 'U'
+      SELECT * FROM sys.server_principals where type in ('U','G', 'E', 'X') and name not like '%NT%'
 
     -- SQL Logins 
-      SELECT * FROM sys.server_principals where type = 'S'
-
-    -- Certificate mapped logins
-      SELECT * FROM sys.server_principals where type = 'C'
-
-    -- Server Roles
-      SELECT * FROM sys.server_principals where type = 'R'
-
-    -- Asymmetric Key mapped Users
-      SELECT * FROM sys.server_principals where type = 'K'
-
-    -- External login from Azure Active Directory
-      SELECT * FROM sys.server_principals where type = 'E'
-
-    -- External group from Azure Active Directory/ applications
-      SELECT * FROM sys.server_principals where type = 'X'
+      SELECT * FROM sys.server_principals where type = 'S' and name not like '%#%' and name not like 'sa'
 </pre>
 
-Classify Database Principals (this needs to be run in each database context.)
-  <pre>
-  SELECT * FROM sys.database_principals order by 'type'
-  </pre>
-
-After taking inventory of each principal on your server, do more research into any that you are surprised or unsure about. A solid grasp on **WHO** can log into the server is a solid starting point in determining **WHAT** they should be able to do!
-
+TODO: learn python app use and integrate it into activity
 
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 
@@ -208,60 +202,26 @@ Securing your SQL Server is the goal of this course. Principals can be managed t
 
   
 Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general [permissions hierarchy](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) as well as reviewing the built in [Server roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) and [Database roles](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16) is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the [Permissions Poster produced by Microsoft](https://aka.ms/sql-permissions-poster). 
-<br>
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-server-roles.png?view=sql-server-ver16">
-
-> Most environments use these out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
-
-<img style="height: 400; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/media/permissions-of-database-roles.png?view=sql-server-ver16">
 
 
-
-
+Most environments use the out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
 <br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
-<br>
 
 Knowing **WHO** is in your environment and **WHAT** they can do is an important step in strengthening your security posture.
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-Use the following Scripts to get an overview of the users, permisisons, and role memberships in your environment (this is technically a security *audit* but that is ok, I wont tell if you don't!)
-
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1) Get a list of users based on their Server Roles:
-<pre>
-      SELECT a.name AS Role, b.name AS Principal
-      FROM
-          master.sys.server_role_members ab
-              inner join
-                master.sys.server_principals a 
-                on a.principal_id = ab.role_principal_id and a.type = 'R'
-              inner join
-                master.sys.server_principals b 
-                on b.principal_id = ab.member_principal_id
-</pre> 
-2) Get a list of all users based on their database roles:
-<pre>
-      EXEC sp_MSforeachdb @command1 ='
-      SELECT  ''?''
-      ,   DP1.name AS DatabaseRoleName
-      ,   DP2.name AS DatabaseUserName
-      FROM sys.database_role_members AS DRM
-      RIGHT OUTER JOIN sys.database_principals AS DP1
-          ON DRM.role_principal_id = DP1.principal_id  
-      LEFT OUTER JOIN sys.database_principals AS DP2  
-          ON DRM.member_principal_id = DP2.principal_id  
-      WHERE 
-          DP1.type = ''R'' and 
-          DP2.name is not Null
-      ORDER BY DP1.name;'  
-</pre>
-3) Cross reference the users and groups with the roles they are and, determine if these levels of permissions are appropriate.
-Remembering least privilege. Reducing permissions will make management more tedious in the short term, and it will cause those with higehr permissions to be consulted more so that changes can be made to the server, but this will help strengthen your security posture and protect your business in the long run, especially from accidents amplified by elevated permissions.
+
+1. TODO: create table, view, and Store procedure in the sample DB
+2. TOD0: gran user1 all rights to table
+3. TODO: Grant 1st DB role rights to the SP
+4. TODO: grant 2nd db roel rights to view
+5. TODO: Learn to integrate the python app
+    5.1 use the python app individual user conenction strings to select fromt he table, view, and execute Sp
+
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -281,35 +241,72 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- Step 1: 
-Create this table of Clients:
+1.  Add this table to the Sample 'SQLSecurityTest' database we created earlier
 <pre>
-CREATE DATABASE SQLSecurityTest
+    USE [SQLSecurityTest]
+    GO
+    CREATE TABLE Patient (
+    LoginID tinyint
+    ,   LastName varchar(255)
+    ,   FirstName varchar(255)
+    ,   Address varchar(255)
+    ,   City varchar(255)
+    ,   SSN nvarchar(11)
+    ,   CardNumber nvarchar(19)
+    );
 
-<with information that can be gathered using an injection for a non-parameterized query>
-</pre>
-
-- Step 2
-Run this Query for a client to see their account information as a general user
-<pre>
-<query>
-</pre>
-- Step 3
-Run the same query with an injection string
-<pre>
-<query>
-</pre>
-- Step 4
-Parameterize the query and run it again
-<pre>
-<query>
-</pre>
-- Step 5
-Notice the error information, add handling
-<pre>
-<query>
+    INSERT INTO Patient (loginid, lastname, firstname, address, city, ssn, cardnumber)
+    VALUES	
+      (1,'Arbiter', 'Agatha', '111 Apple Ave.', 'Atlanta', '111-11-1111', '1111-1111-1111-1111')
+      , (2, 'Bob', 'Billy', '222 Bayshore Blvd.', 'Boice', '222-22-2222', '2222-2222-2222-2222')
+      , (3, 'Choice', 'Charley', '333 Castaway Ct.', 'Chesterfield', '333-33-3333', '3333-3333-3333-3333')
+      , (4, 'Dangerfield', 'David', '4444 Denvue Drive', 'Denver', '444-44-4444', '4444-4444-4444-4444')
+      , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
 </pre>
 
+2. Run this Query for a client to see their account information as a general user
+<pre>
+    SELECT * 
+    FROM Patient 
+    WHERE loginid = '1' -- user input = '1'
+</pre>
+3. Run the same query with an injection string
+<pre>
+    SELECT * 
+    FROM Patient
+    WHERE loginid = '' or 1=1 --'  -- user input = ' or 1=1 --
+</pre>
+4.  Parameterize the query and run it again
+<pre>
+    DECLARE @Loginid tinyint
+    SET @Loginid = '' or 1=1-- --user input
+
+    SELECT * 
+    FROM Patient
+    WHERE loginid = @Loginid --parameterized input
+
+    
+    SET @Loginid = ‘3’ -- --user input
+    SELECT * 
+    FROM Patient
+    WHERE loginid = @Loginid --parameterized input
+
+</pre>
+5.  Notice the error information, add handling
+<pre>
+    declare @Loginid tinyint
+      BEGIN TRY
+        SET @Loginid = ''' or 1=1--' --user input
+      END TRY
+      BEGIN CATCH
+        Print 'Please use only your user ID'
+      END CATCH
+
+    SELECT * 
+    FROM Patient
+    WHERE loginid = @Loginid --parameterized input
+</pre>
+6. TODO see if python app can be used here.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -323,7 +320,7 @@ Notice the error information, add handling
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
 <br>
 
-Encryption, certificates, and keys are encryption based tools for securing SQL server. 
+Encryption, certificates, and keys are tools for securing the physical layer of SQL server. <todo: add more words>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling TDE on a database</b></p>
 
@@ -333,65 +330,62 @@ Encryption, certificates, and keys are encryption based tools for securing SQL s
 Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-Step 1:
-Create & Backup master key
+1. Create & Backup master key
 <pre>
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
-GO
+    CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+    GO
 
-OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
-GO
-BACKUP MASTER KEY TO FILE = 'C:\EncryptedDrive\masterkey.mk' 
-    ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
-GO
+    OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+    GO
+    BACKUP MASTER KEY TO FILE = 'C:\EncryptedDrive\masterkey.mk' 
+        ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+    GO
 
 </pre>
-- Step 2
-Create, Verify, and Backup a certificate
+2.  Create, Verify, and Backup a certificate
 <pre>
-CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
-GO
+    CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
+    GO
 
-SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
-GO
+    SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
+    GO
 
-BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\rev.cer'
-   WITH PRIVATE KEY (
-         FILE = 'C:\EncryptedDrive\TDE.pvk',
-         ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!');
+    BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\rev.cer'
+      WITH PRIVATE KEY (
+            FILE = 'C:\EncryptedDrive\TDE.pvk',
+            ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!');
 GO
 </pre>
 
-- Step 3
-Encrypt a test Database
+3.  Encrypt our test Database
 <pre>
-USE SQLSecurityTest
-GO
+    USE SQLSecurityTest
+    GO
 
---Create Encryption key
-CREATE DATABASE ENCRYPTION KEY
-   WITH ALGORITHM = AES_256
-   ENCRYPTION BY SERVER CERTIFICATE TDE_Cert;
-GO
+    /*Create Encryption key*/
+    CREATE DATABASE ENCRYPTION KEY
+      WITH ALGORITHM = AES_256
+      ENCRYPTION BY SERVER CERTIFICATE TDE_Cert;
+    GO
 
-/* Encrypt database */
-ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
-GO
+    /* Encrypt database */
+    ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
+    GO
 
-/* Verify Encryption */
-SELECT 
-  DB_NAME(database_id) AS DatabaseName
-, Encryption_State AS EncryptionState
-, key_algorithm AS Algorithm
-, key_length AS KeyLength
-FROM sys.dm_database_encryption_keys
-GO
+    /* Verify Encryption */
+    SELECT 
+      DB_NAME(database_id) AS DatabaseName
+    , Encryption_State AS EncryptionState
+    , key_algorithm AS Algorithm
+    , key_length AS KeyLength
+    FROM sys.dm_database_encryption_keys
+    GO
 
-SELECT 
-NAME AS DatabaseName
-, IS_ENCRYPTED AS IsEncrypted 
-FROM sys.databases where name ='SQLSecurityTest'
-GO
+    SELECT 
+    NAME AS DatabaseName
+    , IS_ENCRYPTED AS IsEncrypted 
+    FROM sys.databases where name ='SQLSecurityTest'
+    GO
 </pre>
 
 
@@ -406,19 +400,18 @@ GO
 <h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
 
-TODO: Topic Description
+TODO: Topic Descriptions
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Activity Name</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create a Server Audit</b></p>
 
-TODO: Activity Description and tasks
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-
-TODO: Enter activity description with checkbox
+In this Activity you will set up a server and database audit on your test system. You will then perform an action that would be included in the audit scope, and then you will read the audit log afterwards.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+1. Connect to your test instance, and ensure the test database from previous activities is present.
+2. [Open this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/create-a-server-audit-and-database-audit-specification?view=sql-server-ver16), and complete a Server and database audit using the graphical user interface as well as with T-SQL. rememebr to target the database audit at the test database from previous activities.
+3. Perform actions that are included in the audit (select or insert)
+4. Read the aduit log events, using [this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16) to find them if needed.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
