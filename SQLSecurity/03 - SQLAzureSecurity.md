@@ -35,10 +35,10 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
-In SQL Server installations, you are able to control access to the network addresses and ports using any configuration you like - or you can leave the default settings and your system is available on the entire network. In Microsoft Azure SQL DB however, two mechanisms are enforced at all times: <i>Encrypted Connections</i>, and <i>Firewalls</i>. 
+In SQL Server installations, you are able to control access to the network addresses and ports using any networking controls and configuration you like - or you can leave the default settings and your system is available on the entire network. In Microsoft Azure SQL DB however, two mechanisms are enforced at all times: <i>Encrypted Connections</i>, and <i>Firewalls</i>. 
 
 <h3> Azure SQL DB Encrypted Connections </h3>
-SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">Transport Layer Security</a> (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set. It's also a best practice to *not* trust the Server Certificate, so that the client verifies the Certificate for TLS at all times. 
+SQL Server installations allow for Encrypted Connections to the Instance. In Azure SQL DB, Encrypted Connections are always enforced, using <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">Transport Layer Security</a> (SSL/TLS v1.2). The Azure SQL DB service will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with <i>Encryption</i> set. It's also a best practice to <b>not</b> trust the Server Certificate, so that the client verifies the Certificate for TLS at all times.
 
 <h3> Microsoft Azure Firewalls</h3>
 Before a client or application can connect to Azure SQL DB to begin the Authentication process, the Azure Firewall must have a rule allowing that address to connect, either to the Server or each Azure SQL DB Database. This can be done in the Microsoft Azure Portal or using AZ commands, or for Azure SQL DB database scopes, in Transact-SQL. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-configure?view=azuresql">More details on that process is here</a>.
@@ -69,21 +69,21 @@ You have two primary mechanisms for Principals in Azure SQL DB: <i>SQL Server lo
 Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
 
 <h4>SQL Authentication</h4>
-In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation.
+In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation, with the exception that in Azure SQL DB, you are using a logical "Server" rather than an installed Instance.
 
-Using SQL Authentication means that Azure SQL DB stores the password for the Principals. Because passwords are stored in the master database, it is up to the database owner to ensure that a password and account policy is applied to each user.
+Using SQL Authentication means that Azure SQL DB stores the password for the Principals. Because passwords are stored in the <b>master</b> database, it is up to the database owner to ensure that a password and account policy is applied to each user.
 
 <h4>Microsoft Azure Active Directory</h4>
-As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. <a href="https://docs.microsoft.com/en-us/azure/active-directory/?culture=en-us&country=US">Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud</a>. This is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql">as described in this reference.</a>
+As described in the last module, Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. <a href="https://docs.microsoft.com/en-us/azure/active-directory/?culture=en-us&country=US">Microsoft Azure Active Directory (AAD) is a Domain Service run in the cloud</a>, and works differently than the on-premises installation of Active Directory. AAD is a more secure way to access resources, and allows a higher level of security with Multi-Factor Authentication (MFA), <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-mfa-ssms-overview?view=azuresql">as described in this reference.</a>
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and List Users</b></h4>
 <br>
-Thing
+Fro this Activity, you will run the same scripts as in the previous module, with the exception of not creating the Windows local users. For this course, you will focus on using SQL Authentication, and you will be pointed to resources and demonstrations for using Azure Active Directory. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-Run the following code on your test SQL Azure DB: 
+Run the following code on your test SQL Azure DB:
 <pre>
       Thing
 </pre>
@@ -94,9 +94,9 @@ Similar to SQL Server installations, you can group Principals into <i>Roles</i> 
 
 You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Server Roles and their permissions at this reference</a>. 
 
-Similar to SQL Server Installations, Azure SQL DB also has Database-level Roles, and you can add more if you want to create custom permissions. You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>. 
+Similar to SQL Server Installations, Azure SQL DB also has Database-level Roles, and you can add more if you want to create custom permissions. You can see the included <a href= "https://docs.microsoft.com/en-us/azure/azure-sql/database/security-server-roles?view=azuresql#fixed-server-level-roles">Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>.
 
-Also similar to SQL Server Installations, Azure SQL DB has Application Roles. Application Roles remove the need for user permissions. Using Application Roles, the user runs a client application, which connects to the database as that user. The application switches contexts to the Application Role, runs the commands on behalf of the user, and returns the result. 
+Also similar to SQL Server Installations, Azure SQL DB has Application Roles. Application Roles remove the need for user permissions. Using Application Roles, the user runs a client application, which connects to the database as that user. The application switches contexts to the Application Role, runs the commands on behalf of the user, and returns the result.
 
 You can learn more about <a href= "https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver16"> Application Roles and how to use them at this reference</a>. 
 
@@ -123,7 +123,7 @@ Run the following code on your test SQL Azure DB:
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
-Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a *Schema* allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals.
+Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a <i>Schema</i> allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals.
 
 Securables fall into three categories, or <i>scopes</i>, for ease of use, the same as a SQL Server installation:
 
@@ -177,9 +177,9 @@ Each securable includes a set of <i>permissions</i> relevant to its scope and fu
 The primary commands for object access (Data Control Language, or DCL), just as in a SQL Server installation, are:
 
 <ul>
-  <li>GRANT - Allows a Principal to perform an action on the object, such as SELECT or DELETE.</li>  
-  <li>REVOKE - Removes the permission on an object for a Principal, but if the Principal is a member of another Role with access, does not remove that access.</li>  
-  <li>DENY - Removes the permission on an object for a Principal. Overrides all other permissions, including those inhereted from a Role assignment.</li> 
+  <li><b>GRANT</b> - Allows a Principal to perform an action on the object, such as SELECT or DELETE.</li>  
+  <li><b>REVOKE</b> - Removes the permission on an object for a Principal, but if the Principal is a member of another Role with access, does not remove that access.</li>  
+  <li><b>DENY</b> - Removes the permission on an object for a Principal. Overrides all other permissions, including those inhereted from a Role assignment.</li> 
 </ul>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Permissions to Azure SQL DB Objects</b></h4>
@@ -196,7 +196,7 @@ Thing
 </pre> 
 
 
-Always use the principle of "least privilege" each time you assign permissions, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a>.
+Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
 <br>
@@ -220,7 +220,8 @@ Thing
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
-Apart from the Secure Coding principles your client applications should follow, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections. 
+<br>
+Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.
 
 <h3>Client Libraries and TLS</h3>
 Azure SQL DB requires SSL/TLS at all times. There are, however, various version of TLS, and you want to <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">implement the highest version possible</a> when you connect to an Azure SQL DB. You can find the <a href="https://docs.microsoft.com/en-us/sql/connect/sql-connection-libraries?view=sql-server-ver16">latest drivers and connection methods for Azure SQL DB at this reference</a>. Each of these connection libraries has differing security impacts, so it is important to review the latest releases and use the most secure methods of access possible. 
@@ -234,9 +235,9 @@ The first step is to implement a least-privilege approach within your permission
 Views allow you to show only the collumns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows. 
 
 <h4>Row Level Security</h4>
-Azure SQL DB <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security">provides Row-Level Security</a> so that you can restrict access to objects based on the security context of the user - whether that is based on Role membership or even the execution context of the query. 
+Azure SQL DB <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security">provides Row-Level Security</a> so that you can restrict access to objects based on the security context of the user - whether that is based on Role membership or even the execution context of the query.
 
-By creating a Function and a Security Policy, you can set up protections for SELECT, UPDATE and DELETE operations. 
+By creating a Function and a Security Policy, you can set up protections for _SELECT_, _UPDATE_ and _DELETE_ operations. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Row-Level Security to an Object</b></p>
 In this Activity you will explore setting up Row-Level Security on your Azure SQL DB environment. 
@@ -248,7 +249,7 @@ In this Activity you will explore setting up Row-Level Security on your Azure SQ
 </ol>
 
 <h4>Dynamic Data Masking</h4>
-<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql">Dynamic Data Masking</a> allows you to substitute a standard return from a Qeury with obfuscated characters. You can replace all or part of a result string with another character (X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql">Dynamic Data Masking</a> allows you to substitute a standard return from a Qeury with obfuscated characters. You can replace all or part of a result string with another character (such as the letter X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></p>
 In this Activity you will review an example set of scripts that implement Dynamic Data Masking, and shows the data returned. 
@@ -259,6 +260,21 @@ In this Activity you will review an example set of scripts that implement Dynami
 
 <ol>
   <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
+
+<h4>SQL Ledger</h4>
+
+SQL Server 2022 and Microsoft Azure SQL DB include a new feature called <a href=" https://docs.microsoft.com/en-us/azure/azure-sql/database/ledger-landing?view=azuresql">Ledger</a> that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest, alerting you to any differences, which indicates that the data has been tampered with.
+
+With the Ledger feature, you are able to create updatable tables, or insert-only tables depending on your application's needs.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review SQL Ledger</b></p>
+In this Activity you will review an example of setting up and working with SQL Ledger. 
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/ledger/ledger-how-to-updatable-ledger-tables?view=azuresqldb-current">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -272,19 +288,29 @@ In this Activity you will review an example set of scripts that implement Dynami
 <h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
 <br>
 
-TODO: Topic Description
+Microsoft Azure SQL DB supports encryption of data in multiple places: in-transit, at-rest, in-database and more.
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Review Always Encrypted</b></p>
+For data-in-transit, Transport Layer Security (TLS) is enforced for connections to the server over secure protocols. 
 
-TODO: Activity Description and tasks
+For data encryption, two mechanisms are available. For data-at-rest, Azure SQL Database automatically implements the SQL Server <i>Transparent Data Encryption</i> (TDE) feature. With no code or database changes, your database is encrypted on storage. 
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
+For data encryption, it's important to understand how Azure SQL DB uses Keys to encrypt data.
 
-TODO: Enter activity description with checkbox
+On creation, an Azure SQL DB "Server" creates a <i>Service Master Key</i> (SMK), which is used to create a <i>Database Master Key</i> (DMK). These Keys are protected by either a Certificate, an Asymmetric Key (such as a password) or a Symmetric Key to lock and unlock the Key. An Extensible Key Management (EKM) module can also be used, holding symmetric or asymmetric keys outside of Azure SQL DB.
+
+You can encrypt data as you insert it using  T-SQL functions, such as <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/encryptbypassphrase-transact-sql?view=azuresqldb-current">ENCRYPTBYPASSPHRASE</a> and <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/decryptbypassphrase-transact-sql?view=azuresqldb-current">DECRYPTBYPASSPHRASE</a> calls.
+
+Another method of setting up encryption for your database is using the <i>Always Encrypted</i> feature. Always Encrypted allows applications to encrypt sensitive data wihtout revealing the encryption keys to the Database Engine. This is transparent to the application, so you don't need to write special code to take advantage of this feature.  
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Set up Always Encrypted on your Sample Database</b></p>
+In this Activity you will implement Always Encrypted on your sample course database.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-wizard?view=azuresqldb-current">Navigate to this reference, and follow all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -297,7 +323,7 @@ TODO: Enter activity steps description with checkbox
 <h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
 
-TODO: Topic Description
+TODO: [Topic Description](https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql)
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Implement and Review Microsoft Defender</b></p>
 
