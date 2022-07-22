@@ -311,7 +311,6 @@ In this Activity you will implement Always Encrypted on your sample course datab
   <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-wizard?view=azuresqldb-current">Navigate to this reference, and follow all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
 </ol>
 
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 [//]: <> (================================= ========= =========================================================)
@@ -322,16 +321,21 @@ In this Activity you will implement Always Encrypted on your sample course datab
 
 <h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
 <br>
+Microsoft Azure SQL DB has an auditing capability similar to a SQL Server installation on-premises, but since you do not have access to the storage where the service is running, you send the output of the audits to an Azure storage account, a Log Analytics workspace, or to Azure Event Hubs. Each of these targets provides different interfaces and features, but they store the same information. 
+<p></p>
+You can enable a logical <i>Server</i> audit, a <i>Database</i> audit, or both. In general, you should choose one or another, but not both. Enabling a Server audit audits all the databases on that server, and any new ones you create, and sends it to a single target. Enabling a Database audit allows you to send each audit collection to a different target. 
+<p></p>
 
-TODO: [Topic Description](https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql)
+[You can learn more about Azure SQL DB audits here.](https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql)
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: TODO: Implement and Review Microsoft Defender</b></p>
-
-TODO: Enter activity description with checkbox
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Set up a Server Audit on your Azure SQL DB account</b></p>
+In this Activity you will implement a Server audit on your sample course database environment.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-TODO: Enter activity steps description with checkbox
+<ol>
+  <li><a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql#setup-auditing">Navigate to this reference, and follow all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
+</ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
