@@ -35,16 +35,21 @@ You'll cover these topics in this module:
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">01 - Leveraging your Audits</h2>
 <br>
-<TODO> 
+Earlier in this workshop you created a SQL Server and Azure SQL DB Audit. In the case of SQL Server installations, the primary components of an Audit are the <i>Server Audit</i>, the <i>Server Audit Specification</i>, and the <i>Database Audit Specification</i>. You learned that the Server Audit information is stored in the <i></i>master</i> system database, which sets the file rollover, the queue delay and the error handling for the Audit process.
 
+The Audit target can be set to several locations. If you use a <i>File</i> target, you should ensure that this is an off-server, secure location. Using the Windows Event logs is another option, and you should bias towards the Security Event Log since it has higher protections than the other Event Log types.
+
+An Audit is a historic reference for what has occurred on your system based on the data you chose to collect when you created your Audit Specifications. This history requires periodic review to ensure you are tracking the latest activity on the environment.
 <br>
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Audits</b></h4>
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Your Audits</b></h4>
 <br>
-In this Activity you will <TODO>
+In this Activity you will Locate your Server Audits and review the information you see there. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> <TODO>
+  <li> Locate your Server Audit. This can be done using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16#SSMSProcedure">SQL Server Management Studio tool</a>, or by using The <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-server-audits-transact-sql?view=sql-server-ver16">sys.server_audits Transact-SQL</a> statement for instalations of SQL Server. 
+  <li>If you set the target to the Event logs, use the Event Log tool in Windows to review the log. If you set the Audit target toa file, use the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-ver16">sys.fn_get_audit_file Transact-SQL</a> or a text editor to review the contents.</li>
+  <li> For your Azure SQL DB Audits, use the <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql#subheading-3">Microsoft Azure Portal to locate and review your Audits</a>.</li>
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
