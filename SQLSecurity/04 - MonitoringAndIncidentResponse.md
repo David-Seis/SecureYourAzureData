@@ -21,8 +21,8 @@ Security  breaches are always possible even with the best defenses, so it is imp
 You'll cover these topics in this module:
 <ul>
   <li><a href="#01" target="_blank">01 - Leveraging your Audits</li></a>
-  <li><a href="#01" target="_blank">02 - Working with Microsoft Azure Defender</li></a>
-  <li><a href="#02" target="_blank">03 - The Incident Response Plan</li></a>
+  <li><a href="#01" target="_blank">02 - Working with Microsoft Defender for SQL</li></a>
+  <li><a href="#02" target="_blank">03 - Implementing an Incident Response Plan</li></a>
 </ul>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -60,18 +60,24 @@ In this Activity you will Locate your Server Audits and review the information y
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">02 - Working with Microsoft Azure Defender</h2>
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">02 - Working with Microsoft Defender for SQL</h2>
 <br>
-<TODO> 
+Microsoft Azure Defender for Cloud <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction">is the primary security tool from Microsoft for not only Azure-based assets, but also on-premises systems and even other Cloud provider's environments</a>.  It provides what the industry calls a "Cloud Security Posture Management" (CSPM) and "Cloud Workload Protection Platform" (CWPP) system. The primary aspects are assessing your systems, securing your systems, and reacting to attacks on your systems.
 
+In larger organizations, it is common to have a security team that implements a comprehensive organization security posture. In smaller organizations, that function may fall to each member of the IT team. If your organization has a security team, then you should work with them to extend the systems they have to covering your Data estate.
+
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql?view=azuresql">Microsoft Defender for SQL is a separate plan within Microsoft Defender for Cloud</a>. Microsoft it asseses potential database vulnerabilities, detects anomalous activities, and has a full reporting system that also surfaces these reports up to the larger Microsoft Defender for Cloud system. It's two main components are performing a Vulnerability Assessment, and enabling Advanced Threat Protection to react to threats, in some cases, pre-emptively.
+
+To enable Microsoft Defender for SQL, you can use the Microsoft Azure Portal, the Azure CLI, or PowerShell. In a previous activity, you enabled this feature for your Azure based system. To enable Microsoft Defender for SQL Servers on local systems, you install an Agent Extension on the system, provision the Log Analytics agent on your SQL Server's host, and then enable the optional plan in Defender for Cloud's environment settings page. From there, you can review the logs and alerts it creates. 
 <br>
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Microsoft Defender</b></h4>
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling Microsoft Defender for SQL servers on local or cloud SQL Server Installations</b></h4>
 <br>
-In this Activity you will <TODO>
+In this Activity you will review the steps to install and configure the Agent and Azure environment for a SQL Server Installation. You will start by reviewing the process, and if time permits, install and run the agent on your test system.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> <TODO>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-sql-usage#set-up-advanced-data-security-for-sql-machines">Navigate to this reference</a>, and review the information <a href="https://www.youtube.com/watch?v=V7RdB6RSVpc">you see there</a>.</li>
+  <li> If time permits, implement the steps on your classroom system, using the Azure account you have been using for this workshop.</li>
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -82,17 +88,15 @@ In this Activity you will <TODO>
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">03 - The Incident Response Plan</h2>
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">03 - Implementing an Incident Response Plan</h2>
 <br>
-<TODO> 
+An Incident Response Plan is a pro-active set of documentation that defines the steps your organization will take based on the monitoring and alerting you have set up throughout this course. Some of these actions are pre-emptory, such as "we will do X when the log shows any attempt to access sensitive resources" and some are reactionary, such as "we will do Y when we detect a breach of our systems". In any case, this should be well-documented, reviewed, and communicated not just within the Security or Information Technology teams,  but all throughout the business.
 
-
-You can review the <a href="https://www.microsoft.com/security/blog/2021/05/20/simuland-understand-adversary-tradecraft-and-improve-detection-strategies/">Simuland environment and resources</a> to understand the complexity of a security footprint.
-
+You can find many examples of Security Incident Response Plans, some that are specific to your industry. Keep in mind that if you are in an industry that is covered by a government or other regulatory body, you should consult the specifications for those regulations and incorporate them into your response plan to ensure compliance.  
 <br>
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Incident Response Plan</b></h4>
 <br>
-In this Activity you will <TODO>
+In this Activity you will review the steps to create or evaluate a complete Incident Response Plan. If you have a security team, you should consult them to add the Data estate coverage you control, and if your organization does not have a defined Security team, it is advisable to bring in outside assistance to help your organization create a security posture. They will often use an Incident Response Plan to create the posture.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
@@ -100,7 +104,6 @@ In this Activity you will <TODO>
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
 
 
 [//]: <> (================================= ========= =========================================================)
@@ -112,6 +115,7 @@ In this Activity you will <TODO>
 <ul>
     <li><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Audit%20Notebook.ipynb" target="_blank">You can find a Jupyter Notebook on this course with the Activity code from this course here.</a> You can use this resource as the basis for further exploring your test environment, and this Notebook can be used as the basis for your production envirnment, after testing and validation with your team. You can <a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/notebooks/notebooks-guidance?view=sql-server-ver16">learn how to use a Jupyter Notebook with Azure Data Studio here</a>.</li>
     <li><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Checklist%20Template.md" target="_blank">You can find a sample Security Checklist here</a> which you can use as the basis for creating a comprehensive check on your environments, after testing and validitation with your team.</li>
+    <li>You can review the <a href="https://www.microsoft.com/security/blog/2021/05/20/simuland-understand-adversary-tradecraft-and-improve-detection-strategies/">complete Simuland environment and resources</a> to understand the complexity of a security footprint</li>.
 </ul>
 
 Congratulations! You have completed this workshop. You now have the tools, assets, and processes you need to extrapolate this information into other applications.
