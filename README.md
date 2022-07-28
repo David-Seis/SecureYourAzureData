@@ -8,11 +8,11 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/textbubble.png"> <h2>About this Workshop</h2>
 
-Welcome to this workshop on *SQL Server Security Ground to Cloud*. In this workshop, you'll learnthe Computing Security Landscape, and the Data Professional's responsibilities within it. You'll also learn the latest security frameworks and paradigms, SQL Server security operations both on-premises and in-cloud, and the steps you should secure your organization's data.  
+Welcome to this workshop on [*SQL Server Security Ground to Cloud*](https://github.com/David-Seis/SecureYourAzureData). In this workshop, you'll learn about the computing security landscape, and the Data Professional's responsibilities within it. You'll also learn the latest security frameworks and paradigms, SQL Server security operations both on-premises and in-cloud, and the steps you should secure your organization's data.  
 
 The focus of this workshop is to enable the Data Professional to secure and protect their data estate.
 
-You'll start by <TODO: Describe what the flow of the workshop will be>, with a focus on how to extrapolate what you have learned to create other solutions for your organization.
+You'll start by creating a workshop enviroment using your own laptop or Virtual machine, then work through a module covering general security principals and where the data estates security measures and controls fit within that environment at your organization. From there, you will work through a hands-on module covering the security basics of on-premises and Virtual-Machine based installations of SQL Server. The next module covers the similarities and differences between an installation of SQL Server and the Azure SQL Database Environment. The final module covers monitoring your data environment and creating an Incident Response Plan for your organization, all with a focus on how to extrapolate what you have learned to create other solutions for your organization.
 
 This [github README.MD file](https://lab.github.com/githubtraining/introduction-to-github) explains how the workshop is laid out, what you will learn, and the technologies you will use in this solution. To download this Lab to your local computer, click the **Clone or Download** button you see at the top right side of this page. [More about that process is here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository). 
 
@@ -23,87 +23,69 @@ This [github README.MD file](https://lab.github.com/githubtraining/introduction-
 In this workshop you'll learn:
 <br>
 
-- <TODO: Bullet-point on learning obective>
-- <TODO: Bullet-point on learning obective>
-- <TODO: Bullet-point on learning obective>
+- The General Computing Security Landscape and the Data estate's responsibilities in that environment
+- The basics of security for on-premises and in-Virtual Machine SQL Server installations
+- The basics of Microsoft Azure SQL Database security
+- How to monitor for and react to security incidents in your organization
 
-<TODO: Enter the text you use when you submit the description for this course to a presentation, or advertising>
+In addition, you will recieve a [baseline Security Checklist to use as a starting point for a Defense-In-Depth check](https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Checklist%20Template.md) of your on-premises and in-cloud environments.  
 
-The goal of this workshop is to train <TODO: Describe who you would train for this and why>.
+The goal of this workshop is to train technical professionals in the basics of SQL Server security both on-premises and in-cloud. 
 
 The concepts and skills taught in this workshop form the starting points for:
 
-    <TODO: Job Description and level of person who is the primary that should attend and the reason>.
-    For instance: Solution Architects and Developers, to understand how to put together an end to end solution.
-    <TODO: Job Description and level of person who is the secondary that should attend and the reason>.
-    <TODO: Job Description and level of person who is the third-level of who might want to attend and the reason>.
+ - Technical professionals tasked with securing a data estate 
+ - Data professionals tasked with complete or partial responsibility for data security
+ - Data Security team members who are not familiar with SQL Server security controls and auditing mechanisms
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/building1.png"> <h2>Business Applications of this Workshop</h2>
 
-Businesses require <TODO: Describe the reason the student's business or organization would be interested in the information. Be detailed about the solutions it addresses> 
+Businesses require a high level of security on their most fundamental asset: organizational data. Data breaches are costly, disruptive, and can both financially and structurally negatively impact the organization. Having trained professionals that understand the controls and mechanisms to secure that data is fundamental to the business' survival.
 
-Some industry examples of <TODO: Workshop Topic> are <TODO: Enter Sectors and use briefly>, to name just a few.
+Some industries require an even higher level of security, and are subject to regulatory and government compliance standards, such as healthcare, military, banking and government services. The professionals tasked with securing these environments need the highest level of training to ensure this compliance.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/listcheck.png"> <h2>Technologies used in this Workshop</h2>
 
-The solution includes the following technologies - although you are not limited to these, they form the basis of the workshop. At the end of the workshop you will learn how to extrapolate these components into other solutions. You will cover these at an overview level, with references to much deeper training provided.
+This workshop uses the following technologies - although you are not limited to these, they form the basis of the workshop. At the end of the workshop you will learn how to extrapolate these components into other solutions. You will cover these at an overview level, with references to much deeper training provided.
 
  <table style="tr:nth-child(even) {background-color: #f2f2f2;}; text-align: left; display: table; border-collapse: collapse; border-spacing: 2px; border-color: gray;">
 
   <tr><th style="background-color: #1b20a1; color: white;">Technology</th> <th style="background-color: #1b20a1; color: white;">Description</th></tr>
-
-  <tr><td><i>TODO: Technology name not owned by Microsoft that you will cover</i></td><td>TODO: Reason the student needs to learn it</td></tr>
-  <tr><td>TODO: Technology name owned by Microsoft that you will cover</td><td>TODO: Reason the student needs to learn it</td></tr>
-
+    <tr><td>Microsoft Windows Operating System</td><td>This workshop uses the Microsoft Windows operating system. You will navigate, install, and configure software, settings, and user components during the workshop.</td></tr>
+    <tr><td>Microsoft Azure Cloud Environment</td><td>In this workshop you will create an Azure SQL Database environment and enable and use the Microsoft Defender for SQL products.</td></tr>
+    <tr><td>SQL Server on-premises and in-VM installations</td><td>SQL Server is installed, configured, and audited on a student-supplied environment such as a laptop or Virtual Machine.</td></tr>
+    <tr><td>General Security Tools and Processes</td><td>Computing hardware, networking, and configurations as they partain to security are used throughout the workshop.</td></tr>
 </table>
+
+> Although SQL Server is supported on Linux, Containers, and Orchestration Platforms such as Kubernetes, those platforms are not currently covered in this workshop. 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/owl.png"> <h2>Before Taking this Workshop</h2>
 
-You'll need a local system that you are able to install software on. The workshop demonstrations use Microsoft Windows as an operating system and all examples use Windows for the workshop. Optionally, you can use a Microsoft Azure Virtual Machine (VM) to install the software on and work with the solution.
+You'll need a local system that you are able to install software on. The workshop demonstrations use Microsoft Windows as an operating system and all examples use Windows for the workshop. Optionally, you can use a Microsoft Azure Virtual Machine (VM) to install the software on and use for the workshop. A free Virtual Machine image is provided for you using Hyper-V, VirtualBox, or Parallels in the pre-requisites.
 
-You should have a Microsoft Azure account with the ability to create assets.
+You should have a Microsoft Azure account with the ability to create assets. (A free subscription is available, and described in the Pre-Requisite section)
 
 This workshop expects that you understand <TODO: Enter a brief solution for what a student should know before taking the workshop>.
 
 If you are new to these, here are a few references you can complete prior to class:
 
 <TODO: Enter some pre-work courses or books or whatever that the student could use to prep>
--  [Reference Name](https://url)
--  [Reference Name](https://url)
--  [Reference Name](https://url)
--  [Reference Name](https://url)
+-  [Microsoft Windows]([https://url](https://docs.microsoft.com/en-us/learn/browse/?expanded=windows&products=windows))
+-  [Microsoft Azure]([https://url](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/))
+-  [SQL Server]([https://url](https://docs.microsoft.com/en-us/sql/sql-server/tutorials-for-sql-server-2016?view=sql-server-ver16))
+-  [Computing Security]([https://url](https://www.microsoft.com/en-us/security/content-library/Home/Index?culture=en-US))
 
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/bulletlist.png"> <h3>Setup</h3>
 
-<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">A full pre-requisites document is located here</a>. These instructions should be completed before the workshop starts, since you will not have time to cover these in class. <i>Remember to turn off any Virtual Machines from the Azure Portal when not taking the class so that you do incur charges (shutting down the machine in the VM itself is not sufficient)</i>.
+<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">A full pre-requisites document is located here</a>. These instructions should be completed before the workshop starts, since you will not have time to cover these in class. 
 
-<p style="border-bottom: 1px solid lightgrey;"></p>
-
-<img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/education1.png"> <h2>Workshop Details</h2>
-
-This workshop uses <TODO: enter main technologies used to solve the sceanrio>, with a focus on <TODO: architecture and implementation, development and use, etc>.
-
-<table style="tr:nth-child(even) {background-color: #f2f2f2;}; text-align: left; display: table; border-collapse: collapse; border-spacing: 5px; border-color: gray;">
-
-  <tr><td style="background-color: Cornsilk; color: black; padding: 5px 5px;">Primary Audience:</td><td style="background-color: Cornsilk; color: black; padding: 5px 5px;">TODO: Enter the technical people who will take the workshop> tasked with TODO: Enter what they are tasked to do</td></tr>
-  <tr><td>Secondary Audience:</td><td> TODO: Secondary Audience</td></tr>
-  <tr><td style="background-color: Cornsilk; color: black; padding: 5px 5px;">Level: </td><td style="background-color: Cornsilk; color: black; padding: 5px 5px0;"> TODO: 100, 200, 300, 400 </td></tr>
-  <tr><td>Type:</td><td>TODO: In-Person, On-Line, or from github</td></tr>
-  <tr><td style="background-color: Cornsilk; color: black; padding: 5px 5px;">Length: </td><td style="background-color: Cornsilk; color: black; padding: 5px 5px;">TODO: Number of hours</td></tr>
-
-</table>
-
-<p style="border-bottom: 1px solid lightgrey;"></p>
-
-<img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/pinmap.png"> <h2>Related Workshops</h2>
-
- - [TODO: Enter any other workshops that help in this area](url)
+> Remember to turn off any Virtual Machines from the Azure Portal when not taking the class so that you do incur charges (shutting down the machine in the VM itself is not sufficient)
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
