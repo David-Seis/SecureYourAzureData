@@ -70,15 +70,12 @@ You'll need a local system that you are able to install software on. The worksho
 
 You should have a Microsoft Azure account with the ability to create assets. (A free subscription is available, and described in the Pre-Requisite section)
 
-This workshop expects that you understand <TODO: Enter a brief solution for what a student should know before taking the workshop>.
+This workshop expects that you understand the basics of the technologies you will use. If you are new to these, here are a few references you can complete prior to class:
 
-If you are new to these, here are a few references you can complete prior to class:
-
-<TODO: Enter some pre-work courses or books or whatever that the student could use to prep>
--  [Microsoft Windows]([https://url](https://docs.microsoft.com/en-us/learn/browse/?expanded=windows&products=windows))
--  [Microsoft Azure]([https://url](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/))
--  [SQL Server]([https://url](https://docs.microsoft.com/en-us/sql/sql-server/tutorials-for-sql-server-2016?view=sql-server-ver16))
--  [Computing Security]([https://url](https://www.microsoft.com/en-us/security/content-library/Home/Index?culture=en-US))
+-  [Microsoft Windows](https://docs.microsoft.com/en-us/learn/browse/?expanded=windows&products=windows)
+-  [Microsoft Azure](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/)
+-  [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/tutorials-for-sql-server-2016?view=sql-server-ver16)
+-  [Computing Security](https://www.microsoft.com/en-us/security/content-library/Home/Index?culture=en-US)
 
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/bulletlist.png"> <h3>Setup</h3>
