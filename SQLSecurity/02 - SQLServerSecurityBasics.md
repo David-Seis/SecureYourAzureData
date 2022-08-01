@@ -33,7 +33,57 @@ You'll cover these topics in this module:
 
 <h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1 Principals</h2>
 <br>
+Access to SQL is managed through principals, or logins.  Each principal will have a way for the user to 'log in' considering passwordless, which then enables the user of the account to Access SQL Server at the most basic level, and then we get to the authorization side. Authorization is What you can do once you are connected.
 
+Authentication
+<br>
+
+SQL has two modes of authentication: 1 SQL Authentication where the account is managed and stored inside of SQL, or 2 managed externally through Windows which includes Active Directory, Azure AD and Linux AD Integration. 
+
+
+1 SQL Authentication
+
+The Master database stores all security principals except in the case of a contained database. For all principals stored in the master database, the username and permissions are tracked and managed.
+
+Contained Databases are those where the authentication and authroization are stored inside, without ever using the master database.  <TODO: Research and fill out connection and use cases.>
+
+One key difference between these two kinds of authentication is that SQL stores the password for any non-Windows managed principals. Because passwords are stored in SQL, it is up to the DBA to ensure that a password and account policy is created and applied to each user.
+
+
+[//]: <> (2 Windows Authentication AD, AAD, Linux AD integration)</h4>
+
+It is typically easier and safer to manage accounts via Active Directory. There are some organizations that do not work in a domain, and there are some who use applications that require a certain API to reach SQL. Otherwise, if you have a domain and your app can easily reach SQL, active directory is the safer, and typically easier to manage choice.
+The ease comes in reducing the number of accounts needed to access the server wihtout AD integration a user needs one account to log into their computer, and then another to access SQL Server, simplifying account lifecycles and policy enforcment, and the ease of using groups to manage access and permissions.
+
+A login for a windows group can be created, and later when we get into authorization, permissions and roles can be granted to the group rather than the individual, which makes provisioning accounts and access a more streamlined process.
+
+With relatively little work, Azure can be synced with an on-prem Active directory which opens up a lot of possibilities. This is especially true because there is now the option to extend Active directory to Linux servers. Which enables the SQL installations there to make use of Windows authentication!
+<br>
+
+<br>
+
+<h3>Authorization</h3>
+
+Once you are logged into a SQL server Authorization is the next contender. If you were to log in to a SQL server where you had been given an account and no server roles, what would you see?
+
+
+So the next step for each user or group is to look through the prebuilt server and database roles. Roles are a collection of permissions based on general use cases for a SQL Server user and there a general breakdown in the table below:
+
+<TODO: create table of Server roles, database roles.>
+
+If you want to create your own roles, you can dig into the permissions poster to have the exact levers pulled to get the access profile your organization needs. We recommend against changing server roles, but you can copy the permissions of a prebuilt role and modify from there you can get a custom role tailored to your specific needs.
+
+[Link to the SQL Docs article that has the permisisons poster for download](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16)
+
+Combining roles with Windows Authentication groups helps efficiently and quickly provision permisisons to large groups of people, and it makes for less work on the DBA. However, be aware that if you ar enot managing who is going into and out of roles it can become a security risk. Regular account, role, and group audits should be done in your organization. 
+
+
+
+<TODO Determine the placement and use of the topics below:> SQL Server controlled security accounts Active Directory Integration Azure Active Directory Certificates and other Authentication Methods Roles and Role-Based Access Control Kubernetes as a windows auth process.
+
+
+<h4>Principals "Worst" Practices</h4>
+Having one user account for a group of individuals to use. This can limit the auditing and tracking capabilites of SQL server, so if a malicious actor does something heinous under a shared account, it is less likely you will be able to find out who did it, more about this in <a href="#04" target="_blank">Auditing</a>.</li>
 <br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and list principals in an instance</b></h4>
@@ -263,7 +313,13 @@ You'll cover these topics in this module:
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.2 Securables</h2>
 <br>
+Securing your SQL Server is the goal of this course. Principals can be managed to limit who can access the server, Adding permissions to each user to determine WHAT they can do while they are logged in is key to a secure system. A **Securable** in SQL server is virtually everything. Knowing how to limit access to sensitive data and leveraging least privilege when assigning permissions is of the utmost importance when securing a SQL instance. The topic of securables is usually broken down into three categories, or scopes, for ease of use.
 
+
+Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general permissions hierarchy as well as reviewing the built in Server roles and Database roles is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the Permissions Poster produced by Microsoft.
+
+
+Most environments use the out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
 <br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Test access through roles</b></h4>
@@ -339,7 +395,7 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.3 Applications</h2>
 <br>
 
-[//]: <> (Application security is as important as SQL security. Most applications are set up to have direct access to SQL, and in some cases with sysadmin rights. Secure coding practices as well as managing access and permisisons to the application account are the focus of this section.)
+Application security is as important as SQL security. Most applications are set up to have direct access to SQL, and in some cases with sysadmin rights. Secure coding practices as well as managing access and permisisons to the application account are the focus of this section.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Parameterized Queries and Error Handling</b></p>
 <br>
