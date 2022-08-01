@@ -52,6 +52,10 @@ Perimeter security entails creating defenses at the network level for [distribut
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
+<br><img src="../graphics/checkbox.png"> Microsoft Azure Server-level IP Firewall configured for appropriate access based on application patterns.
+<br><img src="../graphics/checkbox.png"> Microsoft Azure Database-level IP Firewall configured for appropriate access based on application patterns.
+<br><img src="../graphics/checkbox.png"> Microsoft Azure Virtual network service endpoints configured for appropriate access based on application patterns.
+<br><img src="../graphics/checkbox.png"> Microsoft Azure Virtual network rules configured for appropriate access based on application patterns.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Compute</b></p>
 
@@ -84,10 +88,11 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> A full configuration audit of the Operating System and SQL Server Instances has been created, and is updated with Delta reports on a periodic basis. These documents are reviewed by both the Security and Data teams.
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Database backup and other off-DB file storage reviewed for access only by authorised personnel.
+<br><img src="../graphics/checkbox.png"> Microsoft Azure Defender for SQL is implemented and Threat Detection is enabled, with a group alias for incident reporting.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Identitiy and Authorization</b></p>
-
+<br>
 Identity and Authorization security defines the appropriate *Principals* and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
 
 *SQL Server Installations*
@@ -113,7 +118,9 @@ Identity and Authorization security defines the appropriate *Principals* and che
 <br><img src="../graphics/checkbox.png"> The SQL Agent Proxies have been audited to establish least privilege.
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> The highest level of authentication (Azure Active Directory and/or Role-Based Acccess Control) is implemented wherever possible.
+<br><img src="../graphics/checkbox.png"> If Kerberos (Active Directory Integration) is used, accounts are regularly reviewed for proper controls and RBAC acccess.
+<br><img src="../graphics/checkbox.png"> If SQL Server authentication is used, accounts are regularly reviewed for proper controls, strength, rotation, and object acccess.
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Application</b></p>
 
@@ -129,11 +136,13 @@ The Application security area involves implementing [Secure Code](https://docs.m
 <br><img src="../graphics/checkbox.png"> Each application's input for database access is sanitized to prevent SQL Injection and other attacks.
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Azure SQL Database Audit is run and reviewed periodically.
+<br><img src="../graphics/checkbox.png"> Azure SQL Database Vulnerability Report is run and reviewed periodically.
+<br><img src="../graphics/checkbox.png"> Azure logs are monitored and reviewed for each Azure SQL DB environment.
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Data</b></p>
 
-The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. 
+The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured. All demonstration or sample databases have been removed.
@@ -146,11 +155,11 @@ The Data Security Area involves ensuring that business and customer data is encr
 <br><img src="../graphics/checkbox.png"> SQL Server Audit features such as Change Tracking, Change Data Capture, and SQL Server Audit have been evaluated and implemented per-database as required.
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> Thing
+<br><img src="../graphics/checkbox.png"> Row-Level Security  evaluated and implemented for sensitive data elements.
+<br><img src="../graphics/checkbox.png"> Data Masking evaluated and implemented for sensitive data elements.
 
-<a href="url" target="_blank">url</a>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="url" target="_blank">Official Documentation for this section</a></li>
+    <li><a href="[url](https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview?view=azuresql)" target="_blank">Official Azure SQL DB Security Documentation for this section</a></li>
 </ul>
