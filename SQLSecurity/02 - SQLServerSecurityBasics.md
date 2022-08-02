@@ -414,37 +414,39 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Make sure the testign database and tabel are present from previous activities in this module.
-
-2. Run this Query for a client to see their account information as a general user
+1. Run this Query for a client to see their account information as a general user
 <pre>
     SELECT * 
     FROM Patient 
-    WHERE loginid = '1' -- user input = '1'
+    WHERE loginid = '1' 
+    -- user input = 1
 </pre>
-3. Run the same query with an injection string
+2. Run the same query with an injection string
 <pre>
     SELECT * 
     FROM Patient
-    WHERE loginid = '' or 1=1 --'  -- user input = ' or 1=1 --
+    WHERE loginid = '' or 1=1 --'  
+    -- user input = ' or 1=1 --  
 </pre>
-4.  Parameterize the query and run it again
+3.  Run the query below showing how parameterizing the query helps prevent injection strings allowed by an application from negatively affecting SQL server:
 <pre>
     DECLARE @Loginid tinyint
-    SET @Loginid = '' or 1=1-- --user input
 
+    SET @Loginid = '' or 1=1-- '
+    --user input = ' or 1=1-- 
     SELECT * 
     FROM Patient
     WHERE loginid = @Loginid --parameterized input
 
     
-    SET @Loginid = ‘3’ -- --user input
+    SET @Loginid = 3 
+    --user input = 3
     SELECT * 
     FROM Patient
     WHERE loginid = @Loginid --parameterized input
 
 </pre>
-5.  Notice the error information, add handling
+4.  Notice that an error could be returned to a malicious actor which they could use to learn mroe about your environment. Adding error handling helps prevent verbose errors from giving more information for an attacker to use.
 <pre>
     DECLARE @Loginid tinyint
       BEGIN TRY
@@ -458,13 +460,22 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
         Print 'Please use only your user ID'
       END CATCH
 
+    DECLARE @Loginid tinyint
+      BEGIN TRY
+        SET @Loginid = '3'
+        --user input = 3
+            SELECT * 
+            FROM Patient
+            WHERE loginid = @Loginid --parameterized input
+      END TRY
+      BEGIN CATCH
+        Print 'Please use only your user ID'
+      END CATCH
 
 </pre>
-6. TODO see if python app can be used here.
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
-
 
 
 [//]: <> (================================= Section 4 )
