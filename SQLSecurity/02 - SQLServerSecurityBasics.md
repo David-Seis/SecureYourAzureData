@@ -149,7 +149,7 @@ Having one user account for a group of individuals to use. This can limit the au
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1.1 Roles</h2>
 <br>
-<TODO: compelte intro> Server and databases roels are key in managing the everyday security of your SQL server. 
+<TODO: compelte intro> Server and databases roles are key in managing the everyday security of your SQL server. 
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and assign roles.</b></h4>
 <br>
@@ -358,7 +358,7 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
     SELECT FirstName, LastName, CONCAT(Address + ', ' + City)
     FROM Patient
 </pre>
-3. Create a stored procedure
+3. Create a stored procedure in the database:
 <pre>
     USE SQLSecurityTest;  
     GO  
@@ -372,18 +372,28 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
         WHERE loginId= @loginId   
     GO  
 </pre>
-2. TOD0: gran user1 all rights to table
+4. Grant User1 full control on the table:
 <Pre>
+USE [SQLSecurityTest]
+GO
+GRANT CONTROL ON [dbo].[Patient] TO [A1\User1]
+GO
 </pre>
-3. TODO: Grant 1st DB role rights to the SP
+5. Grant rights to execute the stored procedure to the 'Stored_procdure_user_role' role.
 <Pre>
+USE [SQLSecurityTest]
+GO
+GRANT EXECUTE ON [dbo].[uspGetCardInformation] TO [Stored_procedure_user_role]
+GO
 </pre>
-4. TODO: grant 2nd db roel rights to view
+6. Grant rights to use the view to the 'View_user_role' role.
 <Pre>
+USE [SQLSecurityTest]
+GO
+GRANT SELECT ON [dbo].[Patient_Mailing_Address] TO [View_user_role]
+GO
 </pre>
-5. TODO: Learn to integrate the python app
-    5.1 use the python app individual user connection strings to select fromt he table, view, and execute Sp
-
+7. Integrate pyhton APP
 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -438,15 +448,17 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
 <pre>
     DECLARE @Loginid tinyint
       BEGIN TRY
-        SET @Loginid = ''' or 1=1--' --user input
+        SET @Loginid = '' or 1=1--' 
+        --user input = ' or 1=1--
+            SELECT * 
+            FROM Patient
+            WHERE loginid = @Loginid --parameterized input
       END TRY
       BEGIN CATCH
         Print 'Please use only your user ID'
       END CATCH
 
-    SELECT * 
-    FROM Patient
-    WHERE loginid = @Loginid --parameterized input
+
 </pre>
 6. TODO see if python app can be used here.
 
