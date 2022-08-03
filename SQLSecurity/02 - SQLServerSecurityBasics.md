@@ -495,7 +495,8 @@ Encryption, certificates, and keys are tools for securing the physical layer of 
 Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Create & Backup master key
+
+1. Create & Backup master key (first create the C:\EncryptedDrive folder, you will also need to grant permissions to SQL)
 <pre>
     CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
@@ -503,26 +504,29 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
     BACKUP MASTER KEY TO FILE = 'C:\EncryptedDrive\masterkey.mk' 
-        ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+        ENCRYPTION BY PASSWORD = 'S@vior Of.The Un1v3r$3!';
     GO
-
 </pre>
 2.  Create, Verify, and Backup a certificate - you will need to adjust the backup location of the certificate for your system.
 <pre>
     CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
     GO
 
+    BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\TDE_Cert.cer'
+        WITH PRIVATE KEY (
+            FILE = 'C:\EncryptedDrive\TDE_Cert.pvk',
+            ENCRYPTION BY PASSWORD = 'I$ @.Mirac1e!');
+    GO
+</pre>
+3. Verify the creation/presence of the TDE_Cert and the Database Master key.
+<pre>
     SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
     GO
 
-    BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\rev.cer'
-      WITH PRIVATE KEY (
-            FILE = 'C:\EncryptedDrive\TDE.pvk',
-            ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!');
-    GO
+    Select name, algorithm_desc, create_date from sys.symmetric_keys
 </pre>
 
-3.  Encrypt our test Database
+4.  Encrypt our test Database
 <pre>
     USE SQLSecurityTest
     GO
@@ -573,10 +577,75 @@ In this Activity you will set up a server and database audit on your test system
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Connect to your test instance, and ensure the test database from previous activities is present.
-2. [Open this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/create-a-server-audit-and-database-audit-specification?view=sql-server-ver16), and complete a Server and database audit using the graphical user interface as well as with T-SQL. rememebr to target the database audit at the test database from previous activities.
-3. Perform actions that are included in the audit (select or insert)
-4. Read the aduit log events, using [this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16) to find them if needed.
+1. Step 1: Create a SQL Server Audit for the Patient table data
+<pre>
+    USE [master]
+    GO
+
+    CREATE SERVER AUDIT [Patient_Data_Audit]
+    TO FILE 
+    (	FILEPATH = N'C:\EncryptedDrive'
+      ,MAXSIZE = 1024 MB
+      ,MAX_ROLLOVER_FILES = 10
+      ,RESERVE_DISK_SPACE = OFF
+    ) WITH (QUEUE_DELAY = 1000, ON_FAILURE = CONTINUE)
+
+    GO
+
+    ALTER SERVER AUDIT [Patient_Data_Audit]  
+    WITH (STATE = ON) ;  
+    GO  
+</pre>
+
+2. Add an Audit Specification that catches actions on the table
+<pre>
+    USE [SQLSecurityTest]
+    CREATE DATABASE AUDIT SPECIFICATION Audit_Data_Select_On_Patient_Table
+    FOR SERVER AUDIT [Patient_Data_Audit]
+    ADD ( SELECT, INSERT, UPDATE, DELETE  
+        ON SQLSecurityTest.dbo.Patient BY Public )  
+    WITH (STATE = ON) ;    
+    GO  
+</pre>
+
+3. Perform actions that are included in the audit actions: (python examples in the notebook)
+<pre>
+    USE [SQLSecurityTest]
+    INSERT INTO Patient (LoginID,FirstName,LastName,Address,City,SSN,CardNumber)
+    VALUES ('6','Fred','Fernandez', '66 Freedom Fwy.', 'Fremont', '666-66-6666', '6666-6666-6666-6666')
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    WHERE LoginID > 3
+    GO
+
+    USE [SQLSecurityTest]
+    UPDATE Patient
+    SET City = 'Fresno' 
+    WHERE City = 'Fremont'
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    WHERE LoginID > 3
+    GO
+
+    USE [SQLSecurityTest]
+    DELETE FROM Patient
+    WHERE FirstName = 'Fred'
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    GO
+</pre>
+4. Read the aduit log events:
+<pre>
+    SELECT event_time, server_instance_name, server_principal_name, database_name, object_name, [statement] FROM sys.fn_get_audit_file ('C:\EncryptedDrive\Pa*',default,default);  
+    GO  
+</pre>
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
