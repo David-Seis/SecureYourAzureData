@@ -161,7 +161,7 @@ Having one user account for a group of individuals to use. This can limit the au
     USE master;
     CREATE SERVER ROLE SQLSecurityTest_Table_Owner;
 
-    -- Create a database roel that will eventually have rights to execute a stored procedure in the database
+    -- Create a database role that will eventually have rights to execute a stored procedure in the database
     USE [SQLSecurityTest];
     CREATE ROLE Stored_procedure_user_role;
 
@@ -211,13 +211,25 @@ Having one user account for a group of individuals to use. This can limit the au
     SELECT * FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
 </pre>
-4. Run this script to list all users by whether they are SQL or Windows users, excluding any built-in users.
+4. Run this script to list all users by whether they are SQL or Windows users, excluding any built-in users, and identify what rolees they are in.
 <pre>
     -- Windows Logins
       SELECT * FROM sys.server_principals WHERE type IN ('U','G', 'E', 'X') AND name NOT LIKE '%NT%'
 
     -- SQL Logins 
       SELECT * FROM sys.server_principals WHERE type = 'S' AND name NOT LIKE '%#%' AND name NOT LIKE 'sa'
+
+    --Find Role Memberships 
+    SELECT DP1.name AS DatabaseRoleName,   
+      isnull (DP2.name, 'No members') AS DatabaseUserName   
+    FROM sys.database_role_members AS DRM  
+    RIGHT OUTER JOIN sys.database_principals AS DP1  
+      ON DRM.role_principal_id = DP1.principal_id  
+    LEFT OUTER JOIN sys.database_principals AS DP2  
+      ON DRM.member_principal_id = DP2.principal_id  
+    WHERE DP1.type = 'R'
+    ORDER BY DP1.name; 
+
 </pre>
 5.  Open an Administrator Powershell command window and navigate to the test app directory and open the document
   <pre>
@@ -355,7 +367,7 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
 2. Create view, and Stores procedure in the sample DB
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
-    SELECT FirstName, LastName, CONCAT(Address + ', ' + City)
+    SELECT FirstName, LastName, Address, City
     FROM Patient
 </pre>
 3. Create a stored procedure in the database:
@@ -374,26 +386,26 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
 </pre>
 4. Grant User1 full control on the table:
 <Pre>
-USE [SQLSecurityTest]
-GO
-GRANT CONTROL ON [dbo].[Patient] TO [A1\User1]
-GO
+    USE [SQLSecurityTest]
+    GO
+    GRANT CONTROL ON [dbo].[Patient] TO [A1\User1]
+    GO
 </pre>
 5. Grant rights to execute the stored procedure to the 'Stored_procdure_user_role' role.
 <Pre>
-USE [SQLSecurityTest]
-GO
-GRANT EXECUTE ON [dbo].[uspGetCardInformation] TO [Stored_procedure_user_role]
-GO
+    USE [SQLSecurityTest]
+    GO
+    GRANT EXECUTE ON [dbo].[uspGetCardInformation] TO [Stored_procedure_user_role]
+    GO
 </pre>
 6. Grant rights to use the view to the 'View_user_role' role.
 <Pre>
-USE [SQLSecurityTest]
-GO
-GRANT SELECT ON [dbo].[Patient_Mailing_Address] TO [View_user_role]
-GO
+    USE [SQLSecurityTest]
+    GO
+    GRANT SELECT ON [dbo].[Patient_Mailing_Address] TO [View_user_role]
+    GO
 </pre>
-7. Integrate pyhton APP
+7. Integrate python App
 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
