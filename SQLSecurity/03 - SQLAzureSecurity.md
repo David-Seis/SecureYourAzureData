@@ -34,7 +34,7 @@ You'll cover these topics in this module:
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Accessing Azure SQL DB</h2>
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.1 Accessing Azure SQL DB</h2>
 In SQL Server installations, you are able to control access to the network addresses and ports using any networking controls and configuration you like - or you can leave the default settings and your system is available on the entire network. In Microsoft Azure SQL DB however, two mechanisms are enforced at all times: <i>Encrypted Connections</i>, and <i>Firewalls</i>. 
 
 <h3> Azure SQL DB Encrypted Connections </h3>
@@ -62,7 +62,7 @@ In this Activity you will set the firewall rules to allow connections from your 
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">1.0 Principals</h2>
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.2 Principals</h2>
 You have two primary mechanisms for Principals in Azure SQL DB: <i>SQL Server logins</i>, and <i>Azure Active Directory</i> logins. 
  
 <h3>Authentication</h3>
@@ -80,14 +80,29 @@ You can also connect your local Active Directory to Microsoft Azure Active Direc
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and List Users</b></h4>
 <br>
-Fro this Activity, you will run the same scripts as in the previous module, with the exception of not creating the Windows local users. For this course, you will focus on using SQL Authentication, and you will be pointed to resources and demonstrations for using Azure Active Directory. 
+For this Activity, you will run the same scripts as in the previous module, with the exception of not creating the Windows local users. For this course, you will focus on using SQL Authentication, and you will be pointed to resources and demonstrations for using Azure Active Directory. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-Run the following code on your test SQL Azure DB:
+1. Run the following code on your test SQL Azure DB conencted ot the master database:
 <pre>
-      Thing
-</pre>
+    CREATE LOGIN [User1] 
+    WITH PASSWORD=N'Tes#20. Use12!'
+    GO
 
+    CREATE LOGIN [User2] 
+    WITH PASSWORD=N'Tes#20. Use22!'
+    GO
+</pre>
+2. Run the following connected to the test database:
+<pre>
+    CREATE USER [User1] 
+    FROM LOGIN [User1]
+    GO
+
+    CREATE USER [User2] 
+    FROM LOGIN [User2]
+    GO
+</pre>
 
 <h3>Roles in Microsoft Azure SQL DB</h3>
 Similar to SQL Server installations, you can group Principals into <i>Roles</i> in Azure SQL DB. In the case of Azure SQL DB, you do not have direct access to an <i>Instance</i> of SQL Server, but instead rely on a logical construct called a <i>Server</i>. There are several built-in Server Roles, which allow the most common set of permissions. It is a best practice to always put Principals (users) into Roles, and apply permissions at the Role level. This prevents "orphaned" users, and allows easier tracking for the permissions spread. 
@@ -102,17 +117,42 @@ You can learn more about <a href= "https://docs.microsoft.com/en-us/sql/relation
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Working with Server and Database Roles</b></h4>
 <br>
-Add users to builtin Server
-Add users to builtin Database
 Create Database Role
 Add User to DB Role
 List Roles and Members
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-Run the following code on your test SQL Azure DB: 
+1. Run the following code on your test SQL Azure DB: 
 <pre>
-      Thing
+    CREATE ROLE Elevated_permissions;
 </pre>
+2. Add User1 to the new role
+<pre>
+    ALTER ROLE [Elevated_permissions] ADD MEMBER [User1]
+    GO
+</pre>
+3. Query all users and role memberships:
+<pre>
+    --Server Principals
+    SELECT Name, type_desc, create_date FROM sys.database_principals
+    WHERE type = 'S' AND is_fixed_role = 0 AND authentication_type= 1 AND name NOT IN ('dbo')
+
+    --Database Principals
+    SELECT Name, type_desc, create_date FROM sys.database_principals 
+    WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
+    
+    --Find Role Memberships 
+    SELECT DP1.name AS DatabaseRoleName,   
+      isnull (DP2.name, 'No members') AS DatabaseUserName   
+    FROM sys.database_role_members AS DRM  
+    RIGHT OUTER JOIN sys.database_principals AS DP1  
+      ON DRM.role_principal_id = DP1.principal_id  
+    LEFT OUTER JOIN sys.database_principals AS DP2  
+      ON DRM.member_principal_id = DP2.principal_id  
+    WHERE DP1.type = 'R'
+    ORDER BY DP1.name; 
+</pre>
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 
@@ -122,7 +162,7 @@ Run the following code on your test SQL Azure DB:
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.0 Securables</h2>
+<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.3 Securables</h2>
 Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a <i>Schema</i> allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals.
 
 Securables fall into three categories, or <i>scopes</i>, for ease of use, the same as a SQL Server installation:
@@ -185,15 +225,89 @@ The primary commands for object access (Data Control Language, or DCL), just as 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Permissions to Azure SQL DB Objects</b></h4>
 <br>
 
-Thing
+TODO ADD DESCRIPTION
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-Thing
-
+1. Add the three objects from the previous module:
 <pre>
-  Thing
+    CREATE TABLE Patient (
+    LoginID tinyint
+    ,   LastName varchar(255)
+    ,   FirstName varchar(255)
+    ,   Address varchar(255)
+    ,   City varchar(255)
+    ,   SSN nvarchar(11)
+    ,   CardNumber nvarchar(19)
+    );
+
+    INSERT INTO Patient (loginid, lastname, firstname, address, city, ssn, cardnumber)
+    VALUES	
+        (1,'Arbiter', 'Agatha', '111 Apple Ave.', 'Atlanta', '111-11-1111', '1111-1111-1111-1111')
+        , (2, 'Bob', 'Billy', '222 Bayshore Blvd.', 'Boice', '222-22-2222', '2222-2222-2222-2222')
+        , (3, 'Choice', 'Charley', '333 Castaway Ct.', 'Chesterfield', '333-33-3333', '3333-3333-3333-3333')
+        , (4, 'Dangerfield', 'David', '4444 Denvue Drive', 'Denver', '444-44-4444', '4444-4444-4444-4444')
+        , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
 </pre> 
+<pre>
+    CREATE VIEW Patient_Mailing_Address AS
+    SELECT FirstName, LastName, Address, City
+    FROM Patient
+</pre>
+<pre>
+    CREATE PROCEDURE uspGetCardInformation   
+        @Loginid tinyint  
+    AS   
+
+        SET NOCOUNT ON;  
+        SELECT Loginid, cardnumber  
+        FROM Patient  
+        WHERE loginId= @loginId   
+    GO  
+</pre>
+
+2. Connect with User1 or User2 to see what current permissions allow:
+<pre>
+    Select LoginId FROM Patient WHERE Loginid = 1
+    GO
+
+    EXEC uspGetCardInformation @Loginid = 2
+    GO
+
+    SELECT * FROM Patient_Mailing_Address
+    GO
+</pre>
+3. SQitch to admin and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
+<pre>
+    GRANT CONTROL ON Patient TO Elevated_Permissions
+    GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions
+    GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions
+</pre>
+4. Run again on user1:
+<pre>
+    Select LoginId FROM Patient WHERE Loginid = 1
+    GO
+
+    EXEC uspGetCardInformation @Loginid = 2
+    GO
+
+    SELECT * FROM Patient_Mailing_Address
+    GO
+</pre>
+5. Using admin, Revoke SELECT for User1 on the Patient_Mailing_Address view:
+<pre>
+    REVOKE SELECT ON Patient_Mailing_Address TO User1
+</pre>
+6. Return to User1's conenction, run the query again:
+<pre>
+    SELECT * FROM Patient_Mailing_Address
+    GO
+</pre>
+7. As you can see, GRANT supercedes REVOKE, how about DENY? Return to admin and DENY SELECT on the view:
+<pre>
+DENY SELECT ON Patient_Mailing_Address TO User1
+</pre>
+8. Finally, rerun the same query with User1
 
 
 Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
@@ -219,7 +333,7 @@ Thing
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.0 Applications</h2>
+<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.4 Applications</h2>
 <br>
 Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.
 
@@ -285,7 +399,7 @@ In this Activity you will review an example of setting up and working with SQL L
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">4.0 Encryption, Certificates, and Keys</h2>
+<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.5 Encryption, Certificates, and Keys</h2>
 <br>
 
 Microsoft Azure SQL DB supports encryption of data in multiple places: in-transit, at-rest, in-database and more.
@@ -319,7 +433,7 @@ In this Activity you will implement Always Encrypted on your sample course datab
 [//]: <> (================================= ========= =========================================================)
 [//]: <> (================================= ========= =========================================================)
 
-<h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">5.0 Auditing</h2>
+<h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.6 Auditing</h2>
 <br>
 Microsoft Azure SQL DB has an auditing capability similar to a SQL Server installation on-premises, but since you do not have access to the storage where the service is running, you send the output of the audits to an Azure storage account, a Log Analytics workspace, or to Azure Event Hubs. Each of these targets provides different interfaces and features, but they store the same information. 
 <p></p>

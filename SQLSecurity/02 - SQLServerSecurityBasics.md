@@ -149,7 +149,7 @@ Having one user account for a group of individuals to use. This can limit the au
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1.1 Roles</h2>
 <br>
-<TODO: compelte intro> Server and databases roels are key in managing the everyday security of your SQL server. 
+<TODO: compelte intro> Server and databases roles are key in managing the everyday security of your SQL server. 
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and assign roles.</b></h4>
 <br>
@@ -161,7 +161,7 @@ Having one user account for a group of individuals to use. This can limit the au
     USE master;
     CREATE SERVER ROLE SQLSecurityTest_Table_Owner;
 
-    -- Create a database roel that will eventually have rights to execute a stored procedure in the database
+    -- Create a database role that will eventually have rights to execute a stored procedure in the database
     USE [SQLSecurityTest];
     CREATE ROLE Stored_procedure_user_role;
 
@@ -211,13 +211,25 @@ Having one user account for a group of individuals to use. This can limit the au
     SELECT * FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
 </pre>
-4. Run this script to list all users by whether they are SQL or Windows users, excluding any built-in users.
+4. Run this script to list all users by whether they are SQL or Windows users, excluding any built-in users, and identify what rolees they are in.
 <pre>
     -- Windows Logins
       SELECT * FROM sys.server_principals WHERE type IN ('U','G', 'E', 'X') AND name NOT LIKE '%NT%'
 
     -- SQL Logins 
       SELECT * FROM sys.server_principals WHERE type = 'S' AND name NOT LIKE '%#%' AND name NOT LIKE 'sa'
+
+    --Find Role Memberships 
+    SELECT DP1.name AS DatabaseRoleName,   
+      isnull (DP2.name, 'No members') AS DatabaseUserName   
+    FROM sys.database_role_members AS DRM  
+    RIGHT OUTER JOIN sys.database_principals AS DP1  
+      ON DRM.role_principal_id = DP1.principal_id  
+    LEFT OUTER JOIN sys.database_principals AS DP2  
+      ON DRM.member_principal_id = DP2.principal_id  
+    WHERE DP1.type = 'R'
+    ORDER BY DP1.name; 
+
 </pre>
 5.  Open an Administrator Powershell command window and navigate to the test app directory and open the document
   <pre>
@@ -355,10 +367,10 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
 2. Create view, and Stores procedure in the sample DB
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
-    SELECT FirstName, LastName, CONCAT(Address + ', ' + City)
+    SELECT FirstName, LastName, Address, City
     FROM Patient
 </pre>
-3. Create a stored procedure
+3. Create a stored procedure in the database:
 <pre>
     USE SQLSecurityTest;  
     GO  
@@ -372,18 +384,28 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
         WHERE loginId= @loginId   
     GO  
 </pre>
-2. TOD0: gran user1 all rights to table
+4. Grant User1 full control on the table:
 <Pre>
+    USE [SQLSecurityTest]
+    GO
+    GRANT CONTROL ON [dbo].[Patient] TO [A1\User1]
+    GO
 </pre>
-3. TODO: Grant 1st DB role rights to the SP
+5. Grant rights to execute the stored procedure to the 'Stored_procdure_user_role' role.
 <Pre>
+    USE [SQLSecurityTest]
+    GO
+    GRANT EXECUTE ON [dbo].[uspGetCardInformation] TO [Stored_procedure_user_role]
+    GO
 </pre>
-4. TODO: grant 2nd db roel rights to view
+6. Grant rights to use the view to the 'View_user_role' role.
 <Pre>
+    USE [SQLSecurityTest]
+    GO
+    GRANT SELECT ON [dbo].[Patient_Mailing_Address] TO [View_user_role]
+    GO
 </pre>
-5. TODO: Learn to integrate the python app
-    5.1 use the python app individual user connection strings to select fromt he table, view, and execute Sp
-
+7. Integrate python App
 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -404,55 +426,68 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Make sure the testign database and tabel are present from previous activities in this module.
-
-2. Run this Query for a client to see their account information as a general user
+1. Run this Query for a client to see their account information as a general user
 <pre>
     SELECT * 
     FROM Patient 
-    WHERE loginid = '1' -- user input = '1'
+    WHERE loginid = '1' 
+    -- user input = 1
 </pre>
-3. Run the same query with an injection string
+2. Run the same query with an injection string
 <pre>
     SELECT * 
     FROM Patient
-    WHERE loginid = '' or 1=1 --'  -- user input = ' or 1=1 --
+    WHERE loginid = '' or 1=1 --'  
+    -- user input = ' or 1=1 --  
 </pre>
-4.  Parameterize the query and run it again
+3.  Run the query below showing how parameterizing the query helps prevent injection strings allowed by an application from negatively affecting SQL server:
 <pre>
     DECLARE @Loginid tinyint
-    SET @Loginid = '' or 1=1-- --user input
 
+    SET @Loginid = '' or 1=1-- '
+    --user input = ' or 1=1-- 
     SELECT * 
     FROM Patient
     WHERE loginid = @Loginid --parameterized input
 
     
-    SET @Loginid = ‘3’ -- --user input
+    SET @Loginid = 3 
+    --user input = 3
     SELECT * 
     FROM Patient
     WHERE loginid = @Loginid --parameterized input
 
 </pre>
-5.  Notice the error information, add handling
+4.  Notice that an error could be returned to a malicious actor which they could use to learn mroe about your environment. Adding error handling helps prevent verbose errors from giving more information for an attacker to use.
 <pre>
     DECLARE @Loginid tinyint
       BEGIN TRY
-        SET @Loginid = ''' or 1=1--' --user input
+        SET @Loginid = '' or 1=1--' 
+        --user input = ' or 1=1--
+            SELECT * 
+            FROM Patient
+            WHERE loginid = @Loginid --parameterized input
       END TRY
       BEGIN CATCH
         Print 'Please use only your user ID'
       END CATCH
 
-    SELECT * 
-    FROM Patient
-    WHERE loginid = @Loginid --parameterized input
+    DECLARE @Loginid tinyint
+      BEGIN TRY
+        SET @Loginid = '3'
+        --user input = 3
+            SELECT * 
+            FROM Patient
+            WHERE loginid = @Loginid --parameterized input
+      END TRY
+      BEGIN CATCH
+        Print 'Please use only your user ID'
+      END CATCH
+
 </pre>
-6. TODO see if python app can be used here.
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
-
 
 
 [//]: <> (================================= Section 4 )
@@ -472,7 +507,8 @@ Encryption, certificates, and keys are tools for securing the physical layer of 
 Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Create & Backup master key
+
+1. Create & Backup master key (first create the C:\EncryptedDrive folder, you will also need to grant permissions to SQL)
 <pre>
     CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
@@ -480,26 +516,29 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     OPEN MASTER KEY DECRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
     BACKUP MASTER KEY TO FILE = 'C:\EncryptedDrive\masterkey.mk' 
-        ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
+        ENCRYPTION BY PASSWORD = 'S@vior Of.The Un1v3r$3!';
     GO
-
 </pre>
 2.  Create, Verify, and Backup a certificate - you will need to adjust the backup location of the certificate for your system.
 <pre>
     CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
     GO
 
+    BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\TDE_Cert.cer'
+        WITH PRIVATE KEY (
+            FILE = 'C:\EncryptedDrive\TDE_Cert.pvk',
+            ENCRYPTION BY PASSWORD = 'I$ @.Mirac1e!');
+    GO
+</pre>
+3. Verify the creation/presence of the TDE_Cert and the Database Master key.
+<pre>
     SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
     GO
 
-    BACKUP CERTIFICATE TDE_Cert TO FILE = 'C:\EncryptedDrive\rev.cer'
-      WITH PRIVATE KEY (
-            FILE = 'C:\EncryptedDrive\TDE.pvk',
-            ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!');
-    GO
+    Select name, algorithm_desc, create_date from sys.symmetric_keys
 </pre>
 
-3.  Encrypt our test Database
+4.  Encrypt our test Database
 <pre>
     USE SQLSecurityTest
     GO
@@ -550,10 +589,75 @@ In this Activity you will set up a server and database audit on your test system
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Connect to your test instance, and ensure the test database from previous activities is present.
-2. [Open this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/create-a-server-audit-and-database-audit-specification?view=sql-server-ver16), and complete a Server and database audit using the graphical user interface as well as with T-SQL. rememebr to target the database audit at the test database from previous activities.
-3. Perform actions that are included in the audit (select or insert)
-4. Read the aduit log events, using [this resource](https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16) to find them if needed.
+1. Step 1: Create a SQL Server Audit for the Patient table data
+<pre>
+    USE [master]
+    GO
+
+    CREATE SERVER AUDIT [Patient_Data_Audit]
+    TO FILE 
+    (	FILEPATH = N'C:\EncryptedDrive'
+      ,MAXSIZE = 1024 MB
+      ,MAX_ROLLOVER_FILES = 10
+      ,RESERVE_DISK_SPACE = OFF
+    ) WITH (QUEUE_DELAY = 1000, ON_FAILURE = CONTINUE)
+
+    GO
+
+    ALTER SERVER AUDIT [Patient_Data_Audit]  
+    WITH (STATE = ON) ;  
+    GO  
+</pre>
+
+2. Add an Audit Specification that catches actions on the table
+<pre>
+    USE [SQLSecurityTest]
+    CREATE DATABASE AUDIT SPECIFICATION Audit_Data_Select_On_Patient_Table
+    FOR SERVER AUDIT [Patient_Data_Audit]
+    ADD ( SELECT, INSERT, UPDATE, DELETE  
+        ON SQLSecurityTest.dbo.Patient BY Public )  
+    WITH (STATE = ON) ;    
+    GO  
+</pre>
+
+3. Perform actions that are included in the audit actions: (python examples in the notebook)
+<pre>
+    USE [SQLSecurityTest]
+    INSERT INTO Patient (LoginID,FirstName,LastName,Address,City,SSN,CardNumber)
+    VALUES ('6','Fred','Fernandez', '66 Freedom Fwy.', 'Fremont', '666-66-6666', '6666-6666-6666-6666')
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    WHERE LoginID > 3
+    GO
+
+    USE [SQLSecurityTest]
+    UPDATE Patient
+    SET City = 'Fresno' 
+    WHERE City = 'Fremont'
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    WHERE LoginID > 3
+    GO
+
+    USE [SQLSecurityTest]
+    DELETE FROM Patient
+    WHERE FirstName = 'Fred'
+    GO
+
+    USE [SQLSecurityTest]
+    SELECT * FROM Patient
+    GO
+</pre>
+4. Read the aduit log events:
+<pre>
+    SELECT event_time, server_instance_name, server_principal_name, database_name, object_name, [statement] FROM sys.fn_get_audit_file ('C:\EncryptedDrive\Pa*',default,default);  
+    GO  
+</pre>
+
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
