@@ -229,7 +229,6 @@ Having one user account for a group of individuals to use. This can limit the au
       ON DRM.member_principal_id = DP2.principal_id  
     WHERE DP1.type = 'R'
     ORDER BY DP1.name; 
-
 </pre>
 5.  Open an Administrator Powershell command window and navigate to the test app directory and open the document
   <pre>
@@ -538,7 +537,7 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     Select name, algorithm_desc, create_date from sys.symmetric_keys
 </pre>
 
-4.  Encrypt our test Database
+4.  Encrypt the test Database. The time of this process is dependent on the size of the database being encrypted and should be done in a low-use time period when possible.
 <pre>
     USE SQLSecurityTest
     GO
@@ -552,7 +551,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     /* Encrypt database */
     ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
     GO
-
+</pre>
+5. Verify encryption
+<pre>
     /* Verify Encryption */
     SELECT 
       DB_NAME(database_id) AS DatabaseName
