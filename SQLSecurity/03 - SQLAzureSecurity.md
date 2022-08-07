@@ -334,7 +334,8 @@ Thing
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.4 Applications</h2>
-<br>
+<p>This section repeats much of the same information as an installed Instance of SQL Server, so you can review the text below, running any sample scripts that ommitted in the previous Module.</p>
+
 Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.
 
 <h3>Client Libraries and TLS</h3>
