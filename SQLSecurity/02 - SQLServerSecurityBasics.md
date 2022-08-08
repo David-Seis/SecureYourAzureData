@@ -571,20 +571,35 @@ Notice that an error could be returned to a malicious actor which they could use
 [//]: <> (================================= Section 5 )
 
 <h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.5 Encryption, Certificates, and Keys</h2>
-<br>
+<p>
+Microsoft SQL Server supports encryption of data in multiple ways: in-transit, at-rest, in-database and more.
 
-Encryption, certificates, and keys are tools for securing the physical layer of SQL server. <todo: add more words>
+For data-in-transit, Transport Layer Security (TLS) can be enforced for connections to the server over secure protocols. The previous section covered setting up this level of encryption on your SQL Server Instance.
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling TDE on a database</b></p>
+For data encryption, two mechanisms are available. For data-at-rest, you can implement the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver16">SQL Server Transparent Data Encryption (TDE) feature</a>. With no code or database changes, your database is encrypted on storage. You will turn on TDE for your sample Workshop database in an Activity that follows.
 
+For data encryption, it's important to understand how SQL Server uses Keys to encrypt data. On creation, Each Instance creates a Service Master Key (SMK), which is used to create a Database Master Key (DMK). These Keys are protected by either a Certificate, an Asymmetric Key (such as a password) or a Symmetric Key to lock and unlock the Key. An Extensible Key Management (EKM) module can also be used, holding symmetric or asymmetric keys outside of SQL Server. you can see <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/encryption-hierarchy?view=sql-server-ver16">a visual representation of this encryption hierarchy at this reference</a>.
+
+You can also encrypt sections of your data as you insert it using T-SQL functions, such as <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/encryptbypassphrase-transact-sql?view=azuresqldb-current">ENCRYPTBYPASSPHRASE</a> and <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/decryptbypassphrase-transact-sql?view=azuresqldb-current">DECRYPTBYPASSPHRASE</a> calls.
+
+Another method of setting up encryption for your database is using the Always Encrypted feature. Always Encrypted allows applications to encrypt sensitive data wihtout revealing the encryption keys to the Database Engine. This is transparent to the application, so you don't need to write special code to take advantage of this feature. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-database-engine?view=sql-server-ver16">You can learn more about how Always Encrypted works at this reference</a>, and in the next Module you will set up this feature as an Activity.
+</p>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling Transparent Data Encryption</b></p>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
 
-Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
+This activity walks you through setting up Keys, Certificates, and transparent encryption of a database on your Workshop environment. 
+
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
 
-1. Create & Backup master key (first create the C:\EncryptedDrive folder, you will also need to grant permissions to SQL)
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create and backup the Master key</p> 
+
+In the Operating System, create a "C:\EncryptedDrive" folder. 
+
+Grant OS permissions to that folder to the account running the SQL Server Engine Service. 
+
 <pre>
     CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
@@ -595,7 +610,11 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
         ENCRYPTION BY PASSWORD = 'S@vior Of.The Un1v3r$3!';
     GO
 </pre>
-2.  Create, Verify, and Backup a certificate - you will need to adjust the backup location of the certificate for your system.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create, Verify, and Backup a Certificate</p>
+
+(Adjust the backup location in the code below of the certificate for your system)
+
 <pre>
     CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
     GO
@@ -606,7 +625,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
             ENCRYPTION BY PASSWORD = 'I$ @.Mirac1e!');
     GO
 </pre>
-3. Verify the creation/presence of the TDE_Cert and the Database Master key.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Verify the creation/presence of the TDE_Cert and the Database Master key</p>
+
 <pre>
     SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
     GO
@@ -614,7 +635,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     Select name, algorithm_desc, create_date from sys.symmetric_keys
 </pre>
 
-4.  Encrypt the test Database. The time of this process is dependent on the size of the database being encrypted and should be done in a low-use time period when possible.
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Encrypt the <i>test</i> Database</p>
+The time of this process is dependent on the size of the database being encrypted and should be done in a low-use time period whenever possible.
+
 <pre>
     USE SQLSecurityTest
     GO
@@ -629,7 +652,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
     GO
 </pre>
-5. Verify encryption
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Verify encryption</p>
+
 <pre>
     /* Verify Encryption */
     SELECT 
@@ -647,27 +672,35 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     GO
 </pre>
 
-
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
 
 [//]: <> (================================= Section 6 )
 
-
-
 <h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.6 Auditing</h2>
-<br>
+<p>
+Microsoft SQL Server has a strong Auditing capability. You can enable a Server audit, a Database audit, or both. In general, you should choose one or another, but not both. Enabling a Server audit uses <a href="https://docs.microsoft.com/en-us/sql/relational-databases/extended-events/sql-server-extended-events-engine?view=sql-server-ver16">SQL Server's Extended Events</a> to audit all the databases on that server, and any new ones you create, and sends it to a single target. Enabling a Database audit allows you to send each audit collection to a different target, such as a file, or one of the Windows Event Logs, once again using Extended Events.
 
-TODO: Topic Descriptions
+An Audit on SQL Server involves multiple components:
+
+<ol>
+  <li>SQL Server Audit - The definition of a group of Server and Database actions that you want to monitor</li>
+  <li>Server Audit Specification - Server-scoped actions you want to collect. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions?view=sql-server-ver16">The complete list is here</a>.</li>
+  <li>Database Audit Specification - Database-scoped actions you want to collect. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions?view=sql-server-ver16">The complete list is here</a>.</li>
+  <li>Target - A file, the Windows Security Event Log, or the Windows Application Event Log that stores the result of your Audit. Note that the Windows Event Log is less secure than the Security Event Log.</li>
+</ol>
+
+Once you create these elements, you can start the Audit collection, which sends the data to the specified Target.
+
+</p>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create a Server Audit</b></p>
 
-In this Activity you will set up a server and database audit on your test system. You will then perform an action that would be included in the audit scope, and then you will read the audit log afterwards.
+In this Activity you will set up a server and database audit on your test system. You will then perform an action that is included in the audit scope, and then review the Audit Log Target.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Step 1: Create a SQL Server Audit for the Patient table data
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a SQL Server Audit for the <i>Patient</i> Table data</p>
+
 <pre>
     USE [master]
     GO
@@ -687,7 +720,8 @@ In this Activity you will set up a server and database audit on your test system
     GO  
 </pre>
 
-2. Add an Audit Specification that catches actions on the table
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Add an Audit Specification that tracks actions on the Table</p>
+
 <pre>
     USE [SQLSecurityTest]
     CREATE DATABASE AUDIT SPECIFICATION Audit_Data_Select_On_Patient_Table
@@ -698,7 +732,8 @@ In this Activity you will set up a server and database audit on your test system
     GO  
 </pre>
 
-3. Perform actions that are included in the audit actions: (python examples in the notebook)
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Perform actions that are included in the Audit Specification</p>
+
 <pre>
     USE [SQLSecurityTest]
     INSERT INTO Patient (LoginID,FirstName,LastName,Address,City,SSN,CardNumber)
@@ -730,15 +765,15 @@ In this Activity you will set up a server and database audit on your test system
     SELECT * FROM Patient
     GO
 </pre>
-4. Read the aduit log events:
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Review the Audit Log</p>
+
 <pre>
     SELECT event_time, server_instance_name, server_principal_name, database_name, object_name, [statement] FROM sys.fn_get_audit_file ('C:\EncryptedDrive\Pa*',default,default);  
     GO  
 </pre>
 
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
 
 [//]: <> (================================= Closing )
 )
@@ -747,9 +782,10 @@ In this Activity you will set up a server and database audit on your test system
     <TODO: add sql permission poster and builtin roles links>
     <li><a href="https://github.com/sqlstudent144/SQL-Server-Scripts/blob/master/sp_SrvPermissions.sql" target="_blank">An example stored procedure to fetch Server permissions</a></li>
     <li><a href="https://github.com/sqlstudent144/SQL-Server-Scripts/blob/master/sp_DBPermissions.sql" target="_blank">An example stored procedure to fetch Database permissions</a></li>
-</ul
->
+</ul>
+
 <br>
+
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
 Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank"><i> 03 - Azure SQL DB Security</i></a>.
