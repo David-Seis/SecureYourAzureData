@@ -14,6 +14,8 @@ The focus of this workshop is to enable the Data Professional to secure and prot
 
 You'll start by creating a workshop enviroment using your own laptop or Virtual machine, then work through a module covering general security principals and where the data estates security measures and controls fit within that environment at your organization. From there, you will work through a hands-on module covering the security basics of on-premises and Virtual-Machine based installations of SQL Server. The next module covers the similarities and differences between an installation of SQL Server and the Azure SQL Database Environment. The final module covers monitoring your data environment and creating an Incident Response Plan for your organization, all with a focus on how to extrapolate what you have learned to create other solutions for your organization.
 
+> This course does not currently focus on securing a Linux, Docker Container, or Kubernetes installation of SQL Server, although most all of the concepts in this workshop are useful to securely operate Microsoft SQL Server on those platforms.
+
 This [github README.MD file](https://lab.github.com/githubtraining/introduction-to-github) explains how the workshop is laid out, what you will learn, and the technologies you will use in this solution. To download this Lab to your local computer, click the **Clone or Download** button you see at the top right side of this page. [More about that process is here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository). 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>

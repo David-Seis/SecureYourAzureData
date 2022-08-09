@@ -14,76 +14,64 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
-This module builds on the previous module where you learned about securing and auditing the platform. This module focuses on the data professional's responsibilities in regard to the operation of the applications, and introduces the basics of SQL Server security controls, from the login access to the row-level and other security mechanisms they can use. 
+This module builds on the previous module where you learned about securing and auditing the platform. This module focuses on the data professional's responsibilities in regard to the operation of the applications, and introduces the basics of SQL Server security controls, from the login access to the row-level and other security mechanisms they can use.
 
 You'll cover these topics in this module:
 <ul>
-  <li><a href="#01" target="_blank">01 - Principals</li></a>
-  <li><a href="#02" target="_blank">02 - Securables</li></a>
-  <li><a href="#03" target="_blank">03 - Applications</li></a>
-  <li><a href="#04" target="_blank">04 - Encryption, Certificates, and Keys</li></a>
-  <Li><a href="#04" target="_blank">05 - Auditing</li></a>
+  <li><a href="#01" target="_blank">01 - Accessing a SQL Server Instance</li></a>
+  <li><a href="#02" target="_blank">02 - Principals</li></a>
+  <li><a href="#03" target="_blank">03 - Securables</li></a>
+  <li><a href="#04" target="_blank">04 - Applications</li></a>
+  <li><a href="#05" target="_blank">05 - Encryption, Certificates, and Keys</li></a>
+  <Li><a href="#06" target="_blank">06 - Auditing</li></a>
 </ul>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
+[//]: <a> (================================= Section 1 )
 
-[//]: <> (================================= Section 1 )
+<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1 Accessing a SQL Server Instance</h2>
+<p>Each SQL Server installation on a physical or virtual server computer is called an <i>Instance</i>. You are able to control access to the network protocol, addresses and ports for each Instance you install using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-configuration-manager?view=sql-server-ver16">SQL Server Configuration Manager</a>.  You should always use this tool to set up the network access to your system as it does more than just change the basic settings available within other system tools - it is designed to ensure the safest and most secure changes needed for each setting.</p>
 
+> The SQL Server Configuration Management tool also allows you to set the Service Account used by the Microsoft Windows operating system. Review <a href="https://docs.microsoft.com/en-us/sql/relational-databases/sql-server-configuration-manager?view=sql-server-ver16#changing-the-accounts-used-by-the-services">this article</a> to ensure you set up that account with the lowest privileges possible.
 
-<h2 id="01"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1 Principals</h2>
-<br>
-Access to SQL is managed through principals, or logins.  Each principal will have a way for the user to 'log in' considering passwordless, which then enables the user of the account to Access SQL Server at the most basic level, and then we get to the authorization side. Authorization is What you can do once you are connected.
+You should only enable the protocols you know will be in use by your clients. Any other protocols should be disabled to deny an attack vector into your system. You should also consider changing the default ports used by the SQL Server Services to further obfuscate your system from automated port scans.
 
-Authentication
-<br>
+<h3>Encrypting Connections</h3>
+<p>SQL Server installations allow for Encrypted Connections to the Instance. If you enable this setting, encrypted connections are always enforced from the client, using Transport Layer Security. The Microsoft SQL Server service on the system will listen for TLS requests, so your applications (including management tools like SQL Server Management Studio or Azure Data Studio) are required to connect with Encryption set.
+</p>
+The system running the Microsoft SQL Server Instance must have a certificate provisioned to use TLS. To provision a  certificate on the server computer, you first import it into Windows. In addition, the client machine must be set up to trust that certificate's root authority. You can read more about setting up connection encryption by <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/enable-encrypted-connections-to-the-database-engine?view=sql-server-ver16#single-server">reviewing this checklist</a>.
 
-SQL has two modes of authentication: 1 SQL Authentication where the account is managed and stored inside of SQL, or 2 managed externally through Windows which includes Active Directory, Azure AD and Linux AD Integration. 
+<h3>Firewalls and the SQL Server Instance</h3>
+<p>Before a client or application can connect to a SQL Server Instance to begin the Authentication process, you can configure a network firewall with a rule allowing that address to connect. In general, the SQL Server Instance is unaware of the Firewall configuration, but you should check that you have a Firewall enabled, and that it allows SQL Server traffic to and from the addresses you want your clients to use.</p>
 
+There are two primary Firewall choices typically provisioned for a SQL Server Instance: <a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security">Microsoft Azure Defender</a> or the <a href="https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/hh831365(v=ws.11)">Windows Firewall with Advanced Security</a>.
 
-1 SQL Authentication
+You can learn more about <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-ver16">configuring these Firewall rules by reviewing this activity</a>.
 
-The Master database stores all security principals except in the case of a contained database. For all principals stored in the master database, the username and permissions are tracked and managed.
+<p style="border-bottom: 1px solid lightgrey;"></p>
 
-Contained Databases are those where the authentication and authroization are stored inside, without ever using the master database.  <TODO: Research and fill out connection and use cases.>
+[//]: <h3> (================================= Section 2 )
 
-One key difference between these two kinds of authentication is that SQL stores the password for any non-Windows managed principals. Because passwords are stored in SQL, it is up to the DBA to ensure that a password and account policy is created and applied to each user.
+<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.2 Principals</h2>
+<p>
+Access to SQL is managed through <i></i>Principals</i>. Principals are users, accounts, or services that can perform some action against one or more objects, the most basic of which is the Instance itself. Principals are created with <i>Data Control Language</i> (DCL) statements.
 
+When a Principal is created, an entry into two sets of tables is made. The first is in the <i>master</i> system database on the Instance, controlling the login account to the server. A corresponding entry to a system table in one or more user databases is made that has a key dependency on the account created in the <i>master database</i>. If you think of a large building with many offices, the login account would be similar to a key to the building, and the database user account would be similar to having another key that gets you into a particular office. In this way, you need only one key to the building, but a separate key to each office you need access to.  
+</p>
 
-[//]: <> (2 Windows Authentication AD, AAD, Linux AD integration)</h4>
+> <i>Contained Database Users</i> operate differently than this model requiring only a user account in a database, without a server Login account. You can <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=sql-server-ver16">read more about that process here</a>.
 
-It is typically easier and safer to manage accounts via Active Directory. There are some organizations that do not work in a domain, and there are some who use applications that require a certain API to reach SQL. Otherwise, if you have a domain and your app can easily reach SQL, active directory is the safer, and typically easier to manage choice.
-The ease comes in reducing the number of accounts needed to access the server wihtout AD integration a user needs one account to log into their computer, and then another to access SQL Server, simplifying account lifecycles and policy enforcment, and the ease of using groups to manage access and permissions.
+<h3>Authentication</h3>
+<p>SQL has two modes of authentication for user accounts: <i>SQL Server Authentication</i>, where the account is managed and stored by a SQL Server Instance, or <i>Mixed-Mode Authentication</i> which additionally allows a link to an externally managed account. This includes Windows Authentication or Active Directory Atuhentication. Normally this access is set during installation of the Instance, but it can be changed later. <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/change-server-authentication-mode?view=sql-server-ver16">The process to do that is described here</a>.
 
-A login for a windows group can be created, and later when we get into authorization, permissions and roles can be granted to the group rather than the individual, which makes provisioning accounts and access a more streamlined process.
+A key difference between these two type of authentication is that in SQL Server authentication, since the Instance stores the password for any non-Windows managed principals, it is up to the Database Administrator to ensure that a password and account policy is created and applied to each user. This also means that the Database Administrator will need to coordinate security policy settings to ensure consistent security policies. SQL Server Authentication provides for a limited set of security policies - <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/password-policy?view=sql-server-ver16">you can read more about those settings here</a>.
 
-With relatively little work, Azure can be synced with an on-prem Active directory which opens up a lot of possibilities. This is especially true because there is now the option to extend Active directory to Linux servers. Which enables the SQL installations there to make use of Windows authentication!
-<br>
+In Mixed-Mode Authentication, you can create internal SQL Server accounts, and you can also leverage Microsoft Windows accounts on the local system, or use Microsoft Active Directory accounts to add Principals. Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. You can <a href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview">learn more about Microsoft Active Directory here</a>.
 
-<br>
-
-<h3>Authorization</h3>
-
-Once you are logged into a SQL server Authorization is the next contender. If you were to log in to a SQL server where you had been given an account and no server roles, what would you see?
-
-
-So the next step for each user or group is to look through the prebuilt server and database roles. Roles are a collection of permissions based on general use cases for a SQL Server user and there a general breakdown in the table below:
-
-<TODO: create table of Server roles, database roles.>
-
-If you want to create your own roles, you can dig into the permissions poster to have the exact levers pulled to get the access profile your organization needs. We recommend against changing server roles, but you can copy the permissions of a prebuilt role and modify from there you can get a custom role tailored to your specific needs.
 
 [Link to the SQL Docs article that has the permisisons poster for download](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16)
 
-Combining roles with Windows Authentication groups helps efficiently and quickly provision permisisons to large groups of people, and it makes for less work on the DBA. However, be aware that if you ar enot managing who is going into and out of roles it can become a security risk. Regular account, role, and group audits should be done in your organization. 
-
-
-
-<TODO Determine the placement and use of the topics below:> SQL Server controlled security accounts Active Directory Integration Azure Active Directory Certificates and other Authentication Methods Roles and Role-Based Access Control Kubernetes as a windows auth process.
-
-
-<h4>Principals "Worst" Practices</h4>
-Having one user account for a group of individuals to use. This can limit the auditing and tracking capabilites of SQL server, so if a malicious actor does something heinous under a shared account, it is less likely you will be able to find out who did it, more about this in <a href="#04" target="_blank">Auditing</a>.</li>
 <br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and list principals in an instance</b></h4>
@@ -91,20 +79,27 @@ Having one user account for a group of individuals to use. This can limit the au
  >Description<
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+<p>In the following Steps you will create the database and Principals you will use for this Workshop.Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
-1. Create the Test Database we will use for this module:
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create the Test Database we will use for this module</p>
+
 <pre>
     CREATE DATABASE SQLSecurityTest;
     GO
 </pre>
 
-2. Create a set of users on your Windows test environment in an elevated command prompt (linux will be different):
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a set of users on your Windows test environment</p>
+
+<p>This step will need to be run at the Operating System in an elevated Command Prompt.</p>
+
   <pre>
     net user User1 "Tes#20. Use12!" /add
     net user User2 "Tes#20. Use22!" /add
   </pre>
 
-3. Create a set of users in your SQL environment in a new query window, you will need to replace -Placeholder- with your device name. Remember, these are test users and are not designed to be secure.
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a set of users in your SQL environment in a new query window</p>
+<p>Now return to SQL Server Management Studio or Azure Data Studio and run the following commands. You will need to replace -Placeholder- with your device name. Remember, these are test users and are not designed to be secure.</p>
+
   <pre>
     USE [master]
     GO
@@ -147,15 +142,25 @@ Having one user account for a group of individuals to use. This can limit the au
     GO
   </pre>
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.1.1 Roles</h2>
-<br>
-<TODO: compelte intro> Server and databases roles are key in managing the everyday security of your SQL server. 
+<h3>Roles</h3>
+<p>In SQL Server installations, you can group Principals into <i>Roles</i>. Roles allow you to abstract the permission assisngments to a group (even if that group has only one account in it) not only for ease, but this prevents objects from being "orphaned" when a user is directly assigned ownership, but then leaves the organization. If you assign ownership and permissions to a Role, you can simply move another account into the Role when the other account is deactivated.
+
+In SQL Server you have two levels of Roles: one set at the Instance, and the other set at the Database level. There are several built-in Server and Database Roles, which allow the most common set of permissions. It is a best practice to always put Principals (users) into Roles, and apply permissions at the Role level. 
+
+Several Server and Database Roles are already created for you, and you can <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/server-level-roles?view=sql-server-ver16">see the included Server Roles and their permissions at this reference</a>. You can also make more Roles for specific purposes as you need. 
+
+You can <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/database-level-roles?view=sql-server-ver16">see the included Database Roles and their permissions, along with the instructions to create more Database Roles at this reference</a>.
+
+SQL Server also has Application Roles, which remove the need for user permissions. Using Application Roles, the user runs a client application, which connects to the database as that user. The application switches contexts to the Application Role, runs the commands on behalf of the user, and returns the result. You can <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/application-roles?view=sql-server-ver16">learn more about Application Roles and how to use them at this reference</a>.</p>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and assign roles.</b></h4>
-<br>
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+<p>In this set of Steps, you will create Roles on your system and assign Principals to them.</p>
 
-1. Create 1 server role and 2 database roles:
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+You will begin these steps by creating Server and Database Roles, and then you will assign users to them. Run this code in either SQL Server Management Studio or Azure Data Studio, against your test database createed earlier.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create 1 server role and 2 database roles</p>
+
 <pre>
     -- Create a server role that will eventually own a table in the database
     USE master;
@@ -170,38 +175,39 @@ Having one user account for a group of individuals to use. This can limit the au
     CREATE ROLE View_user_role;
 </pre>
 
-2. Assign users to roles:
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Assign users to roles</p>
+
 <pre>
     --Add user 1 to the Server role
-    ALTER SERVER ROLE [SQLSecurityTest_Table_Owner] ADD MEMBER [A1\User1]
+    ALTER SERVER ROLE [SQLSecurityTest_Table_Owner] ADD MEMBER [A1\User1];
     GO
 
 
     --Add user 2 and 3 to the stored procedure user role
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [A1\User2]
+    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [A1\User2];
     GO
 
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [User3]
+    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [User3];
     GO
-
 
     --Add user 1 and 4 to the View user role
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [View_user_role] ADD MEMBER [A1\User1]
+    ALTER ROLE [View_user_role] ADD MEMBER [A1\User1];
     GO
 
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [View_user_role] ADD MEMBER [User4]
+    ALTER ROLE [View_user_role] ADD MEMBER [User4];
     GO
 </pre>
 
-3. Run this script to identify all user created roles on the system:
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Identify all user created roles on the system</p>
+
 <pre>
     --Server Principals
     SELECT * FROM sys.server_principals
@@ -211,7 +217,9 @@ Having one user account for a group of individuals to use. This can limit the au
     SELECT * FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
 </pre>
-4. Run this script to list all users by whether they are SQL or Windows users, excluding any built-in users, and identify what rolees they are in.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">List all users by whether they are SQL or Windows users, excluding any built-in users, and identify what rolees they are in</p>
+
 <pre>
     -- Windows Logins
       SELECT * FROM sys.server_principals WHERE type IN ('U','G', 'E', 'X') AND name NOT LIKE '%NT%'
@@ -229,14 +237,18 @@ Having one user account for a group of individuals to use. This can limit the au
       ON DRM.member_principal_id = DP2.principal_id  
     WHERE DP1.type = 'R'
     ORDER BY DP1.name; 
-
 </pre>
-5.  Open an Administrator Powershell command window and navigate to the test app directory and open the document
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Edit and run the sample Python application</p>
+Open an Administrator Powershell command window and navigate to the test app directory and open the document:
+
   <pre>
     cd \SampleDBApp
     notepad SimpleConnection.py
   </pre>
-6. Add the contents below the previous entry:
+
+Now add the contents below the previous entry:
+
   <pre>
     # ---------------------------- #
     # Declare connection variables #
@@ -311,38 +323,39 @@ Having one user account for a group of individuals to use. This can limit the au
         row = cursor3.fetchone()
 
   </pre>
-7. Run the python app to see the connection results. 
+
+Finally, run the python app to see the connection results:
+
 <pre>
     python SimpleConnection.py
 </pre>
-> Note, windows users will only be able to connect via a trusted connection. Please run powershell as user1 and user2 to see their connection results.
+
+> Note, Windows users will only be able to connect via a trusted connection. Please run powershell as <i>user1</i> and <i>user2</i> to see their connection results.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 
+[//]: <a> (================================= Section 3 )
 
-[//]: <> (================================= Section 2 )
+<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.3 Securables</h2>
+<p>A <i>Securable</i> in SQL Server is a Database or Database object. Permissions and Rights can be assigned to the Securable through a series of Transact-SQL statements grouped as <i>Data Definition Language</i> (DDL) statements, most notably GRANT, REVOKE, DENY, and ALTER, among many others. A <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16">complete list of these permission is here</a>.</p>
 
+In general, GRANT allows access to an object, REVOKE removes access to the object from a Principal - but they retain access to the object if they have it GRANTed as part of a Role they are a member of. DENY, on the other hand, removes access to the object whether the Principal has access to a GRANTed Role or not.
 
-<h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.2 Securables</h2>
-<br>
-Securing your SQL Server is the goal of this course. Principals can be managed to limit who can access the server, Adding permissions to each user to determine WHAT they can do while they are logged in is key to a secure system. A **Securable** in SQL server is virtually everything. Knowing how to limit access to sensitive data and leveraging least privilege when assigning permissions is of the utmost importance when securing a SQL instance. The topic of securables is usually broken down into three categories, or scopes, for ease of use.
+Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general permissions hierarchy as well as reviewing the built in Server roles and Database roles is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary.
 
+Creating a full set of permissions that include all angles is a complex process. <a href="file:///C:/Users/bwoody/AppData/Local/Temp/MicrosoftEdgeDownloads/bb6a34d4-a4cc-42ab-8968-4c7a1096c893/Microsoft_SQL_Server_2017_and_Azure_SQL_Database_permissions_infographic.pdf">This PDF details the general Permissions available in SQL Server</a>. 
 
-Each securable includes a set of permissions relevant to scope and function. Permissions can be granted, denied, or revoked. Referencing the general permissions hierarchy as well as reviewing the built in Server roles and Database roles is good start to understanding what roles are necessary for most users. Considering least privilege each time you assign a role, and cross referencing permissions granted through each role is necessary. These images can help with that process, as well as the Permissions Poster produced by Microsoft.
-
-
-Most environments use the out of the box roles. Unfortunately many users have more permissions than they need because it is simpler to manage.
-<br>
+An important concept to be aware of is the idea of an <i>ownership chain</i>. If a Principal owns objects such as a Table, and then creates a Stored Procedure over that table, they need only GRANT access to the Stored Procedure to another Principal and they will be able to run the Stored Procedure. You can see <a href="https://docs.microsoft.com/en-us/sql/relational-databases/tutorial-ownership-chains-and-context-switching?view=sql-server-ver16">an explanation and example of this process at this reference</a>.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Test access through roles</b></h4>
-
-Knowing **WHO** is in your environment and **WHAT** they can do is an important step in strengthening your security posture.
+<p>Perhaps the best method to learn about applying Permissions to Securables for Principals is to run example code. Once you have run these code snippets as they are, and then you can alter them to see different behavior. Experimentation is one of the best processes to learn how Permissions work.</p>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
+Run the following Steps in SQL Server Management Studio or Azure Data Studio, on the test database for this Workshop.
 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Add a table to the Sample 'SQLSecurityTest' database</p>
 
-1.  Add this table to the Sample 'SQLSecurityTest' database we created earlier
 <pre>
     USE [SQLSecurityTest]
     GO
@@ -364,14 +377,15 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
       , (4, 'Dangerfield', 'David', '4444 Denvue Drive', 'Denver', '444-44-4444', '4444-4444-4444-4444')
       , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
 </pre>
-2. Create view, and Stores procedure in the sample DB
+
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create Views and Stored Procedures</p>
+
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
     SELECT FirstName, LastName, Address, City
     FROM Patient
-</pre>
-3. Create a stored procedure in the database:
-<pre>
+
     USE SQLSecurityTest;  
     GO  
     CREATE PROCEDURE uspGetCardInformation   
@@ -384,63 +398,125 @@ Knowing **WHO** is in your environment and **WHAT** they can do is an important 
         WHERE loginId= @loginId   
     GO  
 </pre>
-4. Grant User1 full control on the table:
-<Pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Grant the <i>user1</i> Principal full control on the table</p>
+
+<pre>
     USE [SQLSecurityTest]
     GO
     GRANT CONTROL ON [dbo].[Patient] TO [A1\User1]
     GO
 </pre>
-5. Grant rights to execute the stored procedure to the 'Stored_procdure_user_role' role.
-<Pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Grant rights to execute the stored procedure to the 'Stored_procdure_user_role' role</p>
+
+<pre>
     USE [SQLSecurityTest]
     GO
     GRANT EXECUTE ON [dbo].[uspGetCardInformation] TO [Stored_procedure_user_role]
     GO
 </pre>
-6. Grant rights to use the view to the 'View_user_role' role.
-<Pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Grant rights to use the view to the 'View_user_role' role</p>
+
+<pre>
     USE [SQLSecurityTest]
     GO
     GRANT SELECT ON [dbo].[Patient_Mailing_Address] TO [View_user_role]
     GO
 </pre>
-7. Integrate python App
 
+You now have a series of Securables and Principals, and you can experiment with SELECT and EXECUTE statements in T-SQL and from the Python Application to see the effects.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
+[//]: <a> (================================= Section 4 )
 
-[//]: <> (================================= Section 3 )
+<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.4 Applications</h2>
+<p>Securing your SQL Server Instance and Database Objects includes ensuring the applications that connect to them are also working with the highest level of security. 
 
+Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.</p>
 
-<h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.3 Applications</h2>
-<br>
+<h3>Client Libraries and TLS</h3>
+In SQL Server Instances you can require TLS connection encryption.  There are, however, various version of TLS, and you want to implement the <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe">highest version possible when you connect to a SQL Server Instance</a>. You can find <a href="https://docs.microsoft.com/en-us/sql/connect/sql-connection-libraries?view=sql-server-ver16">the latest drivers and connection methods for SQL Server at this reference</a>. Each of these connection libraries has differing security impacts, so it is important to review the latest releases and use the most secure methods of access possible.
 
-Application security is as important as SQL security. Most applications are set up to have direct access to SQL, and in some cases with sysadmin rights. Secure coding practices as well as managing access and permisisons to the application account are the focus of this section.
+<h3>Protection of Sensitive Data</h3>
+You should follow <a href="https://social.technet.microsoft.com/wiki/contents/articles/930.sql-server-how-to-design-create-and-maintain-a-database.aspx">the best practices for data design for your application</a>, so that you store sensitive data in a separate, protected space. You can then move to to protecting the data within the application. You have various options for creating a secure database program.
+
+<h3>Permissions and Rights, Views and Stored Procedures</h3>
+The first step in securing your application is to implement a least-privilege approach within your permission structure, as described in the previous sections. By granting permissions only to the higher-level objects (such as Views, Functions and Store Procedures) you are able to protect the underlying base Tables from unecessary access by the end user.
+
+Views allow you to show only the collumns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows.
+
+<h3>Row Level Security</h3>
+SQL Server provides <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16">Row-Level Security so that you can restrict access to objects based on the security context of the user</a> - whether that is based on Role membership or even the execution context of the query.
+By creating a Function and a Security Policy, you can set up protections for SELECT, UPDATE and DELETE operations.
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Row-Level Security to an Object</b></h4>
+
+In this Activity you will explore setting up Row-Level Security on your database environment.
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+<a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16#CodeExamples">Navigate to this reference, and follow all the steps you see there for Scenario "A"</a>, using your sample Workshop environment.
+
+<h3>Dynamic Data Masking</h3>
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql">Dynamic Data Masking</a> allows you to substitute a standard return from a Qeury with obfuscated characters. You can replace all or part of a result string with another character (such as the letter X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></h4>
+
+In this Activity you will review an example set of scripts that implement Dynamic Data Masking, and shows the data returned.
+
+You can implement these scripts if you would like a hands-on experience in your sample workshop database.
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+<a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask">Navigate to this reference, and review all the steps you see there</a>, using your sample Workshop environment.
+
+<h3>SQL Ledger</h3>
+SQL Server 2022 and Microsoft Azure SQL DB include a new feature called Ledger that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest, alerting you to any differences, which indicates that the data has been tampered with.
+
+With the Ledger feature, you are able to create updatable tables, or insert-only tables depending on your application's needs.
+
+<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review SQL Ledger</b></h4>
+
+In this Activity you will review an example of setting up and working with SQL Ledger.
+
+<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
+<a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/ledger/ledger-how-to-updatable-ledger-tables?view=azuresqldb-current">Navigate to this reference, and review all the steps you see there</a>, using your sample Workshop environment.
+
+<h3>Preventing SQL Injection Attacks</h3>
+SQL Injection attacks occur when a T-SQL string is abnormally terminated and another script inserted in the application's context. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-injection?view=sql-server-ver16">A complete explanation of the attack, along with an example, is documented at this reference</a>. 
+
+Once again, a coding practices is best to explain the attack and how to prevent it. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Parameterized Queries and Error Handling</b></p>
 <br>
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
-See the effect of a SQL injection string on a non-parameterized query, and then see the effect once it is parameterized. Also see how error handling helps prevent an attacker from learning too much about your environment.
+In this Activity you will see the effect of a SQL injection string on a non-parameterized query, and then see the effect once it is parameterized. You will also see how error handling helps prevent an attacker from learning too much about your environment.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Run this Query for a client to see their account information as a general user
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Run this Query for a client to see their account information as a general user</p>
+
 <pre>
     SELECT * 
     FROM Patient 
     WHERE loginid = '1' 
     -- user input = 1
 </pre>
-2. Run the same query with an injection string
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Run the same query with an injection string</p>
+
 <pre>
     SELECT * 
     FROM Patient
     WHERE loginid = '' or 1=1 --'  
     -- user input = ' or 1=1 --  
 </pre>
-3.  Run the query below showing how parameterizing the query helps prevent injection strings allowed by an application from negatively affecting SQL server:
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Run the query below showing how parameterizing the query helps prevent injection strings</p>
+
 <pre>
     DECLARE @Loginid tinyint
 
@@ -458,7 +534,11 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
     WHERE loginid = @Loginid --parameterized input
 
 </pre>
-4.  Notice that an error could be returned to a malicious actor which they could use to learn mroe about your environment. Adding error handling helps prevent verbose errors from giving more information for an attacker to use.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Add Error Handling</p>
+
+Notice that an error could be returned to a malicious actor which they could use to learn mroe about your environment. Adding error handling helps prevent verbose errors from giving more information for an attacker to use.
+
 <pre>
     DECLARE @Loginid tinyint
       BEGIN TRY
@@ -486,29 +566,40 @@ See the effect of a SQL injection string on a non-parameterized query, and then 
 
 </pre>
 
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
+[//]: <> (================================= Section 5 )
 
-[//]: <> (================================= Section 4 )
+<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.5 Encryption, Certificates, and Keys</h2>
+<p>
+Microsoft SQL Server supports encryption of data in multiple ways: in-transit, at-rest, in-database and more.
 
+For data-in-transit, Transport Layer Security (TLS) can be enforced for connections to the server over secure protocols. The previous section covered setting up this level of encryption on your SQL Server Instance.
 
+For data encryption, two mechanisms are available. For data-at-rest, you can implement the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption?view=sql-server-ver16">SQL Server Transparent Data Encryption (TDE) feature</a>. With no code or database changes, your database is encrypted on storage. You will turn on TDE for your sample Workshop database in an Activity that follows.
 
-<h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.4 Encryption, Certificates, and Keys</h2>
-<br>
+For data encryption, it's important to understand how SQL Server uses Keys to encrypt data. On creation, Each Instance creates a Service Master Key (SMK), which is used to create a Database Master Key (DMK). These Keys are protected by either a Certificate, an Asymmetric Key (such as a password) or a Symmetric Key to lock and unlock the Key. An Extensible Key Management (EKM) module can also be used, holding symmetric or asymmetric keys outside of SQL Server. you can see <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/encryption-hierarchy?view=sql-server-ver16">a visual representation of this encryption hierarchy at this reference</a>.
 
-Encryption, certificates, and keys are tools for securing the physical layer of SQL server. <todo: add more words>
+You can also encrypt sections of your data as you insert it using T-SQL functions, such as <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/encryptbypassphrase-transact-sql?view=azuresqldb-current">ENCRYPTBYPASSPHRASE</a> and <a href="https://docs.microsoft.com/en-us/sql/t-sql/functions/decryptbypassphrase-transact-sql?view=azuresqldb-current">DECRYPTBYPASSPHRASE</a> calls.
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling TDE on a database</b></p>
+Another method of setting up encryption for your database is using the Always Encrypted feature. Always Encrypted allows applications to encrypt sensitive data wihtout revealing the encryption keys to the Database Engine. This is transparent to the application, so you don't need to write special code to take advantage of this feature. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/encryption/always-encrypted-database-engine?view=sql-server-ver16">You can learn more about how Always Encrypted works at this reference</a>, and in the next Module you will set up this feature as an Activity.
+</p>
 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling Transparent Data Encryption</b></p>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Description</b></p>
 
-Setting up Transparent Data Encryption is a positive tool for the physical security  of data. This activity will touch the setting up of keys, certificates, and finally the encryption of a database. 
+This activity walks you through setting up Keys, Certificates, and transparent encryption of a database on your Workshop environment. 
+
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
 
-1. Create & Backup master key (first create the C:\EncryptedDrive folder, you will also need to grant permissions to SQL)
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create and backup the Master key</p> 
+
+In the Operating System, create a "C:\EncryptedDrive" folder. 
+
+Grant OS permissions to that folder to the account running the SQL Server Engine Service. 
+
 <pre>
     CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Fl@sh G0rd0n!';
     GO
@@ -519,7 +610,11 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
         ENCRYPTION BY PASSWORD = 'S@vior Of.The Un1v3r$3!';
     GO
 </pre>
-2.  Create, Verify, and Backup a certificate - you will need to adjust the backup location of the certificate for your system.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create, Verify, and Backup a Certificate</p>
+
+(Adjust the backup location in the code below of the certificate for your system)
+
 <pre>
     CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
     GO
@@ -530,7 +625,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
             ENCRYPTION BY PASSWORD = 'I$ @.Mirac1e!');
     GO
 </pre>
-3. Verify the creation/presence of the TDE_Cert and the Database Master key.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Verify the creation/presence of the TDE_Cert and the Database Master key</p>
+
 <pre>
     SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
     GO
@@ -538,7 +635,9 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     Select name, algorithm_desc, create_date from sys.symmetric_keys
 </pre>
 
-4.  Encrypt our test Database
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Encrypt the <i>test</i> Database</p>
+The time of this process is dependent on the size of the database being encrypted and should be done in a low-use time period whenever possible.
+
 <pre>
     USE SQLSecurityTest
     GO
@@ -552,7 +651,11 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     /* Encrypt database */
     ALTER DATABASE SQLSecurityTest SET ENCRYPTION ON;
     GO
+</pre>
 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Verify encryption</p>
+
+<pre>
     /* Verify Encryption */
     SELECT 
       DB_NAME(database_id) AS DatabaseName
@@ -569,27 +672,35 @@ Setting up Transparent Data Encryption is a positive tool for the physical secur
     GO
 </pre>
 
-
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
+[//]: <> (================================= Section 6 )
 
-[//]: <> (================================= Section 5 )
+<h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.6 Auditing</h2>
+<p>
+Microsoft SQL Server has a strong Auditing capability. You can enable a Server audit, a Database audit, or both. In general, you should choose one or another, but not both. Enabling a Server audit uses <a href="https://docs.microsoft.com/en-us/sql/relational-databases/extended-events/sql-server-extended-events-engine?view=sql-server-ver16">SQL Server's Extended Events</a> to audit all the databases on that server, and any new ones you create, and sends it to a single target. Enabling a Database audit allows you to send each audit collection to a different target, such as a file, or one of the Windows Event Logs, once again using Extended Events.
 
+An Audit on SQL Server involves multiple components:
 
+<ol>
+  <li>SQL Server Audit - The definition of a group of Server and Database actions that you want to monitor</li>
+  <li>Server Audit Specification - Server-scoped actions you want to collect. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions?view=sql-server-ver16">The complete list is here</a>.</li>
+  <li>Database Audit Specification - Database-scoped actions you want to collect. <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/sql-server-audit-action-groups-and-actions?view=sql-server-ver16">The complete list is here</a>.</li>
+  <li>Target - A file, the Windows Security Event Log, or the Windows Application Event Log that stores the result of your Audit. Note that the Windows Event Log is less secure than the Security Event Log.</li>
+</ol>
 
-<h2 id="05"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.5 Auditing</h2>
-<br>
+Once you create these elements, you can start the Audit collection, which sends the data to the specified Target.
 
-TODO: Topic Descriptions
+</p>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create a Server Audit</b></p>
 
-In this Activity you will set up a server and database audit on your test system. You will then perform an action that would be included in the audit scope, and then you will read the audit log afterwards.
+In this Activity you will set up a server and database audit on your test system. You will then perform an action that is included in the audit scope, and then review the Audit Log Target.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Step 1: Create a SQL Server Audit for the Patient table data
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a SQL Server Audit for the <i>Patient</i> Table data</p>
+
 <pre>
     USE [master]
     GO
@@ -609,7 +720,8 @@ In this Activity you will set up a server and database audit on your test system
     GO  
 </pre>
 
-2. Add an Audit Specification that catches actions on the table
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Add an Audit Specification that tracks actions on the Table</p>
+
 <pre>
     USE [SQLSecurityTest]
     CREATE DATABASE AUDIT SPECIFICATION Audit_Data_Select_On_Patient_Table
@@ -620,7 +732,8 @@ In this Activity you will set up a server and database audit on your test system
     GO  
 </pre>
 
-3. Perform actions that are included in the audit actions: (python examples in the notebook)
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Perform actions that are included in the Audit Specification</p>
+
 <pre>
     USE [SQLSecurityTest]
     INSERT INTO Patient (LoginID,FirstName,LastName,Address,City,SSN,CardNumber)
@@ -652,15 +765,15 @@ In this Activity you will set up a server and database audit on your test system
     SELECT * FROM Patient
     GO
 </pre>
-4. Read the aduit log events:
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Review the Audit Log</p>
+
 <pre>
     SELECT event_time, server_instance_name, server_principal_name, database_name, object_name, [statement] FROM sys.fn_get_audit_file ('C:\EncryptedDrive\Pa*',default,default);  
     GO  
 </pre>
 
-
 <p style="border-bottom: 1px solid lightgrey;"></p>
-
 
 [//]: <> (================================= Closing )
 )
@@ -669,9 +782,10 @@ In this Activity you will set up a server and database audit on your test system
     <TODO: add sql permission poster and builtin roles links>
     <li><a href="https://github.com/sqlstudent144/SQL-Server-Scripts/blob/master/sp_SrvPermissions.sql" target="_blank">An example stored procedure to fetch Server permissions</a></li>
     <li><a href="https://github.com/sqlstudent144/SQL-Server-Scripts/blob/master/sp_DBPermissions.sql" target="_blank">An example stored procedure to fetch Database permissions</a></li>
-</ul
->
+</ul>
+
 <br>
+
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
 Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank"><i> 03 - Azure SQL DB Security</i></a>.
