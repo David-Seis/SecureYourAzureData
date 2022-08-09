@@ -312,18 +312,19 @@ DENY SELECT ON Patient_Mailing_Address TO User1
 
 Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
 
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
-<br>
+[//]: <> (===== This activity is already fulfilled prior (Step 5) =============)
+[//]: <> (=====<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>)
+[//]: <> (=====<br>)
 
-Thing
+[//]: <> (=====Thing)
 
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+[//]: <> (=====<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>)
 
-Thing
+[//]: <> (=====Thing)
 
-<pre>
-  Thing
-</pre> 
+[//]: <> (=====<pre>)
+[//]: <> (=====  Thing)
+[//]: <> (=====</pre>)
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
