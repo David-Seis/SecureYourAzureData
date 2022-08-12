@@ -76,10 +76,9 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and list principals in an instance</b></h4>
 <br>
- >Description<
+<p>In the following Steps you will create the database and Principals you will use for this Workshop. Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-<p>In the following Steps you will create the database and Principals you will use for this Workshop.Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create the Test Database we will use for this module</p>
 
@@ -330,7 +329,7 @@ Finally, run the python app to see the connection results:
     python SimpleConnection.py
 </pre>
 
-> Note, Windows users will only be able to connect via a trusted connection. Please run powershell as <i>user1</i> and <i>user2</i> to see their connection results.
+> Note, Windows users will only be able to connect via a trusted connection. Please run powershell as <i>User1</i> and <i>User2</i> to see their connection results.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 

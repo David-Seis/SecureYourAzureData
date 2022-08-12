@@ -32,12 +32,13 @@ Physical security involves restricting and [controlling access to your datacente
 <br><img src="../graphics/checkbox.png"> All access to the physical system hosting SQL Server is audited and periodically reviewed.
 <br><img src="../graphics/checkbox.png"> Encryption at rest (such as Transparent Data Encryption) has been evaluated and implemented wherever possible.
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media.
-<br><img src="../graphics/checkbox.png"> Server Master Keys and Database Master Keys, along with other Certificate mechanisms, are backed up and secured.
+<br><img src="../graphics/checkbox.png"> Server Master Keys and Database Master Keys, along with other Certificate mechanisms, are backed up and secured. Ideally in a different location. 
 
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security](https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security)
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media, especially if exported from Microsoft Azure.
  
+<br>
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Perimeter</b></p>
 
 Perimeter security entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
@@ -47,7 +48,8 @@ Perimeter security entails creating defenses at the network level for [distribut
 <br><img src="../graphics/checkbox.png"> Default SQL Server ports have been changed to non-standard values.
 <br><img src="../graphics/checkbox.png"> The SQL Server Browser Service has been disabled using the SQL Server Configuration Manager utility.
 <br><img src="../graphics/checkbox.png"> Where possible, Always Encrypted is enabled to ensure encryption of data on the wire and at-rest.
-<br><img src="../graphics/checkbox.png"> Strict connection encryption enabled for SQL Server 2022 and higher applications.
+<br><img src="../graphics/checkbox.png"> Strict connection encryption enabled for SQL Server 2022 and higher applications. 
+<br><img src="../graphics/checkbox.png"> TLS 1.2 should be enforced when possible.
 <br><img src="../graphics/checkbox.png"> Where applicable, the *Extended Protection for Authentication* feature is configured using channel binding and service binding. 
 
 *Microsoft Azure SQL DB environments*
@@ -66,12 +68,12 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> Firewalls are configured to allow only specific access from authorized systems. 
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for administrative or elevated access.
 <br><img src="../graphics/checkbox.png"> A process is in place for auditing and reviewing all Operating System users to check for unusual access to resources.
-<br><img src="../graphics/checkbox.png"> The Server that hosts SQL Server Instances does not also provide file shares, print spools, or other functions. 
+<br><img src="../graphics/checkbox.png"> The Server that hosts SQL Server Instances does not also provide file shares, print spools, applications or other functions. 
 <br><img src="../graphics/checkbox.png"> SQL Server is not installed on a Domain Controller.
 <br><img src="../graphics/checkbox.png"> Binary and file locations for the SQL Server are secured against unauthorized access.
 <br><img src="../graphics/checkbox.png"> Only required Operating System components, utilities, and features are installed required for operating the SQL Server installation.
 <br><img src="../graphics/checkbox.png"> System lock after timeout is enabled.
-<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools are enabled, run, and results are periodically evaluated.
+<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools are enabled, run, and results are periodically evaluated. The following reference has been reviewed and approved by appropriate security and auditing teams: https://support.microsoft.com/en-us/topic/how-to-choose-antivirus-software-to-run-on-computers-that-are-running-sql-server-feda079b-3e24-186b-945a-3051f6f3a95b
 <br><img src="../graphics/checkbox.png"> Only required SQL Server components, utilities and features are installed required for securely servicing authorized data and programmatic requests.
 <br><img src="../graphics/checkbox.png"> SQL Server is at a currently supported version.
 <br><img src="../graphics/checkbox.png"> SQL Server latest Service Packs and/or Cumulative Updates are tested, installed and configuration documents updated.
@@ -90,6 +92,7 @@ The Compute security area requires creating a [strong system](https://techcommun
 *Microsoft Azure SQL DB environments*
 <br><img src="../graphics/checkbox.png"> Database backup and other off-DB file storage reviewed for access only by authorised personnel.
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Defender for SQL is implemented and Threat Detection is enabled, with a group alias for incident reporting.
+
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Identitiy and Authorization</b></p>
 <br>
@@ -142,7 +145,7 @@ The Application security area involves implementing [Secure Code](https://docs.m
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Data</b></p>
 
-The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes.
+The Data Security Area involves ensuring that business and customer data is encrypted and protected against unwanted access at rest, in-transit, in-memory and in-code processes.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> Only system and user databases are installed and configured. All demonstration or sample databases have been removed.
