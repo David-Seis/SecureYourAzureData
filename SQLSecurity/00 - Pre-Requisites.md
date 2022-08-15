@@ -50,7 +50,9 @@ Your workshop invitation may have instructed you that they will provide a Micros
 
 You will use a Windows 10 or higher workstation for this course. After you complete that installation, you will install SQL Server 2019 on this workstation, along with the SQL Server Management Studio tool, and a sample application.  
 
-You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted when necessary. Choose one of the following options if you are planning to do the hands-on steps either in class or on your own. 
+> All steps and commands from here on should be done in the Workshop system you create - if you are using a Virtual Machine, ensure you are following these steps on that system, not on the host computer.
+
+You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted if necessary. Choose one of the following options if you are planning to do the hands-on steps either in class or on your own. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Create your own Workstation</b></p> 
 
