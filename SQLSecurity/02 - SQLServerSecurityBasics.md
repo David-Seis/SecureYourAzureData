@@ -70,7 +70,7 @@ A key difference between these two type of authentication is that in SQL Server 
 In Mixed-Mode Authentication, you can create internal SQL Server accounts, and you can also leverage Microsoft Windows accounts on the local system, or use Microsoft Active Directory accounts to add Principals. Microsoft Active Directory (AD) is a suite of services, and Active Directory Domain Services (AD DS) is the core Active Directory service used to manage users and resources. You can <a href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview">learn more about Microsoft Active Directory here</a>.
 
 
-[Link to the SQL Docs article that has the permisisons poster for download](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16)
+[You can find a complete permisisons poster for download here.](https://docs.microsoft.com/en-us/sql/relational-databases/security/permissions-database-engine?view=sql-server-ver16)
 
 <br>
 
