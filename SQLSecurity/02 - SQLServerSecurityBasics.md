@@ -75,10 +75,10 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
 <br>
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and list principals in an instance</b></h4>
-<p>In this Activity you will create several users, both Integrated and SQL Server based.</p>
+<br>
+<p>In the following Steps you will create the database and Principals you will use for this Workshop. Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-<p>In the following Steps you will create the database and Principals you will use for this Workshop.Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create the Test Database we will use for this module</p>
 
@@ -329,7 +329,7 @@ Finally, run the python app to see the connection results:
     python SimpleConnection.py
 </pre>
 
-> Note, Windows users will only be able to connect via a trusted connection. Please run powershell as <i>user1</i> and <i>user2</i> to see their connection results.
+> Note, Windows users will only be able to connect via a trusted connection. Please run powershell as <i>User1</i> and <i>User2</i> to see their connection results.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>  
 
@@ -769,6 +769,78 @@ In this Activity you will set up a server and database audit on your test system
 
 <pre>
     SELECT event_time, server_instance_name, server_principal_name, database_name, object_name, [statement] FROM sys.fn_get_audit_file ('C:\EncryptedDrive\Pa*',default,default);  
+    GO  
+</pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Add a few more server-audits that can be useful in your organization</p>
+
+> NOTE: You can see the results of this audit from the events done so far in this course in the accompanying notebook.
+
+<pre>
+    USE [master]
+    GO
+    CREATE SERVER AUDIT [Database-Wide-Audit]
+    TO FILE 
+    (	FILEPATH = N'C:\EncryptedDrive'
+      ,MAXSIZE = 1000 MB
+      ,MAX_ROLLOVER_FILES = 100
+      ,RESERVE_DISK_SPACE = OFF
+    ) WITH (QUEUE_DELAY = 1000, ON_FAILURE = CONTINUE)
+
+    GO
+
+    -- This Audit is focused on Security events related to Databases
+    CREATE SERVER AUDIT SPECIFICATION Database_Wide_Security_Specification  
+    FOR SERVER AUDIT [Database-Wide-Audit]  
+      ADD (DATABASE_CHANGE_GROUP),
+      ADD (DATABASE_OBJECT_CHANGE_GROUP),
+      ADD (DATABASE_OBJECT_PERMISSION_CHANGE_GROUP),
+      ADD (DATABASE_OBJECT_OWNERSHIP_CHANGE_GROUP),
+      ADD (DATABASE_PERMISSION_CHANGE_GROUP),
+      ADD (DATABASE_OWNERSHIP_CHANGE_GROUP),
+      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP),
+      ADD (DATABASE_ROLE_MEMBER_CHANGE_GROUP),
+      ADD (SCHEMA_OBJECT_CHANGE_GROUP),
+      ADD (SCHEMA_OBJECT_OWNERSHIP_CHANGE_GROUP),
+      ADD (SCHEMA_OBJECT_PERMISSION_CHANGE_GROUP)
+        WITH (STATE = ON);
+    GO 
+
+    ALTER SERVER AUDIT [Database-Wide-Audit]  
+    WITH (STATE = ON);  
+    GO  
+
+
+    USE [master]
+    GO
+    CREATE SERVER AUDIT [Server-Audit]
+    TO FILE 
+    (	FILEPATH = N'C:\EncryptedDrive'
+      ,MAXSIZE = 1000 MB
+      ,MAX_ROLLOVER_FILES = 100
+      ,RESERVE_DISK_SPACE = OFF
+    ) WITH (QUEUE_DELAY = 1000, ON_FAILURE = CONTINUE)
+
+    GO
+    -- This Audit is focused on Security events related to the server
+    CREATE SERVER AUDIT SPECIFICATION Server_Security_Specification  
+    FOR SERVER AUDIT [Server-Audit]  
+        ADD (SERVER_OBJECT_OWNERSHIP_CHANGE_GROUP),
+      ADD (SERVER_OBJECT_PERMISSION_CHANGE_GROUP),
+      ADD (SERVER_PERMISSION_CHANGE_GROUP),
+      ADD (SERVER_PRINCIPAL_CHANGE_GROUP),
+      ADD (SERVER_ROLE_MEMBER_CHANGE_GROUP),
+      ADD (SERVER_STATE_CHANGE_GROUP),
+      ADD (TRACE_CHANGE_GROUP),
+        ADD (FAILED_LOGIN_GROUP),
+      ADD (SERVER_OPERATION_GROUP),
+      ADD (USER_DEFINED_AUDIT_GROUP),
+      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP)
+        WITH (STATE = ON);
+    GO 
+
+    ALTER SERVER AUDIT [Server-Audit]  
+    WITH (STATE = ON);  
     GO  
 </pre>
 

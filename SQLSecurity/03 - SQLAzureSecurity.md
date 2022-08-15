@@ -88,7 +88,6 @@ For this Activity, you will run the same scripts as in the previous module, with
     CREATE LOGIN [User1] 
     WITH PASSWORD=N'Tes#20. Use12!'
     GO
-
     CREATE LOGIN [User2] 
     WITH PASSWORD=N'Tes#20. Use22!'
     GO
@@ -98,7 +97,6 @@ For this Activity, you will run the same scripts as in the previous module, with
     CREATE USER [User1] 
     FROM LOGIN [User1]
     GO
-
     CREATE USER [User2] 
     FROM LOGIN [User2]
     GO
@@ -134,14 +132,17 @@ List Roles and Members
 3. Query all users and role memberships:
 <pre>
     --Server Principals
+    --
     SELECT Name, type_desc, create_date FROM sys.database_principals
     WHERE type = 'S' AND is_fixed_role = 0 AND authentication_type= 1 AND name NOT IN ('dbo')
-
+    --
     --Database Principals
+    --
     SELECT Name, type_desc, create_date FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
-    
+    --
     --Find Role Memberships 
+    --
     SELECT DP1.name AS DatabaseRoleName,   
       isnull (DP2.name, 'No members') AS DatabaseUserName   
     FROM sys.database_role_members AS DRM  
@@ -277,13 +278,13 @@ TODO ADD DESCRIPTION
     SELECT * FROM Patient_Mailing_Address
     GO
 </pre>
-3. SQitch to admin and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
+3. Switch to admin and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
 <pre>
     GRANT CONTROL ON Patient TO Elevated_Permissions
     GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions
     GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions
 </pre>
-4. Run again on user1:
+4. Run again on User1:
 <pre>
     Select LoginId FROM Patient WHERE Loginid = 1
     GO
@@ -305,25 +306,12 @@ TODO ADD DESCRIPTION
 </pre>
 7. As you can see, GRANT supercedes REVOKE, how about DENY? Return to admin and DENY SELECT on the view:
 <pre>
-DENY SELECT ON Patient_Mailing_Address TO User1
+    DENY SELECT ON Patient_Mailing_Address TO User1
 </pre>
 8. Finally, rerun the same query with User1
 
 
 Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
-
-<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>
-<br>
-
-Thing
-
-<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-
-Thing
-
-<pre>
-  Thing
-</pre> 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
