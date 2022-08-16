@@ -12,9 +12,9 @@ Welcome to this workshop on [*SQL Server Security Ground to Cloud*](https://gith
 
 The focus of this workshop is to enable the Data Professional to secure and protect their data estate.
 
-You'll start by creating a workshop enviroment using your own laptop or Virtual machine, then work through a module covering general security principals and where the data estates security measures and controls fit within that environment at your organization. From there, you will work through a hands-on module covering the security basics of on-premises and Virtual-Machine based installations of SQL Server. The next module covers the similarities and differences between an installation of SQL Server and the Azure SQL Database Environment. The final module covers monitoring your data environment and creating an Incident Response Plan for your organization, all with a focus on how to extrapolate what you have learned to create other solutions for your organization.
+You'll start by creating a workshop enviroment using your own laptop or Virtual machine, then work through a module covering general security principles and where the data estates security measures and controls fit within that environment at your organization. From there, you will work through a hands-on module covering the security basics of on-premises and Virtual-Machine based installations of SQL Server. The next module covers the similarities and differences between an installation of SQL Server and the Azure SQL Database Environment. The final module covers monitoring your data environment and creating an Incident Response Plan for your organization, all with a focus on how to extrapolate what you have learned to create other solutions for your organization.
 
-> This course does not currently focus on securing a Linux, Docker Container, or Kubernetes installation of SQL Server, although most all of the concepts in this workshop are useful to securely operate Microsoft SQL Server on those platforms.
+> This course does not currently focus on securing a Linux, Docker Container, or Kubernetes installation of SQL Server. This workshop also does not cover a highly-secure regulatory environment (such as C2 compliance), although most all of the concepts in this workshop are useful as a starting point to securely operate Microsoft SQL Server on those platforms and in those environments.
 
 This [github README.MD file](https://lab.github.com/githubtraining/introduction-to-github) explains how the workshop is laid out, what you will learn, and the technologies you will use in this solution. To download this Lab to your local computer, click the **Clone or Download** button you see at the top right side of this page. [More about that process is here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository). 
 
@@ -68,7 +68,7 @@ This workshop uses the following technologies - although you are not limited to 
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/owl.png"> <h2>Before Taking this Workshop</h2>
 
-You'll need a local system that you are able to install software on. The workshop demonstrations use Microsoft Windows as an operating system and all examples use Windows for the workshop. Optionally, you can use a Microsoft Azure Virtual Machine (VM) to install the software on and use for the workshop. A free Virtual Machine image is provided for you using Hyper-V, VirtualBox, or Parallels in the pre-requisites.
+You'll need a local system that you are able to install software on, completely format, and start over again. The workshop demonstrations use Microsoft Windows as an operating system and all examples use Windows for the workshop. Optionally, you can use a local or Microsoft Azure Virtual Machine (VM) to install the software on and use for the workshop. A free Virtual Machine image is provided for you using Hyper-V, VirtualBox, or Parallels in the pre-requisites.
 
 You should have a Microsoft Azure account with the ability to create assets. (A free subscription is available, and described in the Pre-Requisite section)
 
@@ -78,7 +78,6 @@ This workshop expects that you understand the basics of the technologies you wil
 -  [Microsoft Azure](https://docs.microsoft.com/en-us/learn/paths/az-900-describe-cloud-concepts/)
 -  [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/tutorials-for-sql-server-2016?view=sql-server-ver16)
 -  [Computing Security](https://www.microsoft.com/en-us/security/content-library/Home/Index?culture=en-US)
-
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/bulletlist.png"> <h3>Setup</h3>
 
