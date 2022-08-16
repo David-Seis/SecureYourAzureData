@@ -8,7 +8,7 @@
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/textbubble.png"><h2>00 Pre-Requisites</h2>
 
-The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">SQL Server Security Ground to Cloud workshop</a> ues the following components. Read through this list, and in the Activities that follow you will see specific steps for each installation. You can also simply read through each of these steps, and observe the activities in the workshop if you cannot install the hands-on poritions.
+The <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">SQL Server Security Ground to Cloud workshop</a> uses the following components. Read through this list, and in the Activities that follow you will see specific steps for each installation. You can also simply read through each of these steps, and observe the activities in the workshop if you cannot install the hands-on poritions.
 
 - **A Microsoft Windows 10 or Higher Workstation**: For this workshop, you will use a Microsoft Windows system as the base workstation, although Apple and Linux operating systems can be used in production. You'll see instructions for multiple options, from a physical system you have administrative access on, to Virtual Machines you can use for free on Windows, Linux and Apple systems. You can also use a VM in the cloud provider of your choice.
 - **Microsoft Azure**: This workshop uses the Microsoft Azure platform for the cloud database and the Microsoft Defender products. You can also host your workstation there if desired. You can use a free Azure account, an MSDN Account, your own account, or potentially one provided for you, as long as you can create about $100.00 (U.S.) worth of assets.
@@ -50,7 +50,9 @@ Your workshop invitation may have instructed you that they will provide a Micros
 
 You will use a Windows 10 or higher workstation for this course. After you complete that installation, you will install SQL Server 2019 on this workstation, along with the SQL Server Management Studio tool, and a sample application.  
 
-You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted when necessary. Choose one of the following options if you are planning to do the hands-on steps either in class or on your own. 
+> All steps and commands from here on should be done in the Workshop system you create - if you are using a Virtual Machine, ensure you are following these steps on that system, not on the host computer.
+
+You can use a local Virtual Machine, or a physical workstation in a test configuration that can be reformatted if necessary. Choose one of the following options if you are planning to do the hands-on steps either in class or on your own. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"><b>Create your own Workstation</b></p> 
 
@@ -73,7 +75,7 @@ Next, ensure all of your updates are current on your development system. You can
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png"> Install SQL Server Database Engine</b></p>
 
-In this activity, you will install SQL Server, selecting at least the "Database Engine" Feature. If you select more than the Database Engine components, <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">you will have more configuration options you will need to consider</a>. For this course, we will focus on the Database Engine feature, so that is all you need to install. You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup?view=sql-server-ver16" target="_blank">add more features later by using the Setup Center</a> on your system.
+In this activity, you will install SQL Server, selecting at least the "Database Engine" Feature. If you select more than the Database Engine components, <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">you will have more configuration options you will need to consider</a>. For this course, we will focus on the Database Engine feature, so that is all you need to install. You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup?view=sql-server-ver16" target="_blank">add more features later by using the Setup Center</a> on your system. 
 
 > For the next two steps, <a href="https://www.youtube.com/watch?v=KZtHbq_Ar_Y" target="_blank">you can see a walkthrough video of this process here.</a>
 
@@ -159,7 +161,7 @@ The instructions that follow use the Microsoft Azure Account you created earlier
     <li><a href="https://docs.microsoft.com/en-us/sql/database-engine/install-windows/install-sql-server?view=sql-server-ver16" target="_blank">Official Documentation for this section</a></li>
 </ul>
 
-You now have a testing and classroom environment for this course. You will add more to this environment as you progress through the modules. 
+You now have a testing and classroom environment for this course. You will add more to this environment as you progress through the modules, and all steps from here on out should be taken on that system. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
