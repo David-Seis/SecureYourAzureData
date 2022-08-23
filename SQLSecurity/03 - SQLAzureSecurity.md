@@ -262,13 +262,15 @@ In this Activity you will work with Permissions on various database objects. You
         , (2, 'Bob', 'Billy', '222 Bayshore Blvd.', 'Boice', '222-22-2222', '2222-2222-2222-2222')
         , (3, 'Choice', 'Charley', '333 Castaway Ct.', 'Chesterfield', '333-33-3333', '3333-3333-3333-3333')
         , (4, 'Dangerfield', 'David', '4444 Denvue Drive', 'Denver', '444-44-4444', '4444-4444-4444-4444')
-        , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
+        , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555');
+        GO
 </pre> 
 
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
     SELECT FirstName, LastName, Address, City
-    FROM Patient
+    FROM Patient;
+    GO
 </pre>
 
 <pre>
@@ -286,60 +288,60 @@ In this Activity you will work with Permissions on various database objects. You
 2. Connect with User1 or User2 to see what current Permissions allow:
 
 <pre>
-    Select LoginId FROM Patient WHERE Loginid = 1
+    Select LoginId FROM Patient WHERE Loginid = 1;
     GO
 
-    EXEC uspGetCardInformation @Loginid = 2
+    EXEC uspGetCardInformation @Loginid = 2;
     GO
 
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
 
 3. Switch to an admin user and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
 
 <pre>
-    GRANT CONTROL ON Patient TO Elevated_Permissions
-    GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions
-    GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions
+    GRANT CONTROL ON Patient TO Elevated_Permissions;
+    GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions;
+    GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions;
 </pre>
 
 4. Run the script again on User1:
 
 <pre>
-    Select LoginId FROM Patient WHERE Loginid = 1
+    Select LoginId FROM Patient WHERE Loginid = 1;
     GO
 
-    EXEC uspGetCardInformation @Loginid = 2
+    EXEC uspGetCardInformation @Loginid = 2;
     GO
 
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
 
 5. Using your admin connection, Revoke SELECT for User1 on the Patient_Mailing_Address view:
 
 <pre>
-    REVOKE SELECT ON Patient_Mailing_Address TO User1
+    REVOKE SELECT ON Patient_Mailing_Address TO User1;
 </pre>
 
 6. Now return to User1's conenction, run the query again:
 
 <pre>
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
 
 7. As you can see, GRANT supercedes REVOKE. Return to admin and DENY SELECT on the view:
 
 <pre>
-    DENY SELECT ON Patient_Mailing_Address TO User1
+    DENY SELECT ON Patient_Mailing_Address TO User1;
 </pre>
 
 8. Finally, rerun the same query with User1. You will note that the DENY permission overrides the previous GRANT:
 
 <pre>
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
 
