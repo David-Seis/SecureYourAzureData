@@ -161,12 +161,12 @@ TODO: Activity Description and tasks
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Microsoft Defender for SQL Security Score</b></p>
 
-TODO: Activity Description and tasks
+In this Activity you will review the process to create a "Security Score" using Microsoft Azure Defender. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- Thing
-
+  - Open <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/microsoft-secure-score?view=o365-worldwide">this reference, and review the video</a> you see near the top of the page. 
+  
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
