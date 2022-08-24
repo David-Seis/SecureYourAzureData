@@ -87,6 +87,9 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
 <pre>
     CREATE DATABASE SQLSecurityTest;
     GO
+
+    SELECT name, create_date, state_desc 
+    FROM sys.databases
 </pre>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a set of users on your Windows test environment</p>
@@ -144,6 +147,24 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
     GO
   </pre>
 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Review the created users and current role memberships</p>
+
+  <pre>
+    EXEC sp_helplogins
+
+
+    --Find Role Memberships 
+    SELECT DP1.name AS ServerRoleName,   
+        isnull (DP2.name, 'No members') AS ServerUserName   
+    FROM sys.server_role_members AS DRM  
+    RIGHT OUTER JOIN sys.server_principals AS DP1  
+        ON DRM.role_principal_id = DP1.principal_id  
+    LEFT OUTER JOIN sys.server_principals AS DP2  
+        ON DRM.member_principal_id = DP2.principal_id  
+    WHERE DP1.type = 'R'
+    ORDER BY DP1.name; 
+  </pre>
+
 <h3>Roles</h3>
 <p>In SQL Server installations, you can group Principals into <i>Roles</i>. Roles allow you to abstract the permission assisngments to a group (even if that group has only one account in it) not only for ease of management, but to prevent objects from being "orphaned" when a user is directly assigned ownership, but then leaves the organization. If you assign ownership and permissions to a Role, you can simply move another account into the Role when the other account is deactivated.
 
@@ -181,13 +202,13 @@ You will begin these steps by creating Server and Database Roles, and then you w
 
 <pre>
     --Add user 1 to the Server role
-    ALTER SERVER ROLE [SQLSecurityTest_Table_Owner] ADD MEMBER [A1\User1];
+    ALTER SERVER ROLE [SQLSecurityTest_Table_Owner] ADD MEMBER [-Placeholder-\User1];
     GO
 
     --Add user 2 and 3 to the stored procedure user role
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [A1\User2];
+    ALTER ROLE [Stored_procedure_user_role] ADD MEMBER [-Placeholder-\User2];
     GO
 
     USE [SQLSecurityTest]
@@ -198,7 +219,7 @@ You will begin these steps by creating Server and Database Roles, and then you w
     --Add user 1 and 4 to the View user role
     USE [SQLSecurityTest]
     GO
-    ALTER ROLE [View_user_role] ADD MEMBER [A1\User1];
+    ALTER ROLE [View_user_role] ADD MEMBER [-Placeholder-\User1];
     GO
 
     USE [SQLSecurityTest]
@@ -207,7 +228,7 @@ You will begin these steps by creating Server and Database Roles, and then you w
     GO
 </pre>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Identify all user created roles on the system</p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Audit all user created roles on the system, as well as role memberships</p>
 
 <pre>
     --Server Principals
@@ -219,19 +240,7 @@ You will begin these steps by creating Server and Database Roles, and then you w
     SELECT * FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public');
     GO
-</pre>
-
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">List all users by whether they are SQL or Windows users, excluding any built-in users, and identify what rolees they are in</p>
-
-<pre>
-    -- Windows Logins
-      SELECT * FROM sys.server_principals WHERE type IN ('U','G', 'E', 'X') AND name NOT LIKE '%NT%';
-      GO
-
-    -- SQL Logins 
-      SELECT * FROM sys.server_principals WHERE type = 'S' AND name NOT LIKE '%#%' AND name NOT LIKE 'sa'; 
-      GO
-
+    
     --Find Role Memberships 
     SELECT DP1.name AS DatabaseRoleName,   
       isnull (DP2.name, 'No members') AS DatabaseUserName   
@@ -243,6 +252,18 @@ You will begin these steps by creating Server and Database Roles, and then you w
     WHERE DP1.type = 'R'
     ORDER BY DP1.name; 
     GO
+</pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">List all users by whether they are SQL or Windows users, excluding any built-in users</p>
+
+<pre>
+    -- Windows Logins
+      SELECT * FROM sys.server_principals WHERE type IN ('U','G', 'E', 'X') AND name NOT LIKE '%NT%';
+      GO
+
+    -- SQL Logins 
+      SELECT * FROM sys.server_principals WHERE type = 'S' AND name NOT LIKE '%#%' AND name NOT LIKE 'sa'; 
+      GO
 </pre>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Edit and run the sample Python application</p>
@@ -384,7 +405,7 @@ Run the following Steps in SQL Server Management Studio or Azure Data Studio, on
       , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
 </pre>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create Views and Stored Procedures</p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create a sample View and Stored Procedures</p>
 
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
@@ -398,10 +419,15 @@ Run the following Steps in SQL Server Management Studio or Azure Data Studio, on
         @Loginid tinyint  
     AS   
         SET NOCOUNT ON;  
-        SELECT Loginid, cardnumber  
+        SELECT cardnumber  
         FROM Patient  
         WHERE loginId= @loginId   
-    GO  
+    GO
+
+    --Preview the result from View and Stored procedure:
+    SELECT * FROM Patient_Mailing_Address
+    EXEC dbo.uspGetCardInformation @loginID = 2
+
 </pre>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Grant the <i>user1</i> Set the Principal to have CONTROL permissions on the Table</p>
@@ -614,7 +640,7 @@ Grant OS permissions to that folder to the account running the SQL Server Engine
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create, Verify, and Backup a Certificate</p>
 
-(Adjust the backup location in the code below of the certificate for your system)
+Adjust the backup location in the code below of the certificate for your system
 
 <pre>
     CREATE CERTIFICATE TDE_Cert WITH SUBJECT = 'TDE Certificate';
@@ -633,7 +659,8 @@ Grant OS permissions to that folder to the account running the SQL Server Engine
     SELECT * FROM sys.certificates where [name] = 'TDE_Cert'
     GO
 
-    Select name, algorithm_desc, create_date from sys.symmetric_keys
+    SELECT name, algorithm_desc, create_date FROM sys.symmetric_keys
+    GO
 </pre>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Encrypt the <i>test</i> Database</p>
@@ -826,24 +853,39 @@ In this Activity you will set up a server and database audit on your test system
     -- This Audit is focused on Security events related to the server
     CREATE SERVER AUDIT SPECIFICATION Server_Security_Specification  
     FOR SERVER AUDIT [Server-Audit]  
-        ADD (SERVER_OBJECT_OWNERSHIP_CHANGE_GROUP),
+      ADD (SERVER_OBJECT_OWNERSHIP_CHANGE_GROUP),
       ADD (SERVER_OBJECT_PERMISSION_CHANGE_GROUP),
       ADD (SERVER_PERMISSION_CHANGE_GROUP),
       ADD (SERVER_PRINCIPAL_CHANGE_GROUP),
       ADD (SERVER_ROLE_MEMBER_CHANGE_GROUP),
       ADD (SERVER_STATE_CHANGE_GROUP),
       ADD (TRACE_CHANGE_GROUP),
-        ADD (FAILED_LOGIN_GROUP),
+      ADD (FAILED_LOGIN_GROUP),
       ADD (SERVER_OPERATION_GROUP),
       ADD (USER_DEFINED_AUDIT_GROUP),
-      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP)
-        WITH (STATE = ON);
+      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP),
+    	ADD (LOGOUT_GROUP)
+      WITH (STATE = ON);
     GO 
 
     ALTER SERVER AUDIT [Server-Audit]  
     WITH (STATE = ON);  
     GO  
 </pre>
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Disable all running audits</p>
+  <pre>
+    USE [master]
+    ALTER SERVER AUDIT [Patient_Data_Audit]  
+    WITH (STATE = OFF);  
+    GO  
+    ALTER SERVER AUDIT [Server-Audit]  
+    WITH (STATE = OFF);  
+    GO  
+    ALTER SERVER AUDIT [Database-Wide-Audit]  
+    WITH (STATE = OFF);  
+    GO  
+  </pre>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
