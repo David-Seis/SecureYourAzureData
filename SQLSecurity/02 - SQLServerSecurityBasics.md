@@ -875,6 +875,7 @@ In this Activity you will set up a server and database audit on your test system
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Disable all running audits</p>
   <pre>
+    USE [master]
     ALTER SERVER AUDIT [Patient_Data_Audit]  
     WITH (STATE = OFF);  
     GO  
@@ -884,9 +885,7 @@ In this Activity you will set up a server and database audit on your test system
     ALTER SERVER AUDIT [Database-Wide-Audit]  
     WITH (STATE = OFF);  
     GO  
-
   </pre>
-
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
