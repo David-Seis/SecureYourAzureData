@@ -419,7 +419,7 @@ Run the following Steps in SQL Server Management Studio or Azure Data Studio, on
         @Loginid tinyint  
     AS   
         SET NOCOUNT ON;  
-        SELECT Loginid, cardnumber  
+        SELECT cardnumber  
         FROM Patient  
         WHERE loginId= @loginId   
     GO
@@ -853,18 +853,19 @@ In this Activity you will set up a server and database audit on your test system
     -- This Audit is focused on Security events related to the server
     CREATE SERVER AUDIT SPECIFICATION Server_Security_Specification  
     FOR SERVER AUDIT [Server-Audit]  
-        ADD (SERVER_OBJECT_OWNERSHIP_CHANGE_GROUP),
+      ADD (SERVER_OBJECT_OWNERSHIP_CHANGE_GROUP),
       ADD (SERVER_OBJECT_PERMISSION_CHANGE_GROUP),
       ADD (SERVER_PERMISSION_CHANGE_GROUP),
       ADD (SERVER_PRINCIPAL_CHANGE_GROUP),
       ADD (SERVER_ROLE_MEMBER_CHANGE_GROUP),
       ADD (SERVER_STATE_CHANGE_GROUP),
       ADD (TRACE_CHANGE_GROUP),
-        ADD (FAILED_LOGIN_GROUP),
+      ADD (FAILED_LOGIN_GROUP),
       ADD (SERVER_OPERATION_GROUP),
       ADD (USER_DEFINED_AUDIT_GROUP),
-      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP)
-        WITH (STATE = ON);
+      ADD (DATABASE_PRINCIPAL_CHANGE_GROUP),
+    	ADD (LOGOUT_GROUP)
+      WITH (STATE = ON);
     GO 
 
     ALTER SERVER AUDIT [Server-Audit]  
