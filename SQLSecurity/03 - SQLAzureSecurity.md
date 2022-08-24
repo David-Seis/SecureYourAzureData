@@ -14,16 +14,16 @@ In each module you'll get more references, which you should follow up on to lear
 
 (<a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/00%20-%20Pre-Requisites.md" target="_blank">Make sure you check out the <b>Pre-Requisites</b> page before you start</a>. You'll need all of the items loaded there before you can proceed with the workshop.)
 
-This module builds on the [previous module where you learned about the basics of SQL Server Security](https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md). This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
+This module builds on the <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/02%20-%20SQLServerSecurityBasics.md">previous module where you learned about the basics of SQL Server Security</a>. This module focuses on the the differences between those security aspects and security in Microsoft Azure SQL DB. 
 
 You'll cover these topics in this module:
 <ul>
   <li><a href="#01" target="_blank">01 - Accessing Azure SQL DB</li></a>
-  <li><a href="#01" target="_blank">02 - Principals</li></a>
-  <li><a href="#02" target="_blank">03 - Securables</li></a>
-  <li><a href="#03" target="_blank">04 - Applications</li></a>
-  <li><a href="#04" target="_blank">05 - Encryption, Certificates, and Keys</li></a>
-  <Li><a href="#04" target="_blank">06 - Auditing</li></a>
+  <li><a href="#02" target="_blank">02 - Principals</li></a>
+  <li><a href="#03" target="_blank">03 - Securables</li></a>
+  <li><a href="#04" target="_blank">04 - Applications</li></a>
+  <li><a href="#05" target="_blank">05 - Encryption, Certificates, and Keys</li></a>
+  <Li><a href="#06" target="_blank">06 - Auditing</li></a>
 </ul>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -46,10 +46,12 @@ Before a client or application can connect to Azure SQL DB to begin the Authenti
 <br>
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create Firewall Rules to allow connections to Azure SQL DB</b></h4>
 <br>
+
 In this Activity you will set the firewall rules to allow connections from your test system to an Azure SQL DB Database. 
+
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> Determine the IP Address on your test system, and record it.
+  <li> Determine the IP Address on your test system, and record it.</li>
   <li> <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql">Open this resource</a>, and complete the sections from <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#prerequisites">Prerequisites</a> to <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/secure-database-tutorial?view=azuresql#create-firewall-rules">Setup Database Firewall Rules</a>.</li>
   <li> Connect to that database with SQL Server Management Studio using an encrypted connection.</li>
 </ol>
@@ -66,7 +68,7 @@ In this Activity you will set the firewall rules to allow connections from your 
 You have two primary mechanisms for Principals in Azure SQL DB: <i>SQL Server logins</i>, and <i>Azure Active Directory</i> logins. 
  
 <h3>Authentication</h3>
-Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
+Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server and database. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
 
 <h4>SQL Authentication</h4>
 In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation, with the exception that in Azure SQL DB, you are using a logical "Server" rather than an installed Instance.
@@ -78,27 +80,31 @@ As described in the last module, Microsoft Active Directory (AD) is a suite of s
 
 You can also connect your local Active Directory to Microsoft Azure Active Directory, allowing administration of your local domain to access resources in the cloud, in a single-sign-on approach. <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?view=azuresql&tabs=azure-powershell">You can learn how to integrate Microsoft Azure Active Directory into Azure SQL DB using this resource</a>.
 
+Microsoft Azure Purview is a Data Governance Tool that allows you to catalog all of your data assets regardless of where they reside - on premises, in Azure, or even in other Cloud providers. It has a feature for certain Azure SQL services that allows you to also configure <a href="https://techcommunity.microsoft.com/t5/azure/a-beginner-s-guide-to-role-based-access-control-on-azure/m-p/1354947">Role Based Access Control</a> to database objects. You can <a href="https://cloudblogs.microsoft.com/sqlserver/2022/08/11/microsoft-purview-access-policies-for-sql-server-2022/">learn more about Microsoft Azure Purview here</a>.
+
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Create and List Users</b></h4>
 <br>
 For this Activity, you will run the same scripts as in the previous module, with the exception of not creating the Windows local users. For this course, you will focus on using SQL Authentication, and you will be pointed to resources and demonstrations for using Azure Active Directory. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
+
 1. Run the following code on your test SQL Azure DB conencted ot the master database:
+
 <pre>
     CREATE LOGIN [User1] 
     WITH PASSWORD=N'Tes#20. Use12!'
     GO
-
     CREATE LOGIN [User2] 
     WITH PASSWORD=N'Tes#20. Use22!'
     GO
 </pre>
-2. Run the following connected to the test database:
+
+2. Run the following commands while connected to the test database:
+
 <pre>
     CREATE USER [User1] 
     FROM LOGIN [User1]
     GO
-
     CREATE USER [User2] 
     FROM LOGIN [User2]
     GO
@@ -117,31 +123,39 @@ You can learn more about <a href= "https://docs.microsoft.com/en-us/sql/relation
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Working with Server and Database Roles</b></h4>
 <br>
-Create Database Role
-Add User to DB Role
-List Roles and Members
+
+In this Activity you will Create Database Roles, add Users to those Roles, and then list Roles and Members.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
-1. Run the following code on your test SQL Azure DB: 
+
+1. Run the following code on your test SQL Azure Database: 
+
 <pre>
     CREATE ROLE Elevated_permissions;
 </pre>
+
 2. Add User1 to the new role
+
 <pre>
     ALTER ROLE [Elevated_permissions] ADD MEMBER [User1]
     GO
 </pre>
+
 3. Query all users and role memberships:
+
 <pre>
     --Server Principals
+    --
     SELECT Name, type_desc, create_date FROM sys.database_principals
     WHERE type = 'S' AND is_fixed_role = 0 AND authentication_type= 1 AND name NOT IN ('dbo')
-
+    --
     --Database Principals
+    --
     SELECT Name, type_desc, create_date FROM sys.database_principals 
     WHERE type = 'R' AND is_fixed_role = 0  AND name NOT IN ('public')
-    
+    --
     --Find Role Memberships 
+    --
     SELECT DP1.name AS DatabaseRoleName,   
       isnull (DP2.name, 'No members') AS DatabaseUserName   
     FROM sys.database_role_members AS DRM  
@@ -163,7 +177,7 @@ List Roles and Members
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="03"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.3 Securables</h2>
-Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a <i>Schema</i> allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals.
+Just as in a SQL Server Instance, <b>Securables</b> in Azure SQL DB are the objects the database contains. A special container called a <i>Schema</i> allows for a gouping of Securables into a single group. Each Schema is owned by one or more Principals, and using a Schema makes for a simplified security management process. You can <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/authentication-access/ownership-and-user-schema-separation?view=sql-server-ver16">learn more about Schemas here</a>.
 
 Securables fall into three categories, or <i>scopes</i>, for ease of use, the same as a SQL Server installation:
 
@@ -212,7 +226,7 @@ Securables fall into three categories, or <i>scopes</i>, for ease of use, the sa
     </ul>
 </ul>
   
-Each securable includes a set of <i>permissions</i> relevant to its scope and function. Some of these permissions include <i>rights</i>, such as the ability for one Principal to allow access to an object the first owns. Permissions are "most permissive" - meaning that if a user has three permissions in one Role they are a member of and two other permissions from another Role they are a member of, they will have a total of five permissions. 
+Each securable includes a set of <i>Permissions</i> relevant to its scope and function. Some of these permissions include <i>Rights</i>, such as the ability for one Principal to allow access to an object the first owns. Permissions are "most permissive" - meaning that if a user has three permissions in one Role they are a member of and two other permissions from another Role they are a member of, they will have a total of five permissions. 
 
 The primary commands for object access (Data Control Language, or DCL), just as in a SQL Server installation, are:
 
@@ -225,11 +239,12 @@ The primary commands for object access (Data Control Language, or DCL), just as 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Permissions to Azure SQL DB Objects</b></h4>
 <br>
 
-TODO ADD DESCRIPTION
+In this Activity you will work with Permissions on various database objects. You can alter these scripts after you run them to experiment with how Permissions work.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Add the three objects from the previous module:
+1. Add the three objects from the previous Module:
+
 <pre>
     CREATE TABLE Patient (
     LoginID tinyint
@@ -247,13 +262,17 @@ TODO ADD DESCRIPTION
         , (2, 'Bob', 'Billy', '222 Bayshore Blvd.', 'Boice', '222-22-2222', '2222-2222-2222-2222')
         , (3, 'Choice', 'Charley', '333 Castaway Ct.', 'Chesterfield', '333-33-3333', '3333-3333-3333-3333')
         , (4, 'Dangerfield', 'David', '4444 Denvue Drive', 'Denver', '444-44-4444', '4444-4444-4444-4444')
-        , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555')
+        , (5, 'Engleton', 'Edbert', '5555 Esquire Rd. E', 'Easton', '555-55-5555', '5555-5555-5555-5555');
+        GO
 </pre> 
+
 <pre>
     CREATE VIEW Patient_Mailing_Address AS
     SELECT FirstName, LastName, Address, City
-    FROM Patient
+    FROM Patient;
+    GO
 </pre>
+
 <pre>
     CREATE PROCEDURE uspGetCardInformation   
         @Loginid tinyint  
@@ -266,65 +285,68 @@ TODO ADD DESCRIPTION
     GO  
 </pre>
 
-2. Connect with User1 or User2 to see what current permissions allow:
+2. Connect with User1 or User2 to see what current Permissions allow:
+
 <pre>
-    Select LoginId FROM Patient WHERE Loginid = 1
+    Select LoginId FROM Patient WHERE Loginid = 1;
     GO
 
-    EXEC uspGetCardInformation @Loginid = 2
+    EXEC uspGetCardInformation @Loginid = 2;
     GO
 
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
-3. SQitch to admin and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
+
+3. Switch to an admin user and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
+
 <pre>
-    GRANT CONTROL ON Patient TO Elevated_Permissions
-    GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions
-    GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions
+    GRANT CONTROL ON Patient TO Elevated_Permissions;
+    GRANT CONTROL ON Patient_Mailing_Address TO Elevated_Permissions;
+    GRANT CONTROL ON uspGetCardInformation TO Elevated_Permissions;
 </pre>
-4. Run again on user1:
+
+4. Run the script again on User1:
+
 <pre>
-    Select LoginId FROM Patient WHERE Loginid = 1
+    Select LoginId FROM Patient WHERE Loginid = 1;
     GO
 
-    EXEC uspGetCardInformation @Loginid = 2
+    EXEC uspGetCardInformation @Loginid = 2;
     GO
 
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
-5. Using admin, Revoke SELECT for User1 on the Patient_Mailing_Address view:
+
+5. Using your admin connection, Revoke SELECT for User1 on the Patient_Mailing_Address view:
+
 <pre>
-    REVOKE SELECT ON Patient_Mailing_Address TO User1
+    REVOKE SELECT ON Patient_Mailing_Address TO User1;
 </pre>
-6. Return to User1's conenction, run the query again:
+
+6. Now return to User1's conenction, run the query again:
+
 <pre>
-    SELECT * FROM Patient_Mailing_Address
+    SELECT * FROM Patient_Mailing_Address;
     GO
 </pre>
-7. As you can see, GRANT supercedes REVOKE, how about DENY? Return to admin and DENY SELECT on the view:
+
+7. As you can see, GRANT supercedes REVOKE. Return to admin and DENY SELECT on the view:
+
 <pre>
-DENY SELECT ON Patient_Mailing_Address TO User1
+    DENY SELECT ON Patient_Mailing_Address TO User1;
 </pre>
-8. Finally, rerun the same query with User1
+
+8. Finally, rerun the same query with User1. You will note that the DENY permission overrides the previous GRANT:
+
+<pre>
+    SELECT * FROM Patient_Mailing_Address;
+    GO
+</pre>
 
 
-Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
-
-[//]: <> (===== This activity is already fulfilled prior (Step 5) =============)
-[//]: <> (=====<h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Query the Roles, Permissions, and Principals in your Test Environment</b></h4>)
-[//]: <> (=====<br>)
-
-[//]: <> (=====Thing)
-
-[//]: <> (=====<p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>)
-
-[//]: <> (=====Thing)
-
-[//]: <> (=====<pre>)
-[//]: <> (=====  Thing)
-[//]: <> (=====</pre>)
+> Always use the principle of <i>Least Privilege</i> each time you assign permissions, and cross referencing permissions granted through each role is necessary. The <a href="https://aka.ms/sql-permissions-poster">Permissions Poster produced by Microsoft</a> can help illustrate that heirarchy.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -335,7 +357,7 @@ Always use the principle of <i>Least Privilege</i> each time you assign permissi
 [//]: <> (================================= ========= =========================================================)
 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.4 Applications</h2>
-<p>This section repeats much of the same information as an installed Instance of SQL Server, so you can review the text below, running any sample scripts that ommitted in the previous Module.</p>
+<p>This section repeats much of the same information as an installed Instance of SQL Server, so you can review the text below, running any sample scripts that you ommitted in the previous Module.</p>
 
 Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.
 
@@ -370,7 +392,7 @@ In this Activity you will explore setting up Row-Level Security on your Azure SQ
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></p>
 In this Activity you will review an example set of scripts that implement Dynamic Data Masking, and shows the data returned. 
 
->You can implement these scripts if you would like a hands-on experience in your sample workshop database. 
+> You can implement these scripts if you would like a hands-on experience in your sample workshop database. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
@@ -438,13 +460,15 @@ In this Activity you will implement Always Encrypted on your sample course datab
 <h2 id="06"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">3.6 Auditing</h2>
 <br>
 Microsoft Azure SQL DB has an auditing capability similar to a SQL Server installation on-premises, but since you do not have access to the storage where the service is running, you send the output of the audits to an Azure storage account, a Log Analytics workspace, or to Azure Event Hubs. Each of these targets provides different interfaces and features, but they store the same information. 
-<p></p>
+<br>
+  
 You can enable a logical <i>Server</i> audit, a <i>Database</i> audit, or both. In general, you should choose one or another, but not both. Enabling a Server audit audits all the databases on that server, and any new ones you create, and sends it to a single target. Enabling a Database audit allows you to send each audit collection to a different target. 
-<p></p>
+<br>
 
-[You can learn more about Azure SQL DB audits here.](https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql)
+You can <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql">learn more about Azure SQL DB audits here</a>.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Set up a Server Audit on your Azure SQL DB account</b></p>
+
 In this Activity you will implement a Server audit on your sample course database environment.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
