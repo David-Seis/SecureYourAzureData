@@ -187,7 +187,7 @@ In this Activity you will review the process to create a "Security Score" using 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="[https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=sql-server-ver16](https://docs.microsoft.com/en-us/security/ciso-workshop/the-ciso-workshop)" target="_blank">You can find a Chief Information Security Office (CISO) workshop to accelerate your security program modernization with reference strategies built using Zero Trust principles here</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/security/ciso-workshop/the-ciso-workshop" target="_blank">You can find a Chief Information Security Office (CISO) workshop to accelerate your security program modernization with reference strategies built using Zero Trust principles here</a></li>
     <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=sql-server-ver16" target="_blank">Official Documentation for SQL Server Security</a></li>
     <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=azuresqldb-current" target="_blank">Official Documentation for Azure SQL DB Security</a></li>
 </ul>
