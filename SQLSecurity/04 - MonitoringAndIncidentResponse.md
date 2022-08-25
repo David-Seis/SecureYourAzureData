@@ -49,7 +49,7 @@ In this Activity you will Locate your Server Audits and review the information y
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
   <li> Locate your Server Audit. This can be done using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16#SSMSProcedure">SQL Server Management Studio tool</a>, or by using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-server-audits-transact-sql?view=sql-server-ver16">sys.server_audits Transact-SQL</a> statement for instalations of SQL Server. 
-  <li>If you set the target to the Event logs, use the Event Log tool in Windows to review the log. If you set the Audit target toa file, use the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-ver16">sys.fn_get_audit_file Transact-SQL</a> or a text editor to review the contents.</li>
+  <li>If you set the target to the Event logs, use the Event Log tool in Windows to review the log. If you set the Audit target to a file, use the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-ver16">sys.fn_get_audit_file Transact-SQL</a> or a text editor to review the contents.</li>
   <li> For your Azure SQL DB Audits, use the <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql#subheading-3">Microsoft Azure Portal to locate and review your Audits</a>.</li>
 </ol>
 
