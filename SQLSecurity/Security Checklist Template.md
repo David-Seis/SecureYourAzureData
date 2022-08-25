@@ -164,5 +164,5 @@ The Data Security Area involves ensuring that business and customer data is encr
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="[url](https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview?view=azuresql)" target="_blank">Official Azure SQL DB Security Documentation for this section</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-server-security-best-practices?view=sql-server-ver16">Official Documentation for this section</a></li>
 </ul>

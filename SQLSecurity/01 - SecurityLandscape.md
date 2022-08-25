@@ -132,28 +132,41 @@ An application role is a SQL Server Database principal with user-like permission
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: General SQL Server Instance Security Settings Review</b></p>
 
-TODO: Activity Description and tasks
+In this Activity you will use the SQL Server Configuration Manager tool and the SQL Server Management Studio tool to review the settings that deal with security for your installation.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- Check Networks in Configuration Manager
-- Check Account Types in Properties
-- Check File Locations in Properties
-- Run Security Standard Reports
-- Determine Access to your environment
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Check Networks and other settings in Configuration Manager</p>
+
+- Using the Windows Start Menu on your test system, search for "SQL Server Configuration Manager" and run it. 
+- Evaluate each section to see the network protocols and ports that are opened, the Account running each service, and the status of each Service it controls.
+- You can <a href="https://docs.microsoft.com/en-us/sql/tools/configuration-manager/sql-server-configuration-manager-help?view=sql-server-ver16">find more information about the SQL Server Configuration Manager tool here</a>.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Check Instance Configuration using SQL Server Management Studio</p>
+
+- Using the Windows Start Menu on your test system, search for "SQL Server Configuration Manager" and run it.
+- On the left-hand side, in the Object Explorer, right-click the name of your test Instance and select "Properties". 
+- Evaluate each section, paying special attention to the primary Authentication methods, the file locations, and other security and authorization settings.
+- You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/view-or-change-server-properties-sql-server?view=sql-server-ver16">learn more about the Server Properties panel, along with various Transact-SQL statements you can use to discover more about your Instance here</a>.
+
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Run Standard Reports for Security using SQL Server Management Studio</p>
+
+- Double-click your Instance, double-click <b>Security</b>, and right-click <b>Logins</b>. 
+- Click <b>Reports</b>, then <b>Standard Reports</b>, and run all of the reports you see there. 
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: SQL Server Security Settings Review</b></p>
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Azure SQL Database Security Settings Review</b></p>
 
-TODO: Activity Description and tasks
+In this Activity you will use the SQL Server Configuration Manager tool and the SQL Server Management Studio tool to review the settings that deal with security for your installation.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- [Right-click this reference and open in a new tab to see the recommendations for Azure SQL DB Security](https://docs.microsoft.com/en-us/security/benchmark/azure/baselines/sql-database-security-baseline?toc=%2Fazure%2Fazure-sql%2Ftoc.json&view=azuresql)
-- Open the Azure Portal for your account, navigate to the Resource Group for your Azure SQL DB created for this course, and click the "Security" item on the left-side of the database blade. Review each setting in light of the guide you opened in the previous step.
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Use the Azure Portal to review your security settings</p>
+
+- Open the Azure Portal for your account, navigate to the Resource Group for your Azure SQL DB created for this course, and click the <b>Security</b> item on the left-side of the database blade. Review each setting in light of the guide you opened in the previous step.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -165,7 +178,7 @@ In this Activity you will review the process to create a "Security Score" using 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-  - Open <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/microsoft-secure-score?view=o365-worldwide">this reference, and review the video</a> you see near the top of the page. 
+  - Open <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/microsoft-secure-score?view=o365-worldwide">this reference, and review the video</a> you see near the top of the page. If there is time in the course, you can follow those instructions to run the evaluation.
   
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
