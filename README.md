@@ -18,6 +18,8 @@ You'll start by creating a workshop enviroment using your own laptop or Virtual 
 
 This [github README.MD file](https://lab.github.com/githubtraining/introduction-to-github) explains how the workshop is laid out, what you will learn, and the technologies you will use in this solution. To download this Lab to your local computer, click the **Clone or Download** button you see at the top right side of this page. [More about that process is here](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository). 
 
+> It's best to right-click any links you see and select "Open in new Tab" for easier navigation.
+
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <img style="float: left; margin: 0px 15px 15px 0px;" src="https://raw.githubusercontent.com/microsoft/sqlworkshops/master/graphics/checkmark.png"> <h3>Learning Objectives</h3>
@@ -25,7 +27,7 @@ This [github README.MD file](https://lab.github.com/githubtraining/introduction-
 In this workshop you'll learn:
 <br>
 
-- The General Computing Security Landscape and the Data estate's responsibilities in that environment
+- The general computing security landscape and the data estate's responsibilities in that environment
 - The basics of security for on-premises and in-Virtual Machine SQL Server installations
 - The basics of Microsoft Azure SQL Database security
 - How to monitor for and react to security incidents in your organization
