@@ -40,10 +40,10 @@ Computing Security paradigms are a kind of framework or action paths you can use
 
 
 <h3>1.1 Computing Security Paradigms</h3>
-To adequately secure a resource, security processes and programs within operating systems and applications control each area. You can implement those areas using various methods and processes, and over time various frameworks for tracking Identity, Authentication and Authorization have been created. Two of these are *Defense in Depth*, and *Zero Trust*.
+To adequately secure a resource, security processes and programs within operating systems and applications control each area. You can implement those areas using various methods and processes, and over time various frameworks for tracking Identity, Authentication and Authorization have been created. Two of these are <b>Defense in Depth</b>, and <b>Zero Trust</b>.
 
 <h4>1.1.1 Defense in Depth</h4>
-One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
+  One of the oldest security paradigms is <b>Defense in Depth</b>. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
 
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
@@ -57,7 +57,7 @@ One of the oldest security paradigms is *Defense in Depth*. You check and secure
 
 <h4>1.1.2 Zero Trust</h4> 
 
-The "Zero Trust" paradigm is a modern framework for distributed applications where you cannot control the various networks and access points applications may use. It layers three basic concepts, Verify Explicitly, Least Privilege, and Assume Breach, over multiple objects in your system:
+  The <b>Zero Trust</b> paradigm is a modern framework for distributed applications where you cannot control the various networks and access points applications may use. It layers three basic concepts, Verify Explicitly, Least Privilege, and Assume Breach, over multiple objects in your system:
 
 - Identities
 - Devices
