@@ -40,10 +40,10 @@ Computing Security paradigms are a kind of framework or action paths you can use
 
 
 <h3>1.1 Computing Security Paradigms</h3>
-To adequately secure a resource, security processes and programs within operating systems and applications control each area. You can implement those areas using various methods and processes, and over time various frameworks for tracking Identity, Authentication and Authorization have been created. Two of these are *Defense in Depth*, and *Zero Trust*.
+To adequately secure a resource, security processes and programs within operating systems and applications control each area. You can implement those areas using various methods and processes, and over time various frameworks for tracking Identity, Authentication and Authorization have been created. Two of these are <b>Defense in Depth</b>, and <b>Zero Trust</b>.
 
 <h4>1.1.1 Defense in Depth</h4>
-One of the oldest security paradigms is *Defense in Depth*. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
+  One of the oldest security paradigms is <b>Defense in Depth</b>. You check and secure each area along a path from the physical access to the computing assets all the way through to the data objects. There are specific steps and actions 
 
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
@@ -57,7 +57,7 @@ One of the oldest security paradigms is *Defense in Depth*. You check and secure
 
 <h4>1.1.2 Zero Trust</h4> 
 
-The "Zero Trust" paradigm is a modern framework for distributed applications where you cannot control the various networks and access points applications may use. It layers three basic concepts, Verify Explicitly, Least Privilege, and Assume Breach, over multiple objects in your system:
+  The <b>Zero Trust</b> paradigm is a modern framework for distributed applications where you cannot control the various networks and access points applications may use. It layers three basic concepts, Verify Explicitly, Least Privilege, and Assume Breach, over multiple objects in your system:
 
 - Identities
 - Devices
@@ -99,9 +99,7 @@ At the end of this course, you'll find a basic Data Security Checklist template,
 There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
 
 <h4>SQL Server Instance</h4>
-Beyond the phsysical facilities and access to the environment where your SQL Server hardware is located, you must also set up system access and file protections. Understanding the file locations.
-
-Data at rest protections
+Beyond the phsysical facilities and access to the environment where your SQL Server hardware is located, you must also set up system access and file protections. SQL Server uses multiple files, which have various file locations depending on their purpose. Use <a href="https://docs.microsoft.com/en-us/sql/sql-server/install/file-locations-for-default-and-named-instances-of-sql-server?view=sql-server-ver16">this reference to understand those locations and create your "Data at Rest" strategy and protections</a>.
 
 
 <h3>Determine Access Strategy</h3>
@@ -118,11 +116,11 @@ Other combinations of access are possible, and you can derive the proper securit
 SQL Server allows for a self-contained security mechanism. The name/password pairs for Instance Logons and Database Users are stored directly in tables in the *master* and the specific database, and these are mapped to each other. 
 
 - Integrated Authentication
-SQL Server can also use Acitve Directory to allow access to database objects. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
-Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) which you will learn more about shortly.
+SQL Server can also use <a href="https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-ad-auth-understanding?view=sql-server-ver16">Active Directory to allow access to database objects</a>. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
+Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) and also <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=azuresqldb-current">Contained users (a best-practice)</a> which you will learn more about shortly. 
 
 - Certificate and other non-user methods of Authentication
-Certificates are not used to log in to a SQL Server Instance or Database, but are used to help secure connections, for database mirroring connections, to sign packages and other objects, or to encrypt data and connections.
+Certificates are not used to log in to a SQL Server Instance or Database, <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-server-certificates-and-asymmetric-keys?view=sql-server-ver16">but are used to help secure connections, for database mirroring connections, to sign packages and other objects, or to encrypt data and connections</a>.
 
 - Application Proxy
 In this pattern the database stores user and permission information in it's own storage, and the application accesses the database on behalf of all users, performing operations on their behalf. The application has access to all data and objects, and the users have none. 
@@ -140,11 +138,10 @@ In this Activity you will use the SQL Server Configuration Manager tool and the 
 
 - Using the Windows Start Menu on your test system, search for "SQL Server Configuration Manager" and run it. 
 - Evaluate each section to see the network protocols and ports that are opened, the Account running each service, and the status of each Service it controls.
-- You can <a href="https://docs.microsoft.com/en-us/sql/tools/configuration-manager/sql-server-configuration-manager-help?view=sql-server-ver16" target="_blank">find more information about the SQL Server Configuration Manager tool here</a>.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Check Instance Configuration using SQL Server Management Studio</p>
 
-- Using the Windows Start Menu on your test system, search for "SQL Server Configuration Manager" and run it.
+  - Using the Windows <b>Start Menu</b> on your test system, search for "SQL Server Configuration Manager" and run it.
 - On the left-hand side, in the Object Explorer, right-click the name of your test Instance and select "Properties". 
 - Evaluate each section, paying special attention to the primary Authentication methods, the file locations, and other security and authorization settings.
 - You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/view-or-change-server-properties-sql-server?view=sql-server-ver16" target="_blank">learn more about the Server Properties panel, along with various Transact-SQL statements you can use to discover more about your Instance here</a>.
@@ -183,7 +180,6 @@ In this Activity you will review the process to create a "Security Score" using 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
 <br>
-
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>

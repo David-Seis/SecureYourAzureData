@@ -400,14 +400,14 @@ In this Activity you will review an example set of scripts that implement Dynami
   <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask" target="_blank">Navigate to this reference, and review all the steps you see there</a>, using your sample Azure SQL DB environment.</li> 
 </ol>
 
-<h4>SQL Ledger</h4>
+<h4>Ledger in SQL Server and Azure SQL</h4>
 
 SQL Server 2022 and Microsoft Azure SQL DB include a new feature called <a href=" https://docs.microsoft.com/en-us/azure/azure-sql/database/ledger-landing?view=azuresql" target="_blank">Ledger</a> that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest, alerting you to any differences, which indicates that the data has been tampered with.
 
 With the Ledger feature, you are able to create updatable tables, or insert-only tables depending on your application's needs.
 
-<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review SQL Ledger</b></p>
-In this Activity you will review an example of setting up and working with SQL Ledger. 
+<p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Ledger in SQL Server and Azure SQL</b></p>
+In this Activity you will review an example of setting up and working with Ledger. 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
