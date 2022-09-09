@@ -10,7 +10,7 @@
 
 In <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">the SQL Server Security Ground to Cloud workshop</a> you'll cover the basics of securing SQL Server installations and databases, from on-premises systems to Microsoft Azure deployments. After completing that workshop, you will know the basics of securing your system along with the other teams in your organization. This checklist should be used as a *guide* to form the basis of your own security posture, after you have completed the workshop and fully understand each section's implementation.
 
-This checklist covers both the Microsoft Azure SQL DB platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL DB security is a shared responsibility between Microsoft and your organization. A more [complete description of these responsibilities is here](https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility).
+This checklist covers both the Microsoft Azure SQL DB platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL DB security is a shared responsibility between Microsoft and your organization. A more <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" target="_blank">complete description of these responsibilities is here.</a>
 
 Some of these items are checked on installation or initial configuration, others are periodic tasks based on your organization's requirements and the general use of your installation. You should augment the steps in this guide to fit your organization and installations. You should review this checklist periodically to ensure compliance and to update the teams in your organization for changes or additions. 
 
@@ -18,13 +18,13 @@ Some of these items are checked on installation or initial configuration, others
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Security Checklist by "Defense in Depth" Area</b></p>
 
-The following sections should be answered as "*Complete*", "*Checked*", or "*Implemented*". If any area is not marked with one of these designations, you should complete the tasks to secure the area using the knowledge gained in the SQL Server Security course. You should also use the ["Zero-Trust"](https://docs.microsoft.com/en-us/azure/security/fundamentals/zero-trust) model for your deployments. 
+The following sections should be answered as "*Complete*", "*Checked*", or "*Implemented*". If any area is not marked with one of these designations, you should complete the tasks to secure the area using the knowledge gained in the SQL Server Security course. You should also use the <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/zero-trust" target="_blank">"Zero-Trust"</a> model for your deployments. 
 
 <br>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Physical</b></p>
 
-Physical security involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
+Physical security involves restricting and <a href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack" target="_blank">controlling access to your datacenter and computing assets</a> to only allow authorized access.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> The physical server hosting SQL Server is kept in a secure location, with alarm and monitoring systems implemented, which are documented and periodically tested.
@@ -35,13 +35,13 @@ Physical security involves restricting and [controlling access to your datacente
 <br><img src="../graphics/checkbox.png"> Server Master Keys and Database Master Keys, along with other Certificate mechanisms, are backed up and secured. Ideally in a different location. 
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security](https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security)
+<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security" target="_blank">https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security</a>
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media, especially if exported from Microsoft Azure.
  
 <br>
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Perimeter</b></p>
 
-Perimeter security entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+Perimeter security entails creating defenses at the network level for <a href="https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks" target="_blank">distributed denial of service (DDoS)</a> attacks, and using <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql" target="_blank">network access controls</a>, <a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" target="_blank">Network Security Groups</a>, and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> Only required network protocols are enabled using the SQL Server Configuration Manager utility. 
@@ -53,7 +53,7 @@ Perimeter security entails creating defenses at the network level for [distribut
 <br><img src="../graphics/checkbox.png"> Where applicable, the *Extended Protection for Authentication* feature is configured using channel binding and service binding. 
 
 *Microsoft Azure SQL DB environments*
-<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: [https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql](https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql)
+<br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql" target="_blank">https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql</a>
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Server-level IP Firewall configured for appropriate access based on application patterns.
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Database-level IP Firewall configured for appropriate access based on application patterns.
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Virtual network service endpoints configured for appropriate access based on application patterns.
@@ -61,7 +61,7 @@ Perimeter security entails creating defenses at the network level for [distribut
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Compute</b></p>
 
-The Compute security area requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlling access to physical and virtual machines, and implementing strong Cloud controls.
+The Compute security area requires creating a <a href="https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672" target="_blank">"strong system</a> for controlling access to physical and virtual machines, and implementing strong Cloud controls.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> All Windows Operating System Service Packs and Linux updates evaluated and applied after testing to the system(s) hosting SQL Server binaries and files. 
@@ -73,7 +73,7 @@ The Compute security area requires creating a [strong system](https://techcommun
 <br><img src="../graphics/checkbox.png"> Binary and file locations for the SQL Server are secured against unauthorized access.
 <br><img src="../graphics/checkbox.png"> Only required Operating System components, utilities, and features are installed required for operating the SQL Server installation.
 <br><img src="../graphics/checkbox.png"> System lock after timeout is enabled.
-<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools are enabled, run, and results are periodically evaluated. The following reference has been reviewed and approved by appropriate security and auditing teams: https://support.microsoft.com/en-us/topic/how-to-choose-antivirus-software-to-run-on-computers-that-are-running-sql-server-feda079b-3e24-186b-945a-3051f6f3a95b
+<br><img src="../graphics/checkbox.png"> Virus and other malware scans and tools are enabled, run, and results are periodically evaluated. The following reference has been reviewed and approved by appropriate security and auditing teams: <a href="https://support.microsoft.com/en-us/topic/how-to-choose-antivirus-software-to-run-on-computers-that-are-running-sql-server-feda079b-3e24-186b-945a-3051f6f3a95b" target="_blank">https://support.microsoft.com/en-us/topic/how-to-choose-antivirus-software-to-run-on-computers-that-are-running-sql-server-feda079b-3e24-186b-945a-3051f6f3a95b</a>
 <br><img src="../graphics/checkbox.png"> Only required SQL Server components, utilities and features are installed required for securely servicing authorized data and programmatic requests.
 <br><img src="../graphics/checkbox.png"> SQL Server is at a currently supported version.
 <br><img src="../graphics/checkbox.png"> SQL Server latest Service Packs and/or Cumulative Updates are tested, installed and configuration documents updated.
@@ -96,7 +96,7 @@ The Compute security area requires creating a [strong system](https://techcommun
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Identitiy and Authorization</b></p>
 <br>
-Identity and Authorization security defines the appropriate *Principals* and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
+Identity and Authorization security defines the appropriate *Principals* and checking that they are who they claim using <a href="https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks" target="_blank">multifactor authentication</a>[]() and other conditional access systems for infrastructure, code, and change tracking systems.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> The *sa* SQL Server account has been disabled or renamed, after testing.
@@ -127,7 +127,7 @@ Identity and Authorization security defines the appropriate *Principals* and che
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Application</b></p>
 
-The Application security area involves implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
+The Application security area involves implementing <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines" target="_blank">Secure Code</a> practices and policies to prevent security vulnerabilities.
 
 *SQL Server Installations*
 <br><img src="../graphics/checkbox.png"> Applications do not use a hard-coded password in the application for database access.
@@ -164,5 +164,5 @@ The Data Security Area involves ensuring that business and customer data is encr
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-server-security-best-practices?view=sql-server-ver16">Official Documentation for this section</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-server-security-best-practices?view=sql-server-ver16" target="_blank">Official Documentation for this section</a></li>
 </ul>

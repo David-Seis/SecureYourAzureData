@@ -48,11 +48,11 @@ To adequately secure a resource, security processes and programs within operatin
 <br>
 <img style="height: 150; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" src="../graphics/1-1.png">
 
-- **Physical**: Involves restricting and [controlling access to your datacenter and computing assets](https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack) to only allow authorized access.
-- **Perimeter**:  Entails creating defenses at the network level for [distributed denial of service (DDoS)](https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks) attacks, and using [network access controls](https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql), [Network Security Groups](https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview), and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
-- **Compute**: Requires creating a [strong system](https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672) for controlling access to physical and virtual machines, and implementing strong Cloud controls.
-- **Identity and Authorization**: Defining Principals and checking that they are who they claim using [multifactor authentication](https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks) and other conditional access systems for infrastructure, code, and change tracking systems.
-- **Application**: Implementing [Secure Code](https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) practices and policies to prevent security vulnerabilities.
+- **Physical**: Involves restricting and <a href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/securing-domain-controllers-against-attack" target="_blank">controlling access to your datacenter and computing assets</a> to only allow authorized access.
+- **Perimeter**:  Entails creating defenses at the network level for <a href="https://docs.microsoft.com/en-us/azure/ddos-protection/types-of-attacks" target="_blank">distributed denial of service (DDoS)</a> attacks, and using <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/network-access-controls-overview?view=azuresql" target="_blank">network access controls</a>, <a href="https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" target="_blank">Network Security Groups</a>, and other network segmentation strategies to limit communication between systems, avoiding spoofing, man-in-the-middle attacks, and other network-related issues.
+- **Compute**: Requires creating a <a href="https://techcommunity.microsoft.com/t5/itops-talk-blog/introduction-to-secured-core-computing/ba-p/2701672" target="_blank">strong system</a> for controlling access to physical and virtual machines, and implementing strong Cloud controls.
+- **Identity and Authorization**: Defining Principals and checking that they are who they claim using <a href="https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks" target="_blank">multifactor authentication</a> and other conditional access systems for infrastructure, code, and change tracking systems.
+- **Application**: Implementing <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines" target="_blank">Secure Code</a> practices and policies to prevent security vulnerabilities.
 - **Data**: Ensuring that business and customer data is encrypted and protected against unwanted access at rest, in=-transit, in-memory and in-code processes. This is the focus of this course.
 
 <h4>1.1.2 Zero Trust</h4> 
@@ -83,8 +83,8 @@ In this exercise you will review two videos on Defense in Depth and Zero Trust c
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-- [Right-click and open this reference in a separate browser tab and watch the video you see there on "Defense in depth".](https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure)
-- [Right-click and open this reference in a separate browser tab and watch the video you see there on "Zero Trust".](https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks)
+- <a href="https://docs.microsoft.com/en-us/shows/azure-videos/defense-in-depth-security-in-azure" target="_blank">Right-click and open this reference in a separate browser tab and watch the video you see there on "Defense in depth".</a>.
+- <a href="https://docs.microsoft.com/en-us/shows/azure-videos/take-a-zero-trust-approach-to-secure-your-networks" target="_blank">Right-click and open this reference in a separate browser tab and watch the video you see there on "Zero Trust".</a>.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -138,14 +138,13 @@ In this Activity you will use the SQL Server Configuration Manager tool and the 
 
 - Using the Windows Start Menu on your test system, search for "SQL Server Configuration Manager" and run it. 
 - Evaluate each section to see the network protocols and ports that are opened, the Account running each service, and the status of each Service it controls.
-- You can <a href="https://docs.microsoft.com/en-us/sql/tools/configuration-manager/sql-server-configuration-manager-help?view=sql-server-ver16">find more information about the SQL Server Configuration Manager tool here</a>. Note the setting for <a href="https://docs.microsoft.com/en-us/sql/tools/configuration-manager/sql-server-browser-service?view=sql-server-ver16">the SQL Server Browser, which has specific security and operational implications</a>. 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Check Instance Configuration using SQL Server Management Studio</p>
 
   - Using the Windows <b>Start Menu</b> on your test system, search for "SQL Server Configuration Manager" and run it.
 - On the left-hand side, in the Object Explorer, right-click the name of your test Instance and select "Properties". 
 - Evaluate each section, paying special attention to the primary Authentication methods, the file locations, and other security and authorization settings.
-- You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/view-or-change-server-properties-sql-server?view=sql-server-ver16">learn more about the Server Properties panel, along with various Transact-SQL statements you can use to discover more about your Instance here</a>.
+- You can <a href="https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/view-or-change-server-properties-sql-server?view=sql-server-ver16" target="_blank">learn more about the Server Properties panel, along with various Transact-SQL statements you can use to discover more about your Instance here</a>.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Run Standard Reports for Security using SQL Server Management Studio</p>
 
@@ -176,7 +175,7 @@ In this Activity you will review the process to create a "Security Score" using 
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-  - Open <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/microsoft-secure-score?view=o365-worldwide">this reference, and review the video</a> you see near the top of the page. If there is time in the course, you can follow those instructions to run the evaluation.
+  - Open <a href="https://docs.microsoft.com/en-us/microsoft-365/security/defender/microsoft-secure-score?view=o365-worldwide" target="_blank">this reference, and review the video</a> you see near the top of the page. If there is time in the course, you can follow those instructions to run the evaluation.
   
 <p style="border-bottom: 1px solid lightgrey;"></p>
 

@@ -48,9 +48,9 @@ In this Activity you will Locate your Server Audits and review the information y
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> Locate your Server Audit. This can be done using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16#SSMSProcedure">SQL Server Management Studio tool</a>, or by using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-server-audits-transact-sql?view=sql-server-ver16">sys.server_audits Transact-SQL</a> statement for instalations of SQL Server. 
-  <li>If you set the target to the Event logs, use the Event Log tool in Windows to review the log. If you set the Audit target to a file, use the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-ver16">sys.fn_get_audit_file Transact-SQL</a> or a text editor to review the contents.</li>
-  <li> For your Azure SQL DB Audits, use the <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql#subheading-3">Microsoft Azure Portal to locate and review your Audits</a>.</li>
+  <li> Locate your Server Audit. This can be done using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/auditing/view-a-sql-server-audit-log?view=sql-server-ver16#SSMSProcedure" target="_blank">SQL Server Management Studio tool</a>, or by using the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-catalog-views/sys-server-audits-transact-sql?view=sql-server-ver16" target="_blank">sys.server_audits Transact-SQL</a> statement for instalations of SQL Server. 
+  <li>If you set the target to the Event logs, use the Event Log tool in Windows to review the log. If you set the Audit target to a file, use the <a href="https://docs.microsoft.com/en-us/sql/relational-databases/system-functions/sys-fn-get-audit-file-transact-sql?view=sql-server-ver16" target="_blank">sys.fn_get_audit_file Transact-SQL</a> or a text editor to review the contents.</li>
+  <li> For your Azure SQL DB Audits, use the <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/auditing-overview?view=azuresql#subheading-3" target="_blank">Microsoft Azure Portal to locate and review your Audits</a>.</li>
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -63,15 +63,15 @@ In this Activity you will Locate your Server Audits and review the information y
 
 <h2 id="02"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">02 - Working with Microsoft Defender for SQL</h2>
 <br>
-Microsoft Azure Defender for Cloud <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction">is the primary security tool from Microsoft for not only Azure-based assets, but also on-premises systems and even other Cloud provider's environments</a>.  It provides what the industry calls a "Cloud Security Posture Management" (CSPM) and "Cloud Workload Protection Platform" (CWPP) system. The primary aspects are assessing your systems, securing your systems, and reacting to attacks on your systems.
+Microsoft Azure Defender for Cloud <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction" target="_blank">is the primary security tool from Microsoft for not only Azure-based assets, but also on-premises systems and even other Cloud provider's environments</a>.  It provides what the industry calls a "Cloud Security Posture Management" (CSPM) and "Cloud Workload Protection Platform" (CWPP) system. The primary aspects are assessing your systems, securing your systems, and reacting to attacks on your systems.
 
 In larger organizations, it is common to have a security team that implements a comprehensive organization security posture. In smaller organizations, that function may fall to each member of the IT team. If your organization has a security team, then you should work with them to extend the systems they have to covering your Data estate.
 
-<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql?view=azuresql">Microsoft Defender for SQL is a separate plan within Microsoft Defender for Cloud</a>. It asseses potential database vulnerabilities, detects anomalous activities, and has a full reporting system that also surfaces these reports up to the larger Microsoft Defender for Cloud system. It's two main components are performing a Vulnerability Assessment, and enabling Advanced Threat Protection to react to threats, in some cases, pre-emptively.
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql?view=azuresql" target="_blank">Microsoft Defender for SQL is a separate plan within Microsoft Defender for Cloud</a>. It asseses potential database vulnerabilities, detects anomalous activities, and has a full reporting system that also surfaces these reports up to the larger Microsoft Defender for Cloud system. It's two main components are performing a Vulnerability Assessment, and enabling Advanced Threat Protection to react to threats, in some cases, pre-emptively.
 
 To enable Microsoft Defender for SQL, you can use the Microsoft Azure Portal, the Azure CLI, or PowerShell. In a previous activity, you enabled this feature for your Azure based system. To enable Microsoft Defender for SQL Servers on local systems, you install an Agent Extension on the system, provision the Log Analytics agent on your SQL Server's host, and then enable the optional plan in Defender for Cloud's environment settings page. From there, you can review the logs and alerts it creates. 
 
-A <i>SQL vulnerability assessment</i> is a Microsoft Azure service that can discover, track, and help you remediate potential database vulnerabilities. It is is part of the Microsoft Defender for SQL offering, and you enable and control it from the central Microsoft Defender for SQL portal. It is supported for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics. You can <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?view=azuresql&tabs=azure-powershell">learn more about SQL vulnerability assessment here</a>.
+A <i>SQL vulnerability assessment</i> is a Microsoft Azure service that can discover, track, and help you remediate potential database vulnerabilities. It is is part of the Microsoft Defender for SQL offering, and you enable and control it from the central Microsoft Defender for SQL portal. It is supported for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics. You can <a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment?view=azuresql&tabs=azure-powershell" target="_blank">learn more about SQL vulnerability assessment here</a>.
 
 <br>
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Enabling Microsoft Defender for SQL servers on local or cloud SQL Server Installations</b></h4>
@@ -80,7 +80,7 @@ In this Activity you will review the steps to install and configure the Agent an
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-sql-usage#set-up-advanced-data-security-for-sql-machines">Navigate to this reference</a>, and review the information <a href="https://www.youtube.com/watch?v=V7RdB6RSVpc">you see there</a>.</li>
+  <li> <a href="https://docs.microsoft.com/en-us/azure/defender-for-cloud/defender-for-sql-usage#set-up-advanced-data-security-for-sql-machines" target="_blank">Navigate to this reference</a>, and review the information <a href="https://www.youtube.com/watch?v=V7RdB6RSVpc" target="_blank">you see there</a>.</li>
   <li> If time permits, implement the steps on your classroom system, using the Azure account you have been using for this workshop.</li>
 </ol>
 
@@ -104,7 +104,7 @@ In this Activity you will review the steps to create or evaluate a complete Inci
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 <ol type="1">
-  <li> Navigate <a href = "https://docs.microsoft.com/en-us/security/compass/incident-response-overview">to this reference</a>, and review the documents you see there. Bookmark this location to develop the proper level of Incident Response for your organization in cooperation with your SecOps team. 
+  <li> Navigate <a href = "https://docs.microsoft.com/en-us/security/compass/incident-response-overview" target="_blank">to this reference</a>, and review the documents you see there. Bookmark this location to develop the proper level of Incident Response for your organization in cooperation with your SecOps team. 
 </ol>
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
@@ -117,11 +117,11 @@ In this Activity you will review the steps to create or evaluate a complete Inci
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/owl.png"><b>For Further Study</b></p>
 <ul>
-    <li><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Audit%20Notebook.ipynb" target="_blank">You can find a Jupyter Notebook on this course with the Activity code from this course here.</a> You can use this resource as the basis for further exploring your test environment, and this Notebook can be used as the basis for your production envirnment, after testing and validation with your team. You can <a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/notebooks/notebooks-guidance?view=sql-server-ver16">learn how to use a Jupyter Notebook with Azure Data Studio here</a>.</li>
+    <li><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Audit%20Notebook.ipynb" target="_blank">You can find a Jupyter Notebook on this course with the Activity code from this course here.</a> You can use this resource as the basis for further exploring your test environment, and this Notebook can be used as the basis for your production envirnment, after testing and validation with your team. You can <a href="https://docs.microsoft.com/en-us/sql/azure-data-studio/notebooks/notebooks-guidance?view=sql-server-ver16" target="_blank">learn how to use a Jupyter Notebook with Azure Data Studio here</a>.</li>
     <li><a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Checklist%20Template.md" target="_blank">You can find a sample Security Checklist here</a> which you can use as the basis for creating a comprehensive check on your environments, after testing and validitation with your team.</li>
-    <li>You can review the <a href="https://www.microsoft.com/security/blog/2021/05/20/simuland-understand-adversary-tradecraft-and-improve-detection-strategies/">complete Simuland environment and resources</a> to understand the complexity of a security footprint.</li>
-    <li>You can find the <a href="https://techcommunity.microsoft.com/t5/itops-talk-blog/what-s-the-difference-between-azure-security-center-azure/ba-p/2155188")">explanation of Microsoft Azure Defender, Microsoft Azure Sentinel, and the Microsoft Azure Security Center here</a>.</li>
-    <li>In addition to the tools and processes ddescribed in this Workshop, Microsoft have announced several other tools you can use for threat intelligence and security monitoring. You can <a href="https://www.microsoft.com/security/blog/2022/08/02/microsoft-announces-new-solutions-for-threat-intelligence-and-attack-surface-management/">see an announcement of those tools here</a>.</li>
+    <li>You can review the <a href="https://www.microsoft.com/security/blog/2021/05/20/simuland-understand-adversary-tradecraft-and-improve-detection-strategies/" target="_blank">complete Simuland environment and resources</a> to understand the complexity of a security footprint.</li>
+    <li>You can find the <a href="https://techcommunity.microsoft.com/t5/itops-talk-blog/what-s-the-difference-between-azure-security-center-azure/ba-p/2155188" target="_blank">explanation of Microsoft Azure Defender, Microsoft Azure Sentinel, and the Microsoft Azure Security Center here</a>.</li>
+    <li>In addition to the tools and processes ddescribed in this Workshop, Microsoft have announced several other tools you can use for threat intelligence and security monitoring. You can <a href="https://www.microsoft.com/security/blog/2022/08/02/microsoft-announces-new-solutions-for-threat-intelligence-and-attack-surface-management/" target="_blank">see an announcement of those tools here</a>.</li>
 </ul>
 
 Congratulations! You have completed this Workshop. You now have the tools, assets, and processes you need to extrapolate this information into other applications in your own organization.

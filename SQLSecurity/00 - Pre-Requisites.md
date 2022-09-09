@@ -136,7 +136,7 @@ python SimpleConnection.py
 
 <br>
  
-> If you are using an Azure Virtual Machine, when you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. [https://build5nines.com/properly-shutdown-azure-vm-to-save-money/](https://build5nines.com/properly-shutdown-azure-vm-to-save-money/) 
+> If you are using an Azure Virtual Machine, when you are done with the installation and with each time period of lab exercises, shut down the Virtual Machine from the Microsoft Azure Portal by selecting "Stop" in the Virutal Machine Panel. Simply shutting down the Virtual Machine using the Power Off feature in the operation system does not release the assets and you are charged until the machine is Stopped in the Portal. <a href = "https://build5nines.com/properly-shutdown-azure-vm-to-save-money/" target="_blank">https://build5nines.com/properly-shutdown-azure-vm-to-save-money/</a>
     
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity 3: Create a Microsoft Azure SQL Database</b></p>
 <br>
