@@ -88,7 +88,7 @@ For this Activity, you will run the same scripts as in the previous module, with
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
-1. Run the following code on your test SQL Azure DB conencted ot the master database:
+1. Run the following code on your test SQL Azure DB connected to the master database:
 
 <pre>
     CREATE LOGIN [User1] 
