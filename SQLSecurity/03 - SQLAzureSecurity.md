@@ -489,6 +489,7 @@ In this Activity you will implement a Server audit on your sample course databas
 <ul>
   <li><a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview?view=azuresql" target="_blank">Official Microsoft Documentation for this section</a></li>
   <li><a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/security-best-practice?view=azuresql" target="_blank">Microsoft Azure SQL DB Security Best Practices</a></li>
+  <li><a href="[https://docs.microsoft.com/en-us/azure/azure-sql/database/security-best-practice?view=azuresql](https://www.youtube.com/playlist?list=PLFOUNxPBUf-Ee8XSLKmXPGb_DPPSUiI5W)" target="_blank">Videos of several of these exercises are here.</a></li>
 </ul>
   
 <br>
