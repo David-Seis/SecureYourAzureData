@@ -80,6 +80,8 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
 <br>
 <p>In the following Steps you will create the database and Principals you will use for this Workshop. Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
+> If you did not have the opportunity to complete the pre-requsites or you are auditing this course without a SQL Server Instance installed, you can <a href="">find all of the T-SQL exercises worked out in a Jupyter Notebook you can review here</a>.
+
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Create the Test Database we will use for this module</p>
