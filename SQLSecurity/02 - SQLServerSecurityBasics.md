@@ -80,7 +80,7 @@ In Mixed-Mode Authentication, you can create internal SQL Server accounts, and y
 <br>
 <p>In the following Steps you will create the database and Principals you will use for this Workshop. Run the following code in SQL Server Management Studio or Azure Data Studio on the Instance you installed for this Workshop.</p>
 
-> If you did not have the opportunity to complete the pre-requsites or you are auditing this course without a SQL Server Instance installed, you can <a href="">find all of the T-SQL exercises worked out in a Jupyter Notebook you can review here</a>.
+> If you did not have the opportunity to complete the pre-requsites or you are auditing this course without a SQL Server Instance installed, you can <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/Security%20Audit%20Notebook.ipynb">find all of the T-SQL exercises worked out in a Jupyter Notebook you can review here</a>.
 
 <p><img style="margin: 0px 15px 15px 0px;" src="../graphics/checkmark.png"><b>Steps</b></p>
 
@@ -270,6 +270,8 @@ You will begin these steps by creating Server and Database Roles, and then you w
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Edit and run the sample Python application</p>
 Open an Administrator Powershell command window and navigate to the test app directory and open the document:
+
+> If you did not have the opportunity to complete the pre-requsites or you are auditing this course without a SQL Server Instance installed, you can <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/SamplePythonCodeNotebook.ipynb">find all of the Python exercises worked out in a Jupyter Notebook you can review here</a>.
 
   <pre>
     cd \SampleDBApp
