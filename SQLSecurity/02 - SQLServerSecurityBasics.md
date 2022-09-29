@@ -437,7 +437,7 @@ Run the following Steps in SQL Server Management Studio or Azure Data Studio, on
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Grant <i>user1</i> CONTROL permissions on the Table. Please replace -Placeholder- with your device name if you are running it locally.</p>
 
-<pre>F
+<pre>
     USE [SQLSecurityTest]
     GO
     GRANT CONTROL ON [dbo].[Patient] TO [-Placeholder-\User1]
