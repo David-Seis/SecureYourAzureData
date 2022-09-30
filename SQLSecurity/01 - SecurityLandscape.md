@@ -35,7 +35,7 @@ This section covers the basics of computing security - defined as "allowing the 
 
 Computing Security paradigms are a kind of framework or action paths you can use to form the basis of good security policies and practices in your organization. These paradigms and frameworks allow each part of the organization to understand their responsibilities for security. It involves three main areas:
 - Identity: The user or process that is requesting access to an asset
-- Athentication: A system or systems that prove the Indentity
+- Authentication: A system or systems that prove the Indentity
 - Authorization: The permissions granted or denied on an asset to the identity
 
 
