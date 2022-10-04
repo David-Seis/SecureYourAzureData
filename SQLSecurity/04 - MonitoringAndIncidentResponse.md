@@ -122,6 +122,7 @@ In this Activity you will review the steps to create or evaluate a complete Inci
     <li>You can review the <a href="https://www.microsoft.com/security/blog/2021/05/20/simuland-understand-adversary-tradecraft-and-improve-detection-strategies/" target="_blank">complete Simuland environment and resources</a> to understand the complexity of a security footprint.</li>
     <li>You can find the <a href="https://techcommunity.microsoft.com/t5/itops-talk-blog/what-s-the-difference-between-azure-security-center-azure/ba-p/2155188" target="_blank">explanation of Microsoft Azure Defender, Microsoft Azure Sentinel, and the Microsoft Azure Security Center here</a>.</li>
     <li>In addition to the tools and processes described in this Workshop, Microsoft have announced several other tools you can use for threat intelligence and security monitoring. You can <a href="https://www.microsoft.com/security/blog/2022/08/02/microsoft-announces-new-solutions-for-threat-intelligence-and-attack-surface-management/" target="_blank">see an announcement of those tools here</a>.</li>
+   <li>Microsoft has a free e-book on dealing with Ransomware. You can <a href="https://www.microsoft.com/security/blog/2022/08/02/microsoft-announces-new-solutions-for-threat-intelligence-and-attack-surface-management/" target="_blank">download it here</a>.</li>
 </ul>
 
 Congratulations! You have completed this Workshop. You now have the tools, assets, and processes you need to extrapolate this information into other applications in your own organization.
