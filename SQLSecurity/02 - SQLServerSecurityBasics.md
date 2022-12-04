@@ -485,7 +485,8 @@ The first step in securing your application is to implement a least-privilege ap
 Views allow you to show only the columns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows.
 
 <h3>Row Level Security</h3>
-SQL Server provides <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16" target="_blank">Row-Level Security so that you can restrict access to objects based on the security context of the user</a> - whether that is based on Role membership or even the execution context of the query.
+SQL Server provides <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security?view=sql-server-ver16" target="_blank">Row-Level Security </a> which enabled you to restrict access to different rows in specific tables based on a function. This function will check the group membership of the user or the execution context to control access to the rows in the database table. 
+
 By creating a Function and a Security Policy, you can set up protections for SELECT, UPDATE and DELETE operations.
 
 <h4><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Apply Row-Level Security to an Object</b></h4>
@@ -507,7 +508,7 @@ In this Activity you will review an example set of scripts that implement Dynami
 
 <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask" target="_blank">Navigate to this reference, and review all the steps you see there</a>, using your sample Workshop environment.
 
-<h3>SQL Ledger</h3>
+<h3>Ledger in SQL Server</h3>
 SQL Server 2022 and Microsoft Azure SQL DB include a new feature called <i>Ledger</i> that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest of those has values, alerting you to any differences, which indicates that the data has been tampered with.
 
 With the Ledger feature, you are able to create updatable tables, or insert-only tables depending on your application's needs.
