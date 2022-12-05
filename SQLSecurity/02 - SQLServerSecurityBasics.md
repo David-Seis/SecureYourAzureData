@@ -471,7 +471,7 @@ You now have a series of Securables and Principals, and you can experiment with 
 <h2 id="04"><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/pencil2.png">2.4 Applications</h2>
 <p>Securing your SQL Server Instance and Database Objects includes ensuring the applications that connect to them are also working with the highest level of security. 
 
-Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines" target="_blank">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL DB that you can leverage in your code for enhanced protections.</p>
+Apart from the <a href="https://docs.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines" target="_blank">Secure Coding principles your client applications should follow</a>, there are security mechanisms within Azure SQL Database that you can leverage in your code for enhanced protections.</p>
 
 <h3>Client Libraries and TLS</h3>
 In SQL Server Instances you can require TLS connection encryption.  There are, however, various version of TLS, and you want to implement the <a href="https://support.microsoft.com/en-us/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe" target="_blank">highest version possible when you connect to a SQL Server Instance</a>. You can find <a href="https://docs.microsoft.com/en-us/sql/connect/sql-connection-libraries?view=sql-server-ver16" target="_blank">the latest drivers and connection methods for SQL Server at this reference</a>. Each of these connection libraries has differing security impacts, so it is important to review the latest releases and use the most secure methods of access possible.
@@ -509,7 +509,7 @@ In this Activity you will review an example set of scripts that implement Dynami
 <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/dynamic-data-masking?view=sql-server-ver16#creating-a-dynamic-data-mask" target="_blank">Navigate to this reference, and review all the steps you see there</a>, using your sample Workshop environment.
 
 <h3>Ledger in SQL Server</h3>
-SQL Server 2022 and Microsoft Azure SQL DB include a new feature called <i>Ledger</i> that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest of those has values, alerting you to any differences, which indicates that the data has been tampered with.
+SQL Server 2022 and Microsoft Azure SQL Database include a new feature called <i>Ledger</i> that stores a one-way hash root digest of the data rows in a table. This Ledger can be kept in a secure location so that the hash of the current rows can be compared to the digest of those has values, alerting you to any differences, which indicates that the data has been tampered with.
 
 With the Ledger feature, you are able to create updatable tables, or insert-only tables depending on your application's needs.
 
@@ -924,4 +924,4 @@ In this activity you will set up a server audit and a database audit specificati
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
 
-Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank"><i> 03 - Azure SQL DB Security</i></a>.
+Next, Continue to <a href="https://github.com/David-Seis/SecureYourAzureData/blob/main/SQLSecurity/03%20-%20SQLAzureSecurity.md" target="_blank"><i> 03 - Azure SQL Database Security</i></a>.
