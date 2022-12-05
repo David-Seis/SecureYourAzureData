@@ -104,7 +104,7 @@ cd \SampleDBApp
 choco install -y python
 </pre>
 
-- In that same window, install the package manager for Python, and use that to install the connection code for SQL Server:
+- In that same window, install the package manager for Python, and use that to install the connection code for SQL Server. Some users have to restart at this point, if the below code doesn't work initially, try rebooting and it should work afterwards.
 <pre>
 python -m pip install -U pip
 python -m pip install pyodbc
