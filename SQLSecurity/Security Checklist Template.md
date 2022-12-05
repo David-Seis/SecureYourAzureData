@@ -10,7 +10,7 @@
 
 In <a href="https://github.com/David-Seis/SecureYourAzureData" target="_blank">the SQL Server Security Ground to Cloud workshop</a> you'll cover the basics of securing SQL Server installations and databases, from on-premises systems to Microsoft Azure deployments. After completing that workshop, you will know the basics of securing your system along with the other teams in your organization. This checklist should be used as a *guide* to form the basis of your own security posture, after you have completed the workshop and fully understand each section's implementation.
 
-This checklist covers both the Microsoft Azure SQL DB platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL DB security is a shared responsibility between Microsoft and your organization. A more <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" target="_blank">complete description of these responsibilities is here.</a>
+This checklist covers both the Microsoft Azure SQL Database platform as well as physical installations of SQL Server on bare-metal or Virtual Machine Environments. SQL Server Installations are the responsibility of the data professional and their larger security team, and Microsoft Azure SQL Database security is a shared responsibility between Microsoft and your organization. A more <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" target="_blank">complete description of these responsibilities is here.</a>
 
 Some of these items are checked on installation or initial configuration, others are periodic tasks based on your organization's requirements and the general use of your installation. You should augment the steps in this guide to fit your organization and installations. You should review this checklist periodically to ensure compliance and to update the teams in your organization for changes or additions. 
 
@@ -34,7 +34,7 @@ Physical security involves restricting and <a href="https://docs.microsoft.com/e
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media.
 <br><img src="../graphics/checkbox.png"> Server Master Keys and Database Master Keys, along with other Certificate mechanisms, are backed up and secured. Ideally in a different location. 
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security" target="_blank">https://docs.microsoft.com/en-us/azure/security/fundamentals/physical-security</a>
 <br><img src="../graphics/checkbox.png"> All Database Backups are encrypted, or stored on Encrypted media, especially if exported from Microsoft Azure.
  
@@ -52,7 +52,7 @@ Perimeter security entails creating defenses at the network level for <a href="h
 <br><img src="../graphics/checkbox.png"> TLS 1.2 should be enforced when possible.
 <br><img src="../graphics/checkbox.png"> Where applicable, the *Extended Protection for Authentication* feature is configured using channel binding and service binding. 
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> The following reference has been reviewed and approved by appropriate security auditing teams: <a href="https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql" target="_blank">https://docs.microsoft.com/en-us/azure/security/fundamentals/infrastructure-sql</a>
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Server-level IP Firewall configured for appropriate access based on application patterns.
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Database-level IP Firewall configured for appropriate access based on application patterns.
@@ -89,7 +89,7 @@ The Compute security area requires creating a <a href="https://techcommunity.mic
 <br><img src="../graphics/checkbox.png"> The *Maximum number of error log files* Instance option is set to 10 or higher.
 <br><img src="../graphics/checkbox.png"> A full configuration audit of the Operating System and SQL Server Instances has been created, and is updated with Delta reports on a periodic basis. These documents are reviewed by both the Security and Data teams.
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> Database backup and other off-DB file storage reviewed for access only by authorised personnel.
 <br><img src="../graphics/checkbox.png"> Microsoft Azure Defender for SQL is implemented and Threat Detection is enabled, with a group alias for incident reporting.
 
@@ -120,7 +120,7 @@ Identity and Authorization security defines the appropriate *Principals* and che
 <br><img src="../graphics/checkbox.png"> Unless required, the *Trustworthy* Database Property is disabled. Note: The *msdb* System Database requires this configuration be enabled.
 <br><img src="../graphics/checkbox.png"> The SQL Agent Proxies have been audited to establish least privilege.
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> The highest level of authentication (Azure Active Directory and/or Role-Based Acccess Control) is implemented wherever possible.
 <br><img src="../graphics/checkbox.png"> If Kerberos (Active Directory Integration) is used, accounts are regularly reviewed for proper controls and RBAC acccess.
 <br><img src="../graphics/checkbox.png"> If SQL Server authentication is used, accounts are regularly reviewed for proper controls, strength, rotation, and object acccess.
@@ -138,10 +138,10 @@ The Application security area involves implementing <a href="https://docs.micros
 <br><img src="../graphics/checkbox.png"> Unless required, the *Ad Hoc Distributed Queries* Instance option is disabled.
 <br><img src="../graphics/checkbox.png"> Each application's input for database access is sanitized to prevent SQL Injection and other attacks.
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> Azure SQL Database Audit is run and reviewed periodically.
 <br><img src="../graphics/checkbox.png"> Azure SQL Database Vulnerability Report is run and reviewed periodically.
-<br><img src="../graphics/checkbox.png"> Azure logs are monitored and reviewed for each Azure SQL DB environment.
+<br><img src="../graphics/checkbox.png"> Azure logs are monitored and reviewed for each Azure SQL Database environment.
  
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/Compass.png"><b>Data</b></p>
 
@@ -157,7 +157,7 @@ The Data Security Area involves ensuring that business and customer data is encr
 <br><img src="../graphics/checkbox.png"> Least-privilege role-based security has been implemented for all data access.
 <br><img src="../graphics/checkbox.png"> SQL Server Audit features such as Change Tracking, Change Data Capture, and SQL Server Audit have been evaluated and implemented per-database as required.
 
-*Microsoft Azure SQL DB environments*
+*Microsoft Azure SQL Database environments*
 <br><img src="../graphics/checkbox.png"> Row-Level Security  evaluated and implemented for sensitive data elements.
 <br><img src="../graphics/checkbox.png"> Data Masking evaluated and implemented for sensitive data elements.
 
