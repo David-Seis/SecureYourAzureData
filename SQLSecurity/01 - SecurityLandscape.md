@@ -96,7 +96,7 @@ At the end of this course, you'll find a basic Data Security Checklist template,
 > In the Modules that follow, you'll learn more about the details of each of these concepts, and have specific Activities to experiment with them. 
 
 <h3>Database Security Process</h3>
-There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL DB database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
+There are various steps you can take for starting the process to secure your database platform, whether that is a full Instance of SQL Server or an Azure SQL Database. In Module 2, you will focus on an Instance of SQL Server installed on a physical computer, or in a Virtual Machine. In Module 3,  you will extend this process to the Microsoft Azure SQL Platform. 
 
 <h4>SQL Server Instance</h4>
 Beyond the phsysical facilities and access to the environment where your SQL Server hardware is located, you must also set up system access and file protections. SQL Server uses multiple files, which have various file locations depending on their purpose. Use <a href="https://docs.microsoft.com/en-us/sql/sql-server/install/file-locations-for-default-and-named-instances-of-sql-server?view=sql-server-ver16">this reference to understand those locations and create your "Data at Rest" strategy and protections</a>.
@@ -117,7 +117,7 @@ SQL Server allows for a self-contained security mechanism. The name/password pai
 
 - Integrated Authentication
 SQL Server can also use <a href="https://docs.microsoft.com/en-us/sql/linux/sql-server-linux-ad-auth-understanding?view=sql-server-ver16">Active Directory to allow access to database objects</a>. SQL Server also allows for "Contained" databases, where the Database Users are not mapped to an Instance Logon. You will explore these options in the Modules that follow.
-Microsoft Azure SQL DB allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) and also <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=azuresqldb-current">Contained users (a best-practice)</a> which you will learn more about shortly. 
+Microsoft Azure SQL Database allows SQL Server authenticated users, as well as Azure Active Directory authentication, in addition to Role-Base Access Conrol (RBAC) and also <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/contained-database-users-making-your-database-portable?view=azuresqldb-current">Contained users (a best-practice)</a> which you will learn more about shortly. 
 
 - Certificate and other non-user methods of Authentication
 Certificates are not used to log in to a SQL Server Instance or Database, <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/sql-server-certificates-and-asymmetric-keys?view=sql-server-ver16">but are used to help secure connections, for database mirroring connections, to sign packages and other objects, or to encrypt data and connections</a>.
@@ -163,7 +163,7 @@ In this Activity you will use the SQL Server Configuration Manager tool and the 
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/checkbox.png">Use the Azure Portal to review your security settings</p>
 
-- Open the Azure Portal for your account, navigate to the Resource Group for your Azure SQL DB created for this course, and click the <b>Security</b> item on the left-side of the database blade. Review each setting in light of the guide you opened in the previous step.
+- Open the Azure Portal for your account, navigate to the Resource Group for your Azure SQL Database created for this course, and click the <b>Security</b> item on the left-side of the database blade. Review each setting in light of the guide you opened in the previous step.
 
 <p style="border-bottom: 1px solid lightgrey;"></p>
 
@@ -185,7 +185,7 @@ In this Activity you will review the process to create a "Security Score" using 
 <ul>
     <li><a href="https://docs.microsoft.com/en-us/security/ciso-workshop/the-ciso-workshop" target="_blank">You can find a Chief Information Security Office (CISO) workshop to accelerate your security program modernization with reference strategies built using Zero Trust principles here</a></li>
     <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=sql-server-ver16" target="_blank">Official Documentation for SQL Server Security</a></li>
-    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=azuresqldb-current" target="_blank">Official Documentation for Azure SQL DB Security</a></li>
+    <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=azuresqldb-current" target="_blank">Official Documentation for Azure SQL Database Security</a></li>
 </ul>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
