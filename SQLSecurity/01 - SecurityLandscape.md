@@ -186,6 +186,8 @@ In this Activity you will review the process to create a "Security Score" using 
     <li><a href="https://docs.microsoft.com/en-us/security/ciso-workshop/the-ciso-workshop" target="_blank">You can find a Chief Information Security Office (CISO) workshop to accelerate your security program modernization with reference strategies built using Zero Trust principles here</a></li>
     <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=sql-server-ver16" target="_blank">Official Documentation for SQL Server Security</a></li>
     <li><a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/security-center-for-sql-server-database-engine-and-azure-sql-database?view=azuresqldb-current" target="_blank">Official Documentation for Azure SQL Database Security</a></li>
+  
+    <li><a href="https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/creating-mfa-policies-with-zero-trust-advanced-deployment-guide/ba-p/3688849"> Creating MFA Policies with Zero Trust Advanced Deployment Guide in Microsoft 365</a></li>
 </ul>
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/geopin.png"><b >Next Steps</b></p>
