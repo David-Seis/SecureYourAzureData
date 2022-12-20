@@ -387,7 +387,7 @@ In this Activity you will explore setting up Row-Level Security on your Azure SQ
 </ol>
 
 <h4>Dynamic Data Masking</h4>
-<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql" target="_blank">Dynamic Data Masking</a> allows you to substitute a standard return from a Qeury with obfuscated characters. You can replace all or part of a result string with another character (such as the letter X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
+<a href="https://docs.microsoft.com/en-us/azure/azure-sql/database/dynamic-data-masking-overview?view=azuresql" target="_blank">Dynamic Data Masking</a> allows you to substitute a standard return from a Query with obfuscated characters. You can replace all or part of a result string with another character (such as the letter X). That means you could allow your users to see that there is in fact data in a field or part of a field, without showing them the data itself.
 
 <p><img style="float: left; margin: 0px 15px 15px 0px;" src="../graphics/point1.png"><b>Activity: Review Dynamic Data Masking</b></p>
 In this Activity you will review an example set of scripts that implement Dynamic Data Masking, and shows the data returned. 
