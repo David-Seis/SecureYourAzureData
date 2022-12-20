@@ -71,7 +71,7 @@ You have two primary mechanisms for Principals in Azure SQL Database: <i>SQL Ser
 Similar to the mechanism in SQL Server, <i>authentication</i> only pertains to whether or not you can log in to the server and database. <i>Authorization</i>, which is covered later, defines the rights and privileges for databases and database objects once the authentication of a Principal is determined. 
 
 <h4>SQL Authentication</h4>
-In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a correspoding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation, with the exception that in Azure SQL Database, you are using a logical "Server" rather than an installed Instance.
+In the case of SQL Authentication, the <b>master</b> system database (accessed by querying <i>sys.syslogins</i>) stores information for the Instance, setting a value for the Principal. This is linked to a corresponding database <i>sysusers</i> system table entry in each database that the Principal will access. This is a similar arrangement to a SQL Server installation, with the exception that in Azure SQL Database, you are using a logical "Server" rather than an installed Instance.
 
 Using SQL Authentication means that Azure SQL Database stores the password for the Principals. Because passwords are stored in the <b>master</b> database, it is up to the database owner to ensure that a password and account policy is applied to each user.
 
