@@ -370,7 +370,7 @@ You should follow the best practices for <a href="https://social.technet.microso
 <h4>Permissions and Rights, Views and Stored Procedures</h4>
 The first step is to implement a least-privilege approach within your permission structure, as described in the previous sections. By granting permissions only to the higher-level objects (such as Views, Functions and Store Procedures) you are able to protect the underlying base Tables from unecessary access by the end user. 
 
-Views allow you to show only the collumns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows. 
+Views allow you to show only the columns and rows required for least-privilege, and Functions and Stored Procedures allow you to restrcit both columns and rows. 
 
 <h4>Row Level Security</h4>
 Azure SQL Database <a href="https://docs.microsoft.com/en-us/sql/relational-databases/security/row-level-security" target="_blank">provides Row-Level Security</a> so that you can restrict access to objects based on the security context of the user - whether that is based on Role membership or even the execution context of the query.
