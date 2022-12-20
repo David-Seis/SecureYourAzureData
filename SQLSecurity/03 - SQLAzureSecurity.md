@@ -298,7 +298,7 @@ In this Activity you will work with Permissions on various database objects. You
     GO
 </pre>
 
-3. Switch to an admin user and GRANT CONTROL (all permisisons) on all three objects to the Elevated_permissions role:
+3. Switch to an admin user and GRANT CONTROL (all permissions) on all three objects to the Elevated_permissions role:
 
 <pre>
     GRANT CONTROL ON Patient TO Elevated_Permissions;
