@@ -193,7 +193,7 @@ Securables fall into three categories, or <i>scopes</i>, for ease of use, the sa
 <h4>Database Scopes</h4>
 <ul>
   <li>Application Roles</li> 
-  <li>Assemblyies</li>
+  <li>Assemblies</li>
   <li>Asymmetric Keys</li>
   <li>Certificates</li>
   <li>Contracts</li>
